@@ -2,27 +2,20 @@ version: "3"
 services:
   php:
     build: .
-    container_name: "quiz-server"
+    container_name: "apache_php"
     image: php:8.1.16-apache
     volumes:
-      - ./code/:/var/www/html/
+      - ./:/var/www/html/
     ports:
-      - 8001:80
+      - 8080:80
   db:
     image: mariadb:10.5
-    container_name: "quiz-questoes"
+    container_name: "mariadb-server"
     restart: always
     volumes:
-      - ./documentacao/banco_quiz.sql:/docker-entrypoint-initdb.d/banco.sql
-      - ./db_data:/var/lib/mysql
+      - ./documentacao/banco.sql:/docker-entrypoint-initdb.d/banco.sql
     environment:
       - MARIADB_USER=root
-      - MARIADB_ROOT_PASSWORD=@n6oVQEMXdWpDSmL@3dm*mQS
+      - MARIADB_ROOT_PASSWORD=123
     ports:
-        - 3309:3306
-  adminer:
-    image: adminer:4.8.1
-    container_name: "adminer"
-    restart: always
-    ports:
-      - 8088:8080
+      - 3307:3306
