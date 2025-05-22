@@ -16,7 +16,7 @@ function ExcluirUsuario($conexao, $idusuario){
     $sql = "DELETE * FROM usuario WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'i', $idfavorito);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -24,11 +24,11 @@ function ExcluirUsuario($conexao, $idusuario){
     return $funcionou;
 
 }
-function editarUsuario($conexao, $idusuario, $nome, $gmail, $senha, $foto){
+function editarUsuario($conexao, $nome, $gmail, $senha, $foto){
     $sql = "UPDATE tb_usuario SET nome=?, gmail=?, senha=?, foto=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $cpf, $endereco, $id);
+    mysqli_stmt_bind_param($comando, 'sssis', $nome, $gmail, $senha, $foto);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
@@ -55,7 +55,7 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img, idgenero) VALUES (?,?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssdsi', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero);
+    mysqli_stmt_bind_param($comando, 'sssssi', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -68,7 +68,7 @@ function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_
     $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_laca=?, imagem=?, idgenero=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssdsii', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero, $idjogo);
+    mysqli_stmt_bind_param($comando, 'sssssii', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero, $idjogo);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
