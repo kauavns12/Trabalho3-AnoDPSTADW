@@ -1,17 +1,10 @@
 <?php
-$conexao = new mysqli("host", "usuario", "senha", "mydb");
+    require_once "../conexao.php";
+    require_once "../funcoes.php";
 
-if ($conexao->connect_error) {
-    die("Erro de conexão: " . $conexao->connect_error);
-}
+    $nome = "Fulano";
+    $gmail = "kuan@teste.com";
+    $senha = "2131241324";
 
-$resultado = salvarUsuario($conexao, "João Silva", "joao@example.com", "senha123");
-
-if ($resultado['status'] === 'sucesso') {
-    echo $resultado['mensagem'];
-} else {
-    echo "Erro: " . $resultado['mensagem'];
-}
-
-$conexao->close();
+    salvarUsuario($conexao, $nome, $gmail, $senha);
 ?>
