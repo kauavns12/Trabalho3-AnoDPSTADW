@@ -13,7 +13,7 @@ function salvarUsuario($conexao, $nome, $gmail, $senha){
 }
 
 function ExcluirUsuario($conexao, $idusuario){
-    $sql = "DELETE * FROM usuario WHERE idusuario=?"
+    $sql = "DELETE * FROM usuario WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'i', $idfavorito);
@@ -239,7 +239,7 @@ function excluirAvaliacaoJogo($conexao, $idavaliacao){
 
 function adicionarFavorito($conexao, $idusuario, $idjogo){
     $sql = "INSERT INTO favorito (idusuario, idjogo) VALUES (?,?)"; 
-    $comando = mysqli_prepare($conexão, $sql);
+    $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idjogo);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -249,7 +249,7 @@ function adicionarFavorito($conexao, $idusuario, $idjogo){
 }
 
 function excluirFavorito($conexao, $idfavorito){
-    $sql = "DELETE * FROM favorito WHERE idfavorito=?"
+    $sql = "DELETE * FROM favorito WHERE idfavorito=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'i', $idfavorito);
@@ -262,7 +262,7 @@ function excluirFavorito($conexao, $idfavorito){
 }
 
 function listarFavoritoUsuario($conexao, $idusuario) {
-    $sql = "SELECT * FROM favorito WHERE idusuario=?"
+    $sql = "SELECT * FROM favorito WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
