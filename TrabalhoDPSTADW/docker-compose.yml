@@ -7,7 +7,7 @@ services:
     volumes:
       - ./:/var/www/html/
     ports:
-      - 8080:80
+      - 81:80
   db:
     image: mariadb:10.5
     container_name: "mariadb-server"
