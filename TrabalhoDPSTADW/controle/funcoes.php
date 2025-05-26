@@ -320,16 +320,6 @@ function editarPreferencia($conexao, $idusuario, $idjogo, $idgenero){
 
 }
 
-function inicarRelacionamento($conexao, $idusuario_p, $idusuario_s, $tipo){
 
-}
-
-function acabarRelacionamento($conexao, $idrelacionamento, $idusuario_p, $idusuario_s, $tipo){
-
-}
-
-function listarRelacionamentoUsuario($conexao, $idusuario){
-
-}
 
 ?>
