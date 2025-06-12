@@ -6,9 +6,8 @@
     $descricao = "Um jogo quadrado";
     $desenvolvedor = "Mojang";
     $data_lancamento = "2011-04-03";
-    $imagem = "oi";
-    $idgenero = 1;
+    $imagem = "teste";
 
-    salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero);
+    salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem);
 
 ?>

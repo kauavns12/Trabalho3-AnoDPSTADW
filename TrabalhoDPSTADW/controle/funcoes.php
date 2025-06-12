@@ -52,11 +52,11 @@ function pesquisarUsuario_ID($conexao, $idusuario){
 }
 
 
-function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero){
-    $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img, idgenero) VALUES (?,?,?,?,?,?)";
+function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem){
+    $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES (?,?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssssi', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero);
+    mysqli_stmt_bind_param($comando, 'sssss', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
