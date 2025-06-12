@@ -14,7 +14,7 @@ function salvarUsuario($conexao, $nome, $gmail, $senha){
 }
 
 function ExcluirUsuario($conexao, $idusuario){
-    $sql = "DELETE * FROM usuario WHERE idusuario=?";
+    $sql = "DELETE FROM usuario WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -250,7 +250,7 @@ function adicionarFavorito($conexao, $idusuario, $idjogo){
 }
 
 function excluirFavorito($conexao, $idfavorito){
-    $sql = "DELETE * FROM favorito WHERE idfavorito=?";
+    $sql = "DELETE FROM favorito WHERE idfavorito=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'i', $idfavorito);
