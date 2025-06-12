@@ -1,7 +1,7 @@
 <?php
 
 function salvarUsuario($conexao, $nome, $gmail, $senha){
-    $sql = "INSERT INTO tb_usuario (nome, gmail, senha) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO usuario (nome, gmail, senha) VALUES (?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'sss', $nome, $gmail, $senha);
@@ -25,7 +25,7 @@ function ExcluirUsuario($conexao, $idusuario){
 
 }
 function editarUsuario($conexao, $nome, $gmail, $senha, $foto){
-    $sql = "UPDATE tb_usuario SET nome=?, gmail=?, senha=?, foto=? WHERE idusuario=?";
+    $sql = "UPDATE usuario SET nome=?, gmail=?, senha=?, foto=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'sssis', $nome, $gmail, $senha, $foto);
