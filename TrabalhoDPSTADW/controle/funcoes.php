@@ -25,7 +25,7 @@ function excluirUsuario($conexao, $idusuario){
     return $funcionou;
 
 }
-function editarUsuario($conexao, $nome, $gmail, $senha){
+function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario){
     $sql = "UPDATE usuario SET nome=?, gmail=?, senha=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
@@ -37,7 +37,7 @@ function editarUsuario($conexao, $nome, $gmail, $senha){
 }
 
 function pesquisarUsuario_ID($conexao, $idusuario){
-    $sql = "SELECT * FROM tb_usuario WHERE idusuario = ?";
+    $sql = "SELECT nome, foto, status, seguindo , seguidores FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -45,12 +45,25 @@ function pesquisarUsuario_ID($conexao, $idusuario){
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
 
-    $usuario = mysqli_fetch_assoc($resultado);
+    $user = mysqli_fetch_assoc($resultado);
 
     mysqli_stmt_close($comando);
-    return $usuario;
+    return $user;
 }
+function pesquisarUsuario_Nome($conexao, $nome){
+    $sql = "SELECT nome, foto, status, seguindo , seguidores FROM usuario WHERE nome = ?";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_bind_param($comando, 's', $nome);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $user = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $user;
+}
 
 function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem){
     $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES (?,?,?,?,?)";
@@ -65,11 +78,11 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     
 }
 
-function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero){
-    $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_laca=?, imagem=?, idgenero=? WHERE idjogo=?";
+function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero){
+    $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=?, idgenero=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssssii', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero, $idjogo);
+    mysqli_stmt_bind_param($comando, 'sssssii', $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero, $idjogo);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
@@ -197,10 +210,10 @@ function salvarCategoriaForun($conexao, $nome, $descricao){
 }
 
 function editarCategoriaForun($conexao, $idcategoria_forun, $nome, $descricao){
-    $sql = "UPDATE categoria_forun SET nome=?, descrição WHERE idjogo=?";
+    $sql = "UPDATE categoria_forun SET nome=?, descricao=? WHERE idcategoria_forun=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'si', $nome, $idgenero);
+    mysqli_stmt_bind_param($comando, 'ssi', $nome, $descricao, $idcategoria_forun);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);

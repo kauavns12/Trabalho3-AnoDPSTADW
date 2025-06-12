@@ -125,12 +125,7 @@ CREATE TABLE IF NOT EXISTS `friv`.`post_forun` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `friv`.``
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `friv`.`` (
-)
-ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -213,13 +208,7 @@ CREATE TABLE IF NOT EXISTS `friv`.`favorito` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `friv`.`lista_personalizada`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `friv`.`lista_personalizada` (
-  `idlista_personalizada` INT NOT NULL,
-  PRIMARY KEY (`idlista_personalizada`))
-ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -309,12 +298,6 @@ CREATE TABLE IF NOT EXISTS `friv`.`relhisto_jogo` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `friv`.`conquista_usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `friv`.`conquista_usuario` (
-)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
