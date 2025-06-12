@@ -1,7 +1,7 @@
 <?php
 
 function salvarUsuario($conexao, $nome, $gmail, $senha){
-    $sql = "INSERT INTO usuario (nome, gmail, senha) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO usuario (nome, gmail, senha, tipo) VALUES (?, ?, ?, 'c')";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'sss', $nome, $gmail, $senha);
