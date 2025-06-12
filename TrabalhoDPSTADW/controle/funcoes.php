@@ -78,11 +78,11 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     
 }
 
-function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero){
-    $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=?, idgenero=? WHERE idjogo=?";
+function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img){
+    $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssssii', $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero, $idjogo);
+    mysqli_stmt_bind_param($comando, 'sssssi', $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idjogo);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
