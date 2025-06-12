@@ -13,7 +13,7 @@ function salvarUsuario($conexao, $nome, $gmail, $senha){
     return $funcionou;
 }
 
-function ExcluirUsuario($conexao, $idusuario){
+function excluirUsuario($conexao, $idusuario){
     $sql = "DELETE FROM usuario WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
@@ -25,11 +25,11 @@ function ExcluirUsuario($conexao, $idusuario){
     return $funcionou;
 
 }
-function editarUsuario($conexao, $nome, $gmail, $senha, $foto){
-    $sql = "UPDATE usuario SET nome=?, gmail=?, senha=?, foto=? WHERE idusuario=?";
+function editarUsuario($conexao, $nome, $gmail, $senha){
+    $sql = "UPDATE usuario SET nome=?, gmail=?, senha=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssis', $nome, $gmail, $senha, $foto);
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $gmail, $senha, $idusuario);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
