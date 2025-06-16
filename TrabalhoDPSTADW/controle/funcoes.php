@@ -280,7 +280,16 @@ function editarAvaliacaoJogo($conexao, $idavaliacao, $classificacao, $idusuario,
 
 }
 
-function excluirAvaliacaoJogo($conexao, $idavaliacao){
+function excluirAvaliacaoJogo($conexao, $idavaliacao_jogo){
+    $sql = "DELETE FROM avaliacao_jogo  WHERE idavaliacao_jogo=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'i', $idavaliacao_jogo);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 
 }
 
