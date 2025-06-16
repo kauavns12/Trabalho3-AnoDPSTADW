@@ -268,7 +268,15 @@ function salvarAvaliacaoJogo($conexao, $classificacao, $idjogo, $idusuario){
 
 
 
-function editarAvaliacaoJogo($conexao, $idavaliacao, $classificacao, $idjogo, $idusuario){
+function editarAvaliacaoJogo($conexao, $idavaliacao, $classificacao, $idusuario, $idjogo){
+    $sql = "UPDATE avaliacao_jogo SET classificacao=?, usuario_idusuario=?, jogo_idjogo=? WHERE idavaliacao_jogo=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'siii', $classificacao, $idusuario, $idjogo, $idavaliacao_jogo);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    return $funcionou;
 
 }
 
