@@ -288,15 +288,10 @@ function listarFavoritoUsuario($conexao, $idusuario) {
 
 
 
-}
-function realizarLogin($conexao, $nome, $gmail, $senha){
 
-}
-
-
-function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao){
 
 }
+
 
 function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario, $idjogo){
     $sql = "INSERT INTO lista (nome, descricao, situacao, idusuario, idjogo) VALUES (?,?,?,?,?)";
@@ -311,18 +306,25 @@ function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario, $idjog
 }
 
 function excluir_Lista($conexao, $idlista){
-
+    $sql = "DELETE FROM lista WHERE idlista=?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idlista);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 }
 
 function editar_Lista($conexao, $nome, $descricao, $situacao, $idusuario){
 
 }
 
-function excluirHistoricoJogo($conexao, $idhisto_jogo){
+function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao){
 
 }
 
-function pesquisarUsuarioNome($conexao, $nome){
+function excluirHistoricoJogo($conexao, $idhisto_jogo){
 
 }
 
