@@ -132,7 +132,7 @@ function salvarGenero($conexao, $nome){
 }
 
 function editarGenero($conexao, $idgenero, $nome){
-    $sql = "UPDATE genero SET nome=? WHERE idjogo=?";
+    $sql = "UPDATE genero SET nome=? WHERE idgenero=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'si', $nome, $idgenero);
