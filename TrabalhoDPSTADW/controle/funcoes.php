@@ -220,18 +220,33 @@ function editarCategoriaForun($conexao, $idcategoria_forun, $nome, $descricao){
     return $funcionou;
 }
 
-function salvarTopicoForun($conexao, $nome, $conteudo, $idjogo, $idcategoria_forun, $idusuario){
+function salvarTopicoForun($conexao, $nome, $conteudo,$idcategoria_forun, $idjogo){
+    $sql = "INSERT INTO topico_forun (nome, conteudo, categoria_forun_idcategoria_forun1,jogo_idjogo1) VALUES(?,?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'ssii', $nome, $conteudo, $idcategoria_forun, $idjogo);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+}
+function editarTopicoForun($conexao, $idtopico_forun ,$nome, $conteudo,$idcategoria_forun, $idjogo){
+    $sql = "UPDATE topico_forun SET nome=?, conteudo=?, categoria_forun_idcategoria_forun1=?, jogo_idjogo1=? WHERE idtopico_forun=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ssiii', $nome, $conteudo, $idcategoria_forun, $idjogo, $idtopico_forun);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    return $funcionou;
+}
+
+function salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun){
 
 }
-function editarTopicoForum($conexao, $idtopico_forun ,$nome, $conteudo,$idjogo,$idcategoria_forun, $idusuario){
 
-}
-
-function salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun, $idjogo, $idcategoria_forun){
-
-}
-
-function editarPostForun($conexao, $idpost_forun,  $conteudo, $idusuario, $idtopico_forun, $idjogo, $idcategoria_forun){
+function editarPostForun($conexao, $idpost_forun,  $conteudo, $idusuario, $idtopico_forun){
 
 }
 
@@ -240,8 +255,18 @@ function excluirPostForun($conexao, $idpost_forun){
 }
 
 function salvarAvaliacaoJogo($conexao, $classificacao, $idjogo, $idusuario){
-
+    $sql = "INSERT INTO avaliacao_jogo (classificacao, usuario_idusuario, jogo_idjogo) VALUES (?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sii', $classificacao, $idusuario, $idjogo);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 }
+
+
 
 function editarAvaliacaoJogo($conexao, $idavaliacao, $classificacao, $idjogo, $idusuario){
 

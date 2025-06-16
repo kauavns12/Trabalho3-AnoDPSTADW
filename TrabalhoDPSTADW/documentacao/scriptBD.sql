@@ -72,13 +72,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`avaliacao_jogo` (
   CONSTRAINT `fk_avaliacao_jogo_jogo1`
     FOREIGN KEY (`jogo_idjogo`)
     REFERENCES `friv`.`jogo` (`idjogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_avaliacao_jogo_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -121,13 +121,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`conquista_usu` (
   CONSTRAINT `fk_conquista_has_usuario_conquista1`
     FOREIGN KEY (`conquista_idconquista`)
     REFERENCES `friv`.`conquista` (`idconquista`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_conquista_has_usuario_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -146,13 +146,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`favorito` (
   CONSTRAINT `fk_favorito_jogo1`
     FOREIGN KEY (`jogo_idjogo`)
     REFERENCES `friv`.`jogo` (`idjogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_favorito_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -181,13 +181,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`genero_jogo` (
   CONSTRAINT `fk_genero_has_jogo_genero`
     FOREIGN KEY (`genero_idgenero`)
     REFERENCES `friv`.`genero` (`idgenero`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_genero_has_jogo_jogo1`
     FOREIGN KEY (`jogo_idjogo`)
     REFERENCES `friv`.`jogo` (`idjogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -206,8 +206,8 @@ CREATE TABLE IF NOT EXISTS `friv`.`histo_jogo` (
   CONSTRAINT `fk_histo_jogo_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -227,8 +227,8 @@ CREATE TABLE IF NOT EXISTS `friv`.`lista` (
   CONSTRAINT `fk_lista_usuario1`
     FOREIGN KEY (`usuario_idusuario1`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -246,13 +246,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`lista_jogo` (
   CONSTRAINT `fk_lista_has_jogo_jogo1`
     FOREIGN KEY (`jogo_idjogo`)
     REFERENCES `friv`.`jogo` (`idjogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_lista_has_jogo_lista1`
     FOREIGN KEY (`lista_idlista`)
     REFERENCES `friv`.`lista` (`idlista`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -273,13 +273,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`topico_forun` (
   CONSTRAINT `fk_topico_forun_categoria_forun1`
     FOREIGN KEY (`categoria_forun_idcategoria_forun1`)
     REFERENCES `friv`.`categoria_forun` (`idcategoria_forun`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_topico_forun_jogo1`
     FOREIGN KEY (`jogo_idjogo1`)
     REFERENCES `friv`.`jogo` (`idjogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -299,13 +299,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`post_forun` (
   CONSTRAINT `fk_post_forun_topico_forun1`
     FOREIGN KEY (`topico_forun_idtopico_forun`)
     REFERENCES `friv`.`topico_forun` (`idtopico_forun`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_post_forun_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -322,13 +322,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`preferencia` (
   CONSTRAINT `fk_usuario_has_genero_genero1`
     FOREIGN KEY (`genero_idgenero`)
     REFERENCES `friv`.`genero` (`idgenero`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario_has_genero_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -345,13 +345,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`relhisto_jogo` (
   CONSTRAINT `fk_histo_jogo_has_jogo_histo_jogo1`
     FOREIGN KEY (`histo_jogo_idhisto_jogo`)
     REFERENCES `friv`.`histo_jogo` (`idhisto_jogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_histo_jogo_has_jogo_jogo1`
     FOREIGN KEY (`jogo_idjogo`)
     REFERENCES `friv`.`jogo` (`idjogo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -369,13 +369,13 @@ CREATE TABLE IF NOT EXISTS `friv`.`topico_usu` (
   CONSTRAINT `fk_topico_forun_has_usuario_topico_forun1`
     FOREIGN KEY (`topico_forun_idtopico_forun`)
     REFERENCES `friv`.`topico_forun` (`idtopico_forun`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_topico_forun_has_usuario_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `friv`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 

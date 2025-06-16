@@ -1,0 +1,101 @@
+INSERT INTO friv.jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES 
+('Super Jump', 'Jogo de pulo infinito', 'JumpDev', '2022-03-15', 'jump.png'),
+('Corrida Turbo', 'Corrida cheia de adrenalina', 'RaceStudio', '2023-01-10', 'corrida.png'),
+('Labirinto Sombrio', 'Explore labirintos assustadores', 'MazeCorp', '2024-11-30', 'maze.png');
+
+
+INSERT INTO friv.usuario (nome, gmail, senha, foto, tipo, status, seguindo, seguidores) VALUES 
+('Alice Silva', 'alice@gmail.com', 'senhaAlice', 'alice.jpg', 'U', 'ativo', 10, '5'),
+('Bruno Costa', 'bruno@gmail.com', 'senhaBruno', 'bruno.png', 'A', 'ativo', 5, '10'),
+('Carla Dias', 'carla@gmail.com', 'senhaCarla', 'carla.jpeg', 'U', 'inativo', 3, '2');
+
+
+INSERT INTO friv.categoria_forun (nome, descricao) VALUES 
+('Geral', 'Discussões gerais sobre jogos'),
+('Ajuda', 'Tire dúvidas e peça suporte'),
+('Atualizações', 'Novidades e atualizações dos jogos');
+
+
+INSERT INTO friv.conquista (nome, descricao) VALUES 
+('Primeira Vitória', 'Ganhe sua primeira partida'),
+('Maratonista', 'Jogue por 10 horas acumuladas'),
+('Explorador', 'Jogue 5 jogos diferentes');
+
+
+INSERT INTO friv.genero (nome) VALUES 
+('Ação'),
+('Corrida'),
+('Terror');
+
+
+INSERT INTO friv.histo_jogo (tempo_ini, tempo_fim, usuario_idusuario) VALUES 
+('2025-06-01 14:00:00', '2025-06-01 14:30:00', 1),
+('2025-06-02 16:15:00', '2025-06-02 17:00:00', 2),
+('2025-06-03 10:00:00', NULL, 3);
+
+
+INSERT INTO friv.lista (nome, descricao, situacao, usuario_idusuario1) VALUES 
+('Favoritos da Alice', 'Jogos que Alice curte', 1, 1),
+('Top do Bruno', 'Lista do Bruno', 1, 2),
+('Exploração da Carla', 'Jogos para explorar', 1, 3);
+
+
+INSERT INTO friv.topico_forun (nome, conteudo, categoria_forun_idcategoria_forun1, jogo_idjogo1) VALUES 
+('Como vencer no Super Jump?', 'Alguém tem dicas?', 1, 1),
+('Erro no Corrida Turbo', 'O jogo fecha sozinho', 2, 2),
+('Atualização do Labirinto', 'Novo mapa incrível!', 3, 3);
+
+
+INSERT INTO friv.avaliacao_jogo (classificacao, usuario_idusuario, jogo_idjogo) VALUES 
+(5, 1, 1),
+(3, 2, 2),
+(4, 3, 3);
+
+
+
+INSERT INTO friv.conquista_usu (conquista_idconquista, usuario_idusuario) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+
+INSERT INTO friv.favorito (usuario_idusuario, jogo_idjogo) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+
+INSERT INTO friv.genero_jogo (genero_idgenero, jogo_idjogo) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+
+INSERT INTO friv.lista_jogo (lista_idlista, lista_usuario_idusuario, jogo_idjogo) VALUES 
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3);
+
+
+INSERT INTO friv.post_forun (conteudo, usuario_idusuario, topico_forun_idtopico_forun) VALUES 
+('Boa dica, valeu!', 1, 1),
+('Também estou com esse erro.', 2, 2),
+('Achei o novo mapa difícil!', 3, 3);
+
+
+INSERT INTO friv.preferencia (usuario_idusuario, genero_idgenero) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+
+INSERT INTO friv.relhisto_jogo (histo_jogo_idhisto_jogo, jogo_idjogo) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+
+INSERT INTO friv.topico_usu (topico_forun_idtopico_forun, topico_forun_jogo_idjogo, usuario_idusuario) VALUES 
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3);
