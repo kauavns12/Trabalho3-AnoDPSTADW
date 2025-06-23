@@ -4,8 +4,8 @@
 
     $nome = "Dead island";
     $descricao = "Um jogo de sobrevivencia...";
-    $situacao = "tgrshzdfsg";
+    $situacao = 1;
+    $usuario_id = 1;
 
-    salvar_Lista($conexao, $nome, $descricao, $situacao);
-
+    salvar_Lista($conexao, $nome, $descricao, $situacao, $usuario_id);
 ?>
