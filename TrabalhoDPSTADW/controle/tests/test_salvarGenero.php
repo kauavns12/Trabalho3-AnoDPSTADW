@@ -4,5 +4,5 @@
 
     $nome = "Ação"; 
 
-    salvargenero($conexao, $nome);
+    salvarGenero($conexao, $nome);
 ?>
