@@ -2,7 +2,7 @@
     require_once "../conexao.php";
     require_once "../funcoes.php";
 
-    $nome = "Ação"; 
+    $nome = "Sandbox"; 
 
-    salvargenero($conexao, $nome);
+    salvarGenero($conexao, $nome);
 ?>
