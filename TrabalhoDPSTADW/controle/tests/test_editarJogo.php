@@ -7,7 +7,8 @@
     $desenvolvedor = "Pokemon Company";
     $data_lancamento = "1990-04-03";
     $img = "teste de imagem";
-    editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img);
+    $idgenero = 2;
+    editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero);
 
 ?>
 
