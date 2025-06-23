@@ -1,10 +1,7 @@
 <?php
      require_once "../conexao.php";
      require_once "../funcoes.php";
-
-
-
-
+     
     $nome = "lunna";
     $conteudo = "Tatakae";
     $idcategoria_forun= 1;

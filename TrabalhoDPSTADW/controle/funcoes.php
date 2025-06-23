@@ -65,12 +65,23 @@ function pesquisarUsuario_Nome($conexao, $nome){
     return $user;
 }
 
-function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem){
+function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero){
     $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES (?,?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'sssss', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem);
+    ///////////////////////
+    $sql1 = "SELECT idgenero FROM jogo WHERE nome = ?"
+    $comando1 = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando1, 's', $nome);
+    $resultado = mysqli_stmt_get_result($comando1);
+
     
+
+
+
+    ///////////////////////
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     
@@ -243,6 +254,16 @@ function editarTopicoForun($conexao, $idtopico_forun ,$nome, $conteudo,$idcatego
 }
 
 function salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun){
+    $sql = "INSERT INTO post_forun (conteudo, usuario_idusuario, topico_forun_idtopico_forun) VALUES (?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sii', $conteudo, $idusuario, $idtopico_forun);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
 
 }
 
