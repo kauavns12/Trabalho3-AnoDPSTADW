@@ -447,11 +447,11 @@ function editar_Lista($conexao, $nome, $descricao, $situacao, $idlista){
     return $funcionou;
 }
 
-function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao){
-$sql = "INSERT INTO histo (tempo_ini, tempo_fim, idusuario, idjogo, idavaliacao) VALUES (?,?,?,?)";
+function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $usuario_idusuario){
+$sql = "INSERT INTO histo_jogo (tempo_ini, tempo_fim, idusuario) VALUES (?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'ddiii', $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao);
+    mysqli_stmt_bind_param($comando, 'ddi', $tempo_ini, $tempo_fim, $usuario_idusuario);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
