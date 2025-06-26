@@ -3,9 +3,8 @@
 require_once "../conexao.php";
 require_once "../funcoes.php";
 
-$idgenero = 2;
 
 echo "<pre>";
-print_r(pesquisarJogoGenero($conexao, $idgenero));
+print_r(listarFavoritoTodosUsuario($conexao));
 echo "</pre>";
 ?>

@@ -36,6 +36,23 @@ function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario){
     return $funcionou;    
 }
 
+function listarUsuario($conexao){
+    $sql = "SELECT * FROM usuario";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_usuario= [];
+
+    while ($usuario = mysqli_fetch_assoc($resultado)){
+        $lista_usuario[] = $usuario;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_usuario;
+}
+    
 function pesquisarUsuario_ID($conexao, $idusuario){
     $sql = "SELECT nome, foto, status, seguindo , seguidores FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -104,7 +121,22 @@ function excluirJogo($conexao, $idjogo){
 
 }
 
+function listarJogo($conexao){
+    $sql = "SELECT * FROM jogo";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_jogo= [];
+
+    while ($jogo = mysqli_fetch_assoc($resultado)){
+        $lista_jogo[] = $jogo;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_jogo;
+}
 
 function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img){
     $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=? WHERE idjogo=?";
@@ -147,28 +179,36 @@ function pesquisarJogoNome($conexao, $nome){
 }
 
 function pesquisarJogoGenero($conexao, $idgenero){
+
     $sql = "SELECT jogo_idjogo FROM genero_jogo WHERE genero_idgenero=?";
     $comando = mysqli_prepare($conexao, $sql);
-
+    
     mysqli_stmt_bind_param($comando, 'i', $idgenero);
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
+    
+    $jogos = array(); 
+    
 
-    $idjogo = mysqli_fetch_assoc($resultado);
-
-    $sql = "SELECT * FROM jogo WHERE idjogo = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'i', $idjogo);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $jogo = mysqli_fetch_assoc($resultado);
-
+    while ($linha = mysqli_fetch_assoc($resultado)) {
+        $idjogo = $linha['jogo_idjogo'];
+        
+        $sql2 = "SELECT * FROM jogo WHERE idjogo = ?";
+        $comando2 = mysqli_prepare($conexao, $sql2);
+        
+        mysqli_stmt_bind_param($comando2, 'i', $idjogo);
+        mysqli_stmt_execute($comando2);
+        $resultado2 = mysqli_stmt_get_result($comando2);
+        
+        if ($jogo = mysqli_fetch_assoc($resultado2)) {
+            $jogos[] = $jogo;
+        }
+        
+        mysqli_stmt_close($comando2);
+    }
+    
     mysqli_stmt_close($comando);
-    return $jogo;
-
+    return $jogos;
 }
 
 function salvarGenero($conexao, $nome){
@@ -390,21 +430,40 @@ function excluirFavorito($conexao, $idfavorito){
 
 }
 
-function listarFavoritoUsuario($conexao, $idusuario) {
-    $sql = "SELECT * FROM favorito WHERE idusuario=?";
+function listarFavoritoTodosUsuario($conexao){
+    $sql = "SELECT * FROM favorito ";
     $comando = mysqli_prepare($conexao, $sql);
-    
-    mysqli_stmt_bind_param($comando, 'i', $idusuario);
-    
-    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_favoritoTodosUsuario= [];
+
+    while ($favorito = mysqli_fetch_assoc($resultado)){
+        $lista_favoritoTodosUsuario[] = $favorito;
+    }
+
+
     mysqli_stmt_close($comando);
-    
-    return $funcionou;
+    return $lista_favoritoTodosUsuario;
+}
+
+function listarFavoritoUsuario($conexao, $idusuario){
+    $sql = "SELECT * FROM favorito WHERE usuario_idusuario =?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_favoritoUsuario= [];
+
+    while ($favorito = mysqli_fetch_assoc($resultado)){
+        $lista_favoritoUsuario[] = $favorito;
+    }
 
 
-
-
-
+    mysqli_stmt_close($comando);
+    return $lista_favoritoUsuario;
 }
 
 

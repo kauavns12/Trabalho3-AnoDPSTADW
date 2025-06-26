@@ -2,7 +2,7 @@
      require_once "../conexao.php";
      require_once "../funcoes.php";
 
-    $idtopico_forun=3;
+    $idtopico_forun=1;
     $nome = "Pablo";
     $conteudo = "UHUUUUUUUUUUU";
     $idcategoria_forun= 1;
