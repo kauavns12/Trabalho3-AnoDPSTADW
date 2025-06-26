@@ -11,5 +11,5 @@
     $seguindo = 12;
     $seguidores = "Nenhum";
 
-    salvarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores);
+    cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores);
 ?>
