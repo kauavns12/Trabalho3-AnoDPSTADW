@@ -492,7 +492,7 @@ function excluir_Lista($conexao, $idlista){
 }
 
 function editar_Lista($conexao, $idlista, $nome, $descricao, $situacao){
-    $sql = "UPDATE lista SET nome=?, descricao=?, situacao-?  WHERE idlista=?";
+    $sql = "UPDATE lista SET nome=?, descricao=?, situacao=?  WHERE idlista=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'ssii', $nome, $descricao, $situacao, $idlista);
