@@ -5,6 +5,11 @@
     $nome = "Koooooooloooooocacaoca";
     $gmail = "Kaio@teste.com";
     $senha = "3840413708";
+    $foto = "teste";
+    $tipo = "c";
+    $status = "Ativo";
+    $seguindo = 0;
+    $seguidores = "0";
 
-    salvarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores);
+    cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores);
 ?>
