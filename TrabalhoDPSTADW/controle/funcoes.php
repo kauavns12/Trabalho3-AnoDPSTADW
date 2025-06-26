@@ -194,20 +194,6 @@ function editarGenero($conexao, $idgenero, $nome){
     return $funcionou;
 }
 
-function pesquisarJogoGenero($conexao, $idgenero){
-    $sql = "SELECT * FROM jogo WHERE idgenero = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'i', $idgenero);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $jogo = mysqli_fetch_assoc($resultado);
-
-    mysqli_stmt_close($comando);
-    return $jogo;
-}
 
 function salvarConquista($conexao, $nome, $descricao){
     $sql = "INSERT INTO conquista (nome, descricao) VALUES (?,?)";
@@ -414,10 +400,6 @@ function listarFavoritoUsuario($conexao, $idusuario) {
     mysqli_stmt_close($comando);
     
     return $funcionou;
-
-
-
-
 
 }
 
