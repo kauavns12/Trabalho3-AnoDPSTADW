@@ -1,3 +1,5 @@
+use friv;
+
 INSERT INTO friv.jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES 
 ('Super Jump', 'Jogo de pulo infinito', 'JumpDev', '2022-03-15', 'jump.png'),
 ('Corrida Turbo', 'Corrida cheia de adrenalina', 'RaceStudio', '2023-01-10', 'corrida.png'),
