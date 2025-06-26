@@ -366,8 +366,8 @@ function listarFavoritoUsuario($conexao, $idusuario) {
 }
 
 
-function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario, $idjogo){
-    $sql = "INSERT INTO lista (nome, descricao, situacao, idusuario, idjogo) VALUES (?,?,?,?,?)";
+function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario){
+    $sql = "INSERT INTO lista (nome, descricao, situacao, usuario_idusuario1) VALUES (?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'sssii', $nome, $descricao, $situacao, $idusuario);
