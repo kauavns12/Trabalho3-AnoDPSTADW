@@ -90,27 +90,26 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     return $funcionou;
 }
 
-function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img){
+function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero){
     $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'sssssi', $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idjogo);
     mysqli_stmt_execute($comando);
 //
-    $sql2 = "UPDATE genero_jogo SET"
+    $sql2 = "UPDATE genero_jogo SET genero_idgenero=? WHERE jogo_idjogo=?";
+    $comando2 = mysqli_prepare($conexao, $sql2);
+
+    mysqli_stmt_bind_param($comando2, 'ii', $idgenero, $idjogo);
+    $funcionou = mysqli_stmt_execute($comando2);
 
 
 
-
-
-
-
-
-
-
-//
+    mysqli_stmt_close($comando2);
     mysqli_stmt_close($comando);
     return $funcionou;
+//
+
 }
 
 function pesquisarJogoID($conexao, $idjogo){

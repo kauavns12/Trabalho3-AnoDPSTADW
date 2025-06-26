@@ -2,7 +2,7 @@
      require_once "../conexao.php";
      require_once "../funcoes.php";
     $idjogo = 1;
-    $nome = "Pokemon Fire Red";
+    $nome = "Pokemon Soul Silver";
     $descricao = "Inicie sua jornada na região de Kanto";
     $desenvolvedor = "Pokemon Company";
     $data_lancamento = "1990-04-03";
