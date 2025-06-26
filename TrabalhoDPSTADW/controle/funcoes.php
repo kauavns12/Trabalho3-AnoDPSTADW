@@ -90,6 +90,22 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     return $funcionou;
 }
 
+function excluirJogo($conexao, $idjogo){
+    $sql = "DELETE FROM jogo WHERE idjogo=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'i', $idjogo);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
+
+}
+
+
+
 function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img){
     $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -128,6 +144,31 @@ function pesquisarJogoNome($conexao, $nome){
 
     mysqli_stmt_close($comando);
     return $jogo;
+}
+
+function pesquisarJogoGenero($conexao, $idgenero){
+    $sql = "SELECT jogo_idjogo FROM genero_jogo WHERE genero_idgenero=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idgenero);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $idjogo = mysqli_fetch_assoc($resultado);
+
+    $sql = "SELECT * FROM jogo WHERE idjogo = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idjogo);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $jogo = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $jogo;
+
 }
 
 function salvarGenero($conexao, $nome){
@@ -187,10 +228,15 @@ function listarConquista($conexao){
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
 
-    $conquista = mysqli_fetch_assoc($resultado);
+    $lista_conquista= [];
+
+    while ($conquista = mysqli_fetch_assoc($resultado)){
+        $lista_conquista[] = $conquista;
+    }
+
 
     mysqli_stmt_close($comando);
-    return $conquista;
+    return $lista_conquista;
 }
 
 function pesquisarConquistaNome($conexao, $nome){
@@ -324,7 +370,7 @@ function excluirAvaliacaoJogo($conexao, $idavaliacao_jogo){
 }
 
 function adicionarFavorito($conexao, $idusuario, $idjogo){
-    $sql = "INSERT INTO favorito (idusuario, idjogo) VALUES (?,?)"; 
+    $sql = "INSERT INTO favorito (usuario_idusuario, jogo_idjogo) VALUES (?,?)"; 
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idjogo);
     $funcionou = mysqli_stmt_execute($comando);
@@ -332,6 +378,17 @@ function adicionarFavorito($conexao, $idusuario, $idjogo){
     
     return $funcionou;
     
+}
+
+function editarFavorito($conexao, $idfavorito, $idusuario, $idjogo){
+    $sql = "UPDATE favorito SET usuario_idusuario=?, jogo_idjogo=?  WHERE idfavorito=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'iii', $idusuario, $idjogo, $idfavorito);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    return $funcionou;
 }
 
 function excluirFavorito($conexao, $idfavorito){

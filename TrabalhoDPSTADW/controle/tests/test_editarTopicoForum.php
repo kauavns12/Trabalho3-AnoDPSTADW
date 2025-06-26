@@ -8,5 +8,5 @@
     $idcategoria_forun= 1;
     $idjogo= 1;
     
-    editarTopicoForun($conexao,$idtopico_forun, $nome, $conteudo, $idcategoria_forun,$idjogo)
+    editarTopicoForun($conexao,$idtopico_forun, $nome, $conteudo, $idcategoria_forun,$idjogo);
 ?>
