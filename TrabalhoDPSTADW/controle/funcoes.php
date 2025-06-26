@@ -90,6 +90,22 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     return $funcionou;
 }
 
+function excluirJogo($conexao, $idjogo){
+    $sql = "DELETE FROM jogo WHERE idjogo=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'i', $idjogo);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
+
+}
+
+
+
 function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero){
     $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -152,17 +168,18 @@ function pesquisarJogoGenero($conexao, $idgenero){
 
     $idjogo = mysqli_fetch_assoc($resultado);
 
-    $sql = "SELECT * FROM jogo WHERE idjogo = ?";
-    $comando = mysqli_prepare($conexao, $sql);
+    $sql2 = "SELECT * FROM jogo WHERE idjogo = ?";
+    $comando2 = mysqli_prepare($conexao, $sql2);
 
-    mysqli_stmt_bind_param($comando, 'i', $idjogo);
+    mysqli_stmt_bind_param($comando2, 'i', $idjogo);
 
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
+    mysqli_stmt_execute($comando2);
+    $resultado2 = mysqli_stmt_get_result($comando2);
 
-    $jogo = mysqli_fetch_assoc($resultado);
+    $jogo = mysqli_fetch_assoc($resultado2);
 
     mysqli_stmt_close($comando);
+    mysqli_stmt_close($comando2);
     return $jogo;
 
 }
