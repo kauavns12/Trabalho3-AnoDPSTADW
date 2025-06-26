@@ -359,10 +359,6 @@ function listarFavoritoUsuario($conexao, $idusuario) {
     
     return $funcionou;
 
-
-
-
-
 }
 
 
@@ -389,8 +385,15 @@ function excluir_Lista($conexao, $idlista){
     return $funcionou;
 }
 
-function editar_Lista($conexao, $nome, $descricao, $situacao, $idusuario){
+function editar_Lista($conexao, $idlista, $nome, $descricao, $situacao){
+    $sql = "UPDATE lista SET nome=?, descricao=?, situacao-?  WHERE idlista=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ssii', $nome, $descricao, $situacao, $idlista);
+    $funcionou = mysqli_stmt_execute($comando);
 
+    mysqli_stmt_close($comando);
+    return $funcionou;
 }
 
 function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao){
