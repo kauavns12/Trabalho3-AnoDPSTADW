@@ -3,8 +3,8 @@
     require_once "../funcoes.php";
 
     $nome = "D&D";
-    $descricao = "Um jogo quadrado";
-    $desenvolvedor = "Mojang";
+    $descricao = "Um jogo massa";
+    $desenvolvedor = "Alguem";
     $data_lancamento = "2011-04-03";
     $imagem = "teste";
     $idgenero = 1;
