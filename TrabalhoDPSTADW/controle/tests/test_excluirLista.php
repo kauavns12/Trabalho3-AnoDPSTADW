@@ -2,7 +2,7 @@
     require_once "../conexao.php";
     require_once "../funcoes.php";
 
-    $idlista = 2; 
+    $idlista = 1; 
 
-    excluirAvaliacaoJogo($conexao, $idavaliacao_jogo);
+    excluir_Lista($conexao, $idlista);
 ?>
