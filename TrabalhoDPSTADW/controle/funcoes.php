@@ -1,11 +1,11 @@
 <?php
 
-function salvarUsuario($conexao, $nome, $gmail, $senha){
+function salvarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores){
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO usuario (nome, gmail, senha, tipo) VALUES (?, ?, ?, 'c')";
+    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status, seguindo, seguidores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sss', $nome, $gmail, $senha_hash);
+    mysqli_stmt_bind_param($comando, 'ssssssis', $nome, $gmail, $senha_hash, $foto, $tipo, $status, $seguindo, $seguidores);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
