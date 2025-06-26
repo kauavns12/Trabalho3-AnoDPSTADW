@@ -479,7 +479,7 @@ $sql = "INSERT INTO histo_jogo (tempo_ini, tempo_fim, usuario_idusuario) VALUES 
 }
 
 function excluirHistoricoJogo($conexao, $idhisto_jogo){
-    $sql = "DELETE * FROM histo WHERE idhisto_jogo=?";
+    $sql = "DELETE FROM histo_jogo WHERE idhisto_jogo=?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idhisto_jogo);
     
