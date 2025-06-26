@@ -1,11 +1,11 @@
 <?php
 
-function salvarUsuario($conexao, $nome, $gmail, $senha){
+function cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores){
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO usuario (nome, gmail, senha, tipo) VALUES (?, ?, ?, 'c')";
+    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status, seguindo, seguidores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sss', $nome, $gmail, $senha_hash);
+    mysqli_stmt_bind_param($comando, 'ssssssis', $nome, $gmail, $senha_hash, $foto, $tipo, $status, $seguindo, $seguidores);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -13,6 +13,18 @@ function salvarUsuario($conexao, $nome, $gmail, $senha){
     return $funcionou;
 }
 
+function login($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores){
+    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status, seguindo, seguidores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ssssssis', $nome, $gmail, $senha_hash, $foto, $tipo, $status, $seguindo, $seguidores);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+}
 function excluirUsuario($conexao, $idusuario){
     $sql = "DELETE FROM usuario WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -90,6 +102,19 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     return $funcionou;
 }
 
+function excluirJogo($conexao, $idjogo){
+    $sql = "DELETE FROM jogo WHERE idjogo=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'i', $idjogo);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
+
+}
 
 
 function pesquisarJogoID($conexao, $idjogo){
@@ -335,6 +360,17 @@ function adicionarFavorito($conexao, $idusuario, $idjogo){
     
 }
 
+function editarFavorito($conexao, $idfavorito, $idusuario, $idjogo){
+    $sql = "UPDATE favorito SET usuario_idusuario=?, jogo_idjogo=?  WHERE idfavorito=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'iii', $idusuario, $idjogo, $idfavorito);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    return $funcionou;
+}
+
 function excluirFavorito($conexao, $idfavorito){
     $sql = "DELETE FROM favorito WHERE idfavorito=?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -360,13 +396,26 @@ function listarFavoritoUsuario($conexao, $idusuario) {
     return $funcionou;
 
 }
+function listarFavoritoTodosUsuario($conexao){
+    $sql = "SELECT * FROM favorito ";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
 
+    $lista_favoritoTodosUsuario= [];
+
+    while ($favorito = mysqli_fetch_assoc($resultado)){
+        $lista_favoritoTodosUsuario[] = $favorito;
+    }
+
+    return $lista_favoritoTodosUsuario;
+}
 
 function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario){
-    $sql = "INSERT INTO lista (nome, descricao, situacao, usuario_idusuario1) VALUES (?,?,?,?)";
+    $sql = "INSERT INTO lista (nome, descricao, situacao, idusuario) VALUES (?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssii', $nome, $descricao, $situacao, $idusuario);
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $descricao, $situacao, $idusuario);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -375,7 +424,7 @@ function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario){
 }
 
 function excluir_Lista($conexao, $idlista){
-    $sql = "DELETE FROM lista WHERE idlista=?";
+    $sql = "DELETE * FROM lista WHERE idlista=?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idlista);
     
@@ -385,35 +434,67 @@ function excluir_Lista($conexao, $idlista){
     return $funcionou;
 }
 
-function editar_Lista($conexao, $idlista, $nome, $descricao, $situacao){
-    $sql = "UPDATE lista SET nome=?, descricao=?, situacao-?  WHERE idlista=?";
+function editar_Lista($conexao, $nome, $descricao, $situacao, $idlista){
+     $sql = "UPDATE lista SET nome=?, descricao=?, situacao=?  WHERE idlista=?";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'ssii', $nome, $descricao, $situacao, $idlista);
-    $funcionou = mysqli_stmt_execute($comando);
-
+     $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
     mysqli_stmt_close($comando);
     return $funcionou;
 }
 
 function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao){
-
+$sql = "INSERT INTO histo (tempo_ini, tempo_fim, idusuario, idjogo, idavaliacao) VALUES (?,?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ddiii', $tempo_ini, $tempo_fim, $idusuario, $idjogo, $idavaliacao);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 }
 
 function excluirHistoricoJogo($conexao, $idhisto_jogo){
-
+    $sql = "DELETE * FROM histo WHERE idhisto_jogo=?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idhisto_jogo);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 }
 
-function salvarPreferencia($conexao, $idusuario, $idjogo, $idgenero){
-
+function salvarPreferencia($conexao, $idusuario, $idgenero){
+    $sql = "INSERT INTO preferencia (usuario_idusuario, genero_idgenero) VALUES (?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idgenero);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 }
 
-function editarPreferencia($conexao, $idusuario, $idjogo, $idgenero){
-
+function editarPreferencia($conexao, $idgenero, $idusuario){
+    $sql = "UPDATE preferencia SET genero_idgenero=?  WHERE usuario_idusuario=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ii', $nome, $idgenero,$idusuario);
+     $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
 }
 
 function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idgenero) {
-    // 1. Atualiza os dados principais do jogo
+    
     $sql = "UPDATE jogo SET nome=?, descricao=?, desenvolvedor=?, data_lanca=?, img=? WHERE idjogo=?";
     $comando = mysqli_prepare($conexao, $sql);
     
@@ -421,7 +502,7 @@ function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_
     $funcionou1 = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     
-    // 2. Atualiza o gênero do jogo
+    
     $sql2 = "UPDATE genero_jogo SET genero_idgenero=? WHERE jogo_idjogo=?";
     $comando2 = mysqli_prepare($conexao, $sql2);
     
@@ -429,8 +510,41 @@ function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_
     $funcionou2 = mysqli_stmt_execute($comando2);
     mysqli_stmt_close($comando2);
     
-    // Retorna true apenas se AMBAS atualizações funcionaram
+    
     return ($funcionou1 && $funcionou2);
 }
 
+function listarUsuario($conexao){
+    $sql = "SELECT * FROM usuario";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_usuario= [];
+
+    while ($usuario = mysqli_fetch_assoc($resultado)){
+        $lista_usuario[] = $usuario;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_usuario;
+}
+
+function listarJogo($conexao){
+    $sql = "SELECT * FROM jogo";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_jogo= [];
+
+    while ($jogo = mysqli_fetch_assoc($resultado)){
+        $lista_jogo[] = $jogo;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_jogo;
+}
 ?>

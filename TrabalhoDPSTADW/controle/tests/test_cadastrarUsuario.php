@@ -6,5 +6,5 @@
     $gmail = "Kaio@teste.com";
     $senha = "3840413708";
 
-    salvarUsuario($conexao, $nome, $gmail, $senha);
+    salvarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores);
 ?>

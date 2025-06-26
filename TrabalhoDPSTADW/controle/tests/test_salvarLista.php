@@ -8,5 +8,5 @@ require_once "../funcoes.php";
     $descricao = "Rpg de mundo aberto";
     $situacao = 1;
 
-    $resultado = salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario);
+    salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario);
 ?>
