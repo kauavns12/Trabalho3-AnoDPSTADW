@@ -142,6 +142,31 @@ function pesquisarJogoNome($conexao, $nome){
     return $jogo;
 }
 
+function pesquisarJogoGenero($conexao, $idgenero){
+    $sql = "SELECT jogo_idjogo FROM genero_jogo WHERE genero_idgenero=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idgenero);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $idjogo = mysqli_fetch_assoc($resultado);
+
+    $sql = "SELECT * FROM jogo WHERE idjogo = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idjogo);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $jogo = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $jogo;
+
+}
+
 function salvarGenero($conexao, $nome){
     $sql = "INSERT INTO genero (nome) VALUES (?)";
     $comando = mysqli_prepare($conexao, $sql);
@@ -165,20 +190,7 @@ function editarGenero($conexao, $idgenero, $nome){
     return $funcionou;
 }
 
-function pesquisarJogoGenero($conexao, $idgenero){
-    $sql = "SELECT * FROM jogo WHERE idgenero = ?";
-    $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'i', $idgenero);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $jogo = mysqli_fetch_assoc($resultado);
-
-    mysqli_stmt_close($comando);
-    return $jogo;
-}
 
 function salvarConquista($conexao, $nome, $descricao){
     $sql = "INSERT INTO conquista (nome, descricao) VALUES (?,?)";
@@ -293,6 +305,16 @@ function editarPostForun($conexao, $idpost_forun, $conteudo, $idusuario, $idtopi
 }
 
 function excluirPostForun($conexao, $idpost_forun){
+    $sql = "DELETE FROM post_forun WHERE idpost_forun=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'i', $idpost_forun);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
 
 }
 

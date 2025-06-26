@@ -3,8 +3,8 @@
      require_once "../funcoes.php";
      
     $conteudo = "Ferramentas do Minecraft";
-    $idusuario = 3;
-    $idtopico_forun = 2;
+    $idusuario = 2;
+    $idtopico_forun = 1;
    
     
     salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun);
