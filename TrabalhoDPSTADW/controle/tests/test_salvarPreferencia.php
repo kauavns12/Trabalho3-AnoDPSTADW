@@ -2,7 +2,7 @@
      require_once "../conexao.php";
      require_once "../funcoes.php";
      
-    $idusuario = 1;
+    $idusuario = 2;
     $idgenero = 1;
    
     salvarPreferencia($conexao, $idusuario, $idgenero);

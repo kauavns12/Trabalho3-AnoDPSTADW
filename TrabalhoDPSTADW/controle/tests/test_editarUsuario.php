@@ -5,7 +5,7 @@
     $nome = "Bruna";
     $gmail = "bruna@gmail.com";
     $senha = "123";
-    $idusuario = 1;
+    $idusuario = 2;
     editarUsuario($conexao, $nome, $gmail, $senha, $idusuario);
 
 ?>

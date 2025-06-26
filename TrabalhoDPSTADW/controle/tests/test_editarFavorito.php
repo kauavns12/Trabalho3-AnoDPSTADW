@@ -3,7 +3,7 @@
      require_once "../funcoes.php";
 
     $idfavorito = 1;
-    $idusuario=3;
+    $idusuario=2;
     $idjogo = 2;
   
     
