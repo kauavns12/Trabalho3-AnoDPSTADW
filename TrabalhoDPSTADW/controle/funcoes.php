@@ -359,9 +359,6 @@ function listarFavoritoUsuario($conexao, $idusuario) {
     return $funcionou;
 
 
-
-
-
 }
 
 
