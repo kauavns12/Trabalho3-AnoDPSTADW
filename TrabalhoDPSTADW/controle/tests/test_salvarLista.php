@@ -1,11 +1,12 @@
 <?php
-    require_once "../conexao.php";
-    require_once "../funcoes.php";
+require_once "../conexao.php";
+require_once "../funcoes.php";
 
-    $nome = "Dead island";
-    $descricao = "Um jogo de sobrevivencia...";
+    
+    $idusuario = 1;
+    $nome = "Jogos de Sobrevivência";
+    $descricao = "Melhores jogos de sobrevivência pós-apocalíptico";
     $situacao = 1;
-    $usuario_id = 1;
 
-    salvar_Lista($conexao, $nome, $descricao, $situacao, $usuario_id);
+    $resultado = salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario);
 ?>

@@ -97,20 +97,7 @@ function editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_
     mysqli_stmt_bind_param($comando, 'sssssi', $nome, $descricao, $desenvolvedor, $data_lancamento, $img, $idjogo);
     mysqli_stmt_execute($comando);
 //
-    $sql2 = "UPDATE genero_jogo SET"
 
-
-
-
-
-
-
-
-
-
-//
-    mysqli_stmt_close($comando);
-    return $funcionou;
 }
 
 function pesquisarJogoID($conexao, $idjogo){
@@ -315,7 +302,7 @@ function editarAvaliacaoJogo($conexao, $idavaliacao, $classificacao, $idusuario,
     $sql = "UPDATE avaliacao_jogo SET classificacao=?, usuario_idusuario=?, jogo_idjogo=? WHERE idavaliacao_jogo=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'siii', $classificacao, $idusuario, $idjogo, $idavaliacao_jogo);
+    mysqli_stmt_bind_param($comando, 'siii', $classificacao, $idusuario, $idjogo, $idavaliacao);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
@@ -378,11 +365,12 @@ function listarFavoritoUsuario($conexao, $idusuario) {
 }
 
 
-function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario, $idjogo){
-    $sql = "INSERT INTO lista (nome, descricao, situacao,) VALUES (?,?,?,)";
+function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario){
+    
+    $sql = "INSERT INTO lista (nome, descricao, situacao, usuario_idusuario1) VALUES (?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sss', $nome, $descricao, $situacao);
+    mysqli_stmt_bind_param($comando, 'ssii', $nome, $descricao, $situacao, $idusuario);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
