@@ -593,4 +593,21 @@ function listarConquistaUsu($conexao){
 
     return $lista_ConquistaUsuario;
 }
+
+
+
+function cadastrarComentario($conexao, $comentario, $criado, $post_forun_idpost_forun, $post_forun_usuario_idusuario, $post_forun_topico_forun_idtopico_forun){
+    $sql = "INSERT INTO comentario (comentario, criado, post_forun_idpost_forun, post_forun_usuario_idusuario, post_forun_topico_forun_idtopico_forun) VALUES (?, ?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ssiii', $comentario, $criado, $post_forun_idpost_forun, $post_forun_usuario_idusuario, $post_forun_topico_forun_idtopico_forun);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
+  
+}
+?>
 ?>
