@@ -63,7 +63,7 @@ function pesquisarUsuario_ID($conexao, $idusuario){
     return $user;
 }
 function pesquisarUsuario_Nome($conexao, $nome){
-    $sql = "SELECT nome, foto, status, seguindo , seguidores FROM usuario WHERE nome = ?";
+    $sql = "SELECT nome, foto, status FROM usuario WHERE nome = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 's', $nome);
