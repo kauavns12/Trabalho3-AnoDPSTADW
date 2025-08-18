@@ -13,12 +13,12 @@ function cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status
     return $funcionou;
 }
 
-function login($conexao, $nome, $gmail, $senha, $foto, $tipo, $status, $seguindo, $seguidores){
+function login($conexao, $nome, $gmail, $senha, $foto, $tipo, $status){
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status, seguindo, seguidores) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status) VALUES (?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'ssssssis', $nome, $gmail, $senha_hash, $foto, $tipo, $status, $seguindo, $seguidores);
+    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $gmail, $senha_hash, $foto, $tipo, $status);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
