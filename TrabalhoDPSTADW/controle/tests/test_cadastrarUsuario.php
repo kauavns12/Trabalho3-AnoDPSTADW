@@ -2,9 +2,9 @@
     require_once "../conexao.php";
     require_once "../funcoes.php";
 
-    $nome = "Koooooooloooooocacaoca";
-    $gmail = "Kaio@teste.com";
-    $senha = "3840413708";
+    $nome = "Lunna";
+    $gmail = "Lunna@teste.com";
+    $senha = "3840413770";
     $foto = "teste";
     $tipo = "c";
     $status = "Ativo";
