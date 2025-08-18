@@ -49,7 +49,7 @@ function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario){
 }
 
 function pesquisarUsuario_ID($conexao, $idusuario){
-    $sql = "SELECT nome, foto, status, seguindo , seguidores FROM usuario WHERE idusuario = ?";
+    $sql = "SELECT nome, foto, status FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
