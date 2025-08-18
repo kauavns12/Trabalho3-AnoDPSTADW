@@ -329,7 +329,7 @@ function excluirPostForun($conexao, $idpost_forun){
 
 }
 
-function salvarAvaliacaoJogo($conexao, $classificacao, $idjogo, $idusuario){
+function salvarAvaliacaoJogo($conexao, $classificacao, $idusuario, $idjogo){
     $sql = "INSERT INTO avaliacao_jogo (classificacao, usuario_idusuario, jogo_idjogo) VALUES (?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     

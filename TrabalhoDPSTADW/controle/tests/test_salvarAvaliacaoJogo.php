@@ -5,5 +5,5 @@
     $classificacao = 3;
     $idusuario = 2;
     $idjogo= 1;
-    salvarAvaliacaoJogo($conexao, $classificacao, $idjogo, $idusuario);
+    salvarAvaliacaoJogo($conexao, $classificacao, $idusuario, $idjogo);
 ?>
