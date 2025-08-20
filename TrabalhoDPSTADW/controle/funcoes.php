@@ -609,5 +609,6 @@ function cadastrarComentario($conexao, $comentario, $criado, $post_forun_idpost_
 
   
 }
+
 ?>
 
