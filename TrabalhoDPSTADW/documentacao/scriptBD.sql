@@ -381,7 +381,7 @@ ENGINE = InnoDB;
 -- Table `friv`.`relacionamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `friv`.`relacionamento` (
-  `idrelacionamento` INT NOT NULL,
+  `idrelacionamento` INT NOT NULL AUTO_INCREMENT,
   `seguindo` INT NOT NULL,
   `seguidor` INT NOT NULL,
   PRIMARY KEY (`idrelacionamento`),
