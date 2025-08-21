@@ -610,5 +610,48 @@ function cadastrarComentario($conexao, $comentario, $criado, $post_forun_idpost_
   
 }
 
+function efetuarRelacionamento($conexao, $idusuario1, $idusario2){
+
+    $sql = "INSERT INTO seguidor (seguindo, seguidor) VALUES (?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ii',$idusuario1, $idusario2 );
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
+}
+
+function acabarRelacionamento($conexao, $idrelacionamento){
+    $sql = "DELETE * FROM relacionamento WHERE idrelacionamento = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idlista);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
 
