@@ -606,9 +606,10 @@ function cadastrarComentario($conexao, $comentario, $criado, $post_forun_idpost_
     mysqli_stmt_close($comando);
     
     return $funcionou;
-
-  
 }
+
+function deletarComentario($co)
+
 
 function efetuarRelacionamento($conexao, $idusuario1, $idusuario2){
 
