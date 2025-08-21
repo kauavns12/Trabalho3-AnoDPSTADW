@@ -13,12 +13,10 @@
     $id5 = 5;
 
     efetuarRelacionamento($conexao, $id1, $id2);
-
     efetuarRelacionamento($conexao, $id1, $id4);
-
-
-
-
-
-
+    efetuarRelacionamento($conexao, $id4, $id1);
+    efetuarRelacionamento($conexao, $id2, $id3);
+    efetuarRelacionamento($conexao, $id3, $id2);
+    efetuarRelacionamento($conexao, $id2, $id1);
+    efetuarRelacionamento($conexao, $id3, $id1);
 ?>
