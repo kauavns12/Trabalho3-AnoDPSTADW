@@ -612,7 +612,7 @@ function cadastrarComentario($conexao, $comentario, $criado, $post_forun_idpost_
 
 function efetuarRelacionamento($conexao, $idusuario1, $idusario2){
 
-    $sql = "INSERT INTO seguidor (seguindo, seguidor) VALUES (?,?)";
+    $sql = "INSERT INTO relacionamento (seguindo, seguidor) VALUES (?,?)";
     $comando = mysqli_prepare($conexao, $sql);
     
     mysqli_stmt_bind_param($comando, 'ii',$idusuario1, $idusario2 );
