@@ -608,7 +608,17 @@ function cadastrarComentario($conexao, $comentario, $criado, $post_forun_idpost_
     return $funcionou;
 }
 
-function deletarComentario($co)
+function deletarComentario($conexao, $idcomentario){
+    $sql = "DELETE FROM comentario WHERE idcomentario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idcomentario);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+
+}
 
 
 function efetuarRelacionamento($conexao, $idusuario1, $idusuario2){
