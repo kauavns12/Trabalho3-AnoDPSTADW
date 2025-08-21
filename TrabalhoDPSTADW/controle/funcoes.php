@@ -627,7 +627,7 @@ function efetuarRelacionamento($conexao, $idusuario1, $idusario2){
 function acabarRelacionamento($conexao, $idrelacionamento){
     $sql = "DELETE * FROM relacionamento WHERE idrelacionamento = ?";
     $comando =  mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'i', $idlista);
+    mysqli_stmt_bind_param($comando, 'i', $idrelacionamento);
     
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
