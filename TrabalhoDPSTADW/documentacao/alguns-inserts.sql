@@ -135,17 +135,17 @@ INSERT INTO friv.preferencia (usuario_idusuario, genero_idgenero) VALUES
 (5, 5);
 
 -- Inserindo dados na tabela comentario (depende de post_forun)
-INSERT INTO friv.comentario (idcomentario, comentario, criado, post_forun_idpost_forun, post_forun_usuario_idusuario, post_forun_topico_forun_idtopico_forun) VALUES
-(1, 'Boa dica!', '2024-01-15', 2, 3, 1),
-(2, 'Funcionou aqui também', '2024-01-16', 4, 4, 3),
-(3, 'Vou tentar isso', '2024-01-17', 1, 2, 1),
-(4, 'Ótima sugestão', '2024-01-18', 5, 5, 4),
-(5, 'Concordo plenamente', '2024-01-19', 3, 1, 2);
+INSERT INTO friv.comentario (comentario, criado, post_forun_idpost_forun, post_forun_usuario_idusuario, post_forun_topico_forun_idtopico_forun) VALUES
+( 'Boa dica!', '2024-01-15', 2, 3, 1),
+( 'Funcionou aqui também', '2024-01-16', 4, 4, 3),
+( 'Vou tentar isso', '2024-01-17', 1, 2, 1),
+( 'Ótima sugestão', '2024-01-18', 5, 5, 4),
+( 'Concordo plenamente', '2024-01-19', 3, 1, 2);
 
 -- Inserindo dados na tabela relacionamento (depende de usuario para seguidor e seguindo)
-INSERT INTO friv.relacionamento (idrelacionamento, seguindo, seguidor) VALUES
-(1, 1, 2),
-(2, 2, 3),
-(3, 3, 4),
-(4, 4, 5),
-(5, 5, 1);
+INSERT INTO friv.relacionamento ( seguindo, seguidor) VALUES
+(1, 2),
+(2, 3),
+(3, 4),
+(4, 5),
+(5, 1);
