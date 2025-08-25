@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Acesso - Dark Mode</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --input-bg: #2d2d2d;
+            --text-primary: #e4e4e4;
+            --text-secondary: #a0a0a0;
+            --accent: #8a2be2;
+            --accent-hover: #9932cc;
+            --error: #cf6679;
+            --success: #03dac6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to right, var(--dark-bg), var(--darker-bg));
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
+            border: 1px solid #333;
+        }
+        
+        .login-header {
+            background: linear-gradient(to right, var(--accent), var(--accent-hover));
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .login-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .login-header::before {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            background: var(--card-bg);
+            border-radius: 20px 20px 0 0;
+            z-index: 2;
+        }
+        
+        .login-form {
+            padding: 40px 30px 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            background-color: var(--input-bg);
+            border: 2px solid #3d3d3d;
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3);
+        }
+        
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, var(--accent), var(--accent-hover));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .links {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 15px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        .links a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            z-index: 3;
+            font-size: 18px;
+        }
+        
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .theme-switcher:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                max-width: 100%;
+                border-radius: 10px;
+            }
+            
+            .login-form {
+                padding: 30px 20px 20px;
+            }
+            
+            .login-header {
+                padding: 25px 20px;
+            }
+            
+            .login-header h1 {
+                font-size: 24px;
+            }
+            
+            .form-group input {
+                padding: 14px 40px 14px 14px;
+            }
+        }
+        
+        @media (max-width: 350px) {
+            .login-header h1 {
+                font-size: 22px;
+            }
+            
+            .btn-login {
+                padding: 14px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Efeitos de foco suave */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-text-fill-color: var(--text-primary);
+            -webkit-box-shadow: 0 0 0px 1000px var(--input-bg) inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-switcher" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Acesso ao Sistema</h1>
+        </div>
+        
+        <form class="login-form" action="verificarLogin.php" method="post">
+            <div class="logo">
+                <i class="fas fa-lock"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> E-mail:</label>
+                <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com">
+                <i class="fas fa-envelope"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="senha"><i class="fas fa-key"></i> Senha:</label>
+                <div class="password-container">
+                    <input type="password" id="senha" name="senha" required placeholder="Sua senha secreta">
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Acessar
+            </button>
+            
+            <div class="links">
+                <a href="formUsuario.php"><i class="fas fa-user-plus"></i> Primeiro acesso</a>
+                <br>
+                <a href="#"><i class="fas fa-question-circle"></i> Esqueci minha senha</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Função para mostrar/ocultar senha
+        function togglePassword() {
+            const passwordInput = document.getElementById('senha');
+            const toggleIcon = document.querySelector('.toggle-password i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+        
+        // Função para alternar entre temas
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-switcher i');
+            
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                body.classList.add('light-theme');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+        
+        // Função para validar o formulário antes do envio
+        function validarFormulario(event) {
+            // Esta função pode ser expandida para validações adicionais
+            console.log('Validação do formulário - espaço para sua função personalizada');
+            
+            // Exemplo de validação básica
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            
+            if (!email || !senha) {
+                alert('Por favor, preencha todos os campos.');
+                event.preventDefault();
+                return false;
+            }
+            
+            // Validação de e-mail simples
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um endereço de e-mail válido.');
+                event.preventDefault();
+                return false;
+            }
+            
+            // Adicione aqui suas validações personalizadas
+            // chamadaParaSuaFuncao(email, senha);
+            
+            return true;
+        }
+        
+        // Adicionando o event listener para o formulário
+        document.querySelector('.login-form').addEventListener('submit', validarFormulario);
+        
+        // Efeito de foco nos inputs
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('focused');
+            });
+        });
+    </script>
+</body>
+</html>

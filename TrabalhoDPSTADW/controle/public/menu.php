@@ -20,9 +20,7 @@
             <li><a href="#">Popular</a></li>
             <li><a href="#">Tudo</a></li>
             <li><a href="#">Jogos</a></li>
-            <li><a href="#">Esportes</a></li>
-            <li><a href="#">Notícias</a></li>
-            <li><a href="#">Aprender</a></li>
+            <li><a href="#">Usuario</a></li>
         </ul>
         
         <div class="search-container">
@@ -30,10 +28,6 @@
             <input type="text" class="search-box" placeholder="Pesquisar no Reddit">
         </div>
         
-        <div class="nav-buttons">
-            <button class="nav-button login-btn">Entrar</button>
-            <button class="nav-button signup-btn">Registrar-se</button>
-        </div>
         
         <div class="user-menu">
             <div class="user-avatar">U</div>
