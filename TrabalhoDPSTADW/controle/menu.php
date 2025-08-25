@@ -12,22 +12,21 @@
 <body>
     <nav class="navbar">
         <a href="#" class="logo">
-            <i class="fab fa-reddit-alien logo-icon"></i>
-            <span class="logo-text">reddit</span>
+            <i class="fas fa-gamepad logo-icon"></i>
+            <span class="logo-text">Friv</span>
         </a>
         
         <ul class="nav-links">
-            <li><a href="#">Popular</a></li>
-            <li><a href="#">Tudo</a></li>
+            <li><a href="menu.php" class="active">Início</a></li>
             <li><a href="#">Jogos</a></li>
-            <li><a href="#">Esportes</a></li>
-            <li><a href="#">Notícias</a></li>
-            <li><a href="#">Aprender</a></li>
+            <li><a href="#">Comunidade</a></li>
+            <li><a href="#">Fóruns</a></li>
+            <li><a href="#">Lançamentos</a></li>
         </ul>
         
         <div class="search-container">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-box" placeholder="Pesquisar no Reddit">
+            <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
         </div>
         
         <div class="nav-buttons">
@@ -36,8 +35,8 @@
         </div>
         
         <div class="user-menu">
-            <div class="user-avatar">U</div>
-            <div class="user-name">usuário</div>
+            <div class="user-avatar">J</div>
+            <div class="user-name">JoãoSilva</div>
             <i class="fas fa-chevron-down dropdown-icon"></i>
         </div>
         
@@ -46,59 +45,184 @@
         </button>
     </nav>
     
-    <div class="content">
-        <div class="post">
-            <div class="post-header">
-                <span class="post-subreddit">r/AskReddit</span>
-                <span class="post-user">Postado por u/exemplo_user • 5 horas atrás</span>
+    <div class="container">
+        <div class="main-content">
+            <h2 class="section-title">Jogos em Destaque</h2>
+            
+            <div class="game-card">
+                <img src="https://via.placeholder.com/120x120/ff4500/ffffff?text=Among+Us" alt="Among Us" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Among Us</h3>
+                    <p class="game-description">Jogo de investigação multijogador onde você precisa descobrir quem é o impostor.</p>
+                    <div class="game-meta">
+                        <div class="game-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                        <div class="game-genre">Ação • Multijogador</div>
+                    </div>
+                    <button class="btn-play">Jogar Agora</button>
+                </div>
             </div>
-            <h3 class="post-title">Qual é a coisa mais estranha que você já viu em casa de um amigo?</h3>
-            <div class="post-content">
-                <p>Estava na casa de um amigo e vi algo realmente incomum. Alguém mais já passou por algo assim?</p>
+            
+            <div class="game-card">
+                <img src="https://via.placeholder.com/120x120/5a75cc/ffffff?text=Candy+Crush" alt="Candy Crush" class="game-image">
+                <div class="game-info">
+                    <h3 class="game-title">Candy Crush Saga</h3>
+                    <p class="game-description">Jogo de puzzle com doces que já conquistou milhões de jogadores.</p>
+                    <div class="game-meta">
+                        <div class="game-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                        <div class="game-genre">Puzzle • Casual</div>
+                    </div>
+                    <button class="btn-play">Jogar Agora</button>
+                </div>
             </div>
-            <div class="post-actions">
-                <div class="post-action upvote">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>2.1k</span>
+            
+            <h2 class="section-title">Discussões Recentes</h2>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-subreddit">r/AmongUs</span>
+                    <span class="post-user">Postado por u/MariaSantos • 5 horas atrás</span>
                 </div>
-                <div class="post-action downvote">
-                    <i class="fas fa-arrow-down"></i>
+                <h3 class="post-title">Dicas para identificar o impostor</h3>
+                <div class="post-content">
+                    <p>Estou compartilhando algumas estratégias que uso para descobrir quem é o impostor nas partidas. Quem mais tem dicas?</p>
                 </div>
-                <div class="post-action">
-                    <i class="far fa-comment"></i>
-                    <span>423 Comentários</span>
+                <div class="post-actions">
+                    <div class="post-action upvote">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>2.1k</span>
+                    </div>
+                    <div class="post-action downvote">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>423 Comentários</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fas fa-share"></i>
+                        <span>Compartilhar</span>
+                    </div>
                 </div>
-                <div class="post-action">
-                    <i class="fas fa-share"></i>
-                    <span>Compartilhar</span>
+            </div>
+            
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-subreddit">r/CandyCrush</span>
+                    <span class="post-user">Postado por u/PedroCosta • 12 horas atrás</span>
+                </div>
+                <h3 class="post-title">Como passar da fase 350?</h3>
+                <div class="post-content">
+                    <p>Estou travado na fase 350 há uma semana. Alguém tem alguma dica específica para esta fase?</p>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action upvote">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>1.8k</span>
+                    </div>
+                    <div class="post-action downvote">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>217 Comentários</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fas fa-share"></i>
+                        <span>Compartilhar</span>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="post">
-            <div class="post-header">
-                <span class="post-subreddit">r/javascript</span>
-                <span class="post-user">Postado por u/dev_example • 12 horas atrás</span>
+        <div class="sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Comunidades Populares</div>
+                <div class="sidebar-content">
+                    <div class="community-item">
+                        <div class="community-icon">A</div>
+                        <div>
+                            <div class="community-name">r/AmongUs</div>
+                            <div class="community-members">1.2M membros</div>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <div class="community-icon">C</div>
+                        <div>
+                            <div class="community-name">r/CandyCrush</div>
+                            <div class="community-members">850k membros</div>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <div class="community-icon">S</div>
+                        <div>
+                            <div class="community-name">r/SubwaySurfers</div>
+                            <div class="community-members">720k membros</div>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <div class="community-icon">P</div>
+                        <div>
+                            <div class="community-name">r/PokemonGO</div>
+                            <div class="community-members">2.4M membros</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h3 class="post-title">Dica de JavaScript: Usando Optional Chaining</h3>
-            <div class="post-content">
-                <p>O optional chaining (?.) permite ler o valor de uma propriedade localizada internamente em uma cadeia de objetos conectados sem ter que validar cada referência na cadeia.</p>
+            
+            <div class="sidebar-box">
+                <div class="sidebar-header">Seus Jogos Favoritos</div>
+                <div class="sidebar-content">
+                    <div class="community-item">
+                        <div class="community-icon" style="background-color: #5a75cc;">C</div>
+                        <div>
+                            <div class="community-name">Candy Crush Saga</div>
+                            <div class="community-members">Jogado 12h esta semana</div>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <div class="community-icon" style="background-color: #ff4500;">A</div>
+                        <div>
+                            <div class="community-name">Among Us</div>
+                            <div class="community-members">Jogado 8h esta semana</div>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <div class="community-icon" style="background-color: #46d160;">P</div>
+                        <div>
+                            <div class="community-name">Pokémon GO</div>
+                            <div class="community-members">Jogado 5h esta semana</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="post-actions">
-                <div class="post-action upvote">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>1.8k</span>
-                </div>
-                <div class="post-action downvote">
-                    <i class="fas fa-arrow-down"></i>
-                </div>
-                <div class="post-action">
-                    <i class="far fa-comment"></i>
-                    <span>217 Comentários</span>
-                </div>
-                <div class="post-action">
-                    <i class="fas fa-share"></i>
-                    <span>Compartilhar</span>
+            
+            <div class="sidebar-box">
+                <div class="sidebar-header">Eventos em Destaque</div>
+                <div class="sidebar-content">
+                    <div class="community-item">
+                        <div class="community-icon" style="background-color: #ff4500;">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <div class="community-name">Torneio de Among Us</div>
+                            <div class="community-members">25-27 de Ago • Prêmio: R$ 5.000</div>
+                        </div>
+                    </div>
+                    <div class="community-item">
+                        <div class="community-icon" style="background-color: #5a75cc;">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div>
+                            <div class="community-name">Evento de Aniversário</div>
+                            <div class="community-members">Candy Crush • 30 de Ago</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,6 +258,15 @@
         
         document.querySelector('.signup-btn').addEventListener('click', function() {
             alert('Funcionalidade de registro acionada!');
+        });
+        
+        // Botões de jogar
+        document.querySelectorAll('.btn-play').forEach(button => {
+            button.addEventListener('click', function() {
+                const game = this.closest('.game-card');
+                const title = game.querySelector('.game-title').textContent;
+                alert(`Iniciando jogo: ${title}`);
+            });
         });
     </script>
 </body>

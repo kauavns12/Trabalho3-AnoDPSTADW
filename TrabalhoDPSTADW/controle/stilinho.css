@@ -6,9 +6,9 @@
         }
         
         body {
-            background-color: #1a1a1b;
+            background-color: #0f1419;
             color: #d7dadc;
-            padding-top: 50px;
+            padding-top: 60px;
         }
         
         .navbar {
@@ -62,7 +62,7 @@
             transition: background-color 0.2s;
         }
         
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             background-color: #343536;
         }
         
@@ -166,30 +166,93 @@
             color: #818384;
         }
         
-        .content {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 16px;
+            gap: 24px;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+        
+        .sidebar {
+            width: 312px;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-box {
+            background-color: #1a1a1b;
+            border-radius: 8px;
+            border: 1px solid #343536;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .sidebar-header {
+            padding: 12px;
+            border-bottom: 1px solid #343536;
+            font-weight: bold;
+            color: #d7dadc;
+            background-color: #161617;
+        }
+        
+        .sidebar-content {
+            padding: 12px;
+        }
+        
+        .community-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .community-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ff4500;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .community-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .community-members {
+            font-size: 12px;
+            color: #818384;
         }
         
         .post {
             background-color: #1a1a1b;
             border: 1px solid #343536;
-            border-radius: 4px;
+            border-radius: 8px;
             margin-bottom: 16px;
-            padding: 16px;
+            overflow: hidden;
         }
         
         .post-header {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
+            padding: 12px;
+            background-color: #161617;
+            border-bottom: 1px solid #343536;
         }
         
         .post-subreddit {
             font-weight: bold;
             color: #d7dadc;
             margin-right: 8px;
+            font-size: 14px;
         }
         
         .post-user {
@@ -199,18 +262,27 @@
         
         .post-title {
             font-size: 18px;
-            margin-bottom: 12px;
+            padding: 16px;
             color: #d7dadc;
         }
         
         .post-content {
             color: #d7dadc;
-            margin-bottom: 12px;
+            padding: 0 16px 16px;
+        }
+        
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
         }
         
         .post-actions {
             display: flex;
             align-items: center;
+            padding: 8px 16px;
+            border-top: 1px solid #343536;
+            background-color: #161617;
         }
         
         .post-action {
@@ -220,6 +292,13 @@
             color: #818384;
             font-size: 14px;
             cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .post-action:hover {
+            background-color: #343536;
         }
         
         .post-action i {
@@ -232,6 +311,91 @@
         
         .downvote:hover {
             color: #5a75cc;
+        }
+        
+        .game-card {
+            display: flex;
+            margin-bottom: 16px;
+            background-color: #1a1a1b;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #343536;
+        }
+        
+        .game-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .game-info {
+            padding: 12px;
+            flex: 1;
+        }
+        
+        .game-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #d7dadc;
+        }
+        
+        .game-description {
+            font-size: 14px;
+            color: #818384;
+            margin-bottom: 12px;
+        }
+        
+        .game-meta {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #818384;
+        }
+        
+        .game-rating {
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .game-rating i {
+            color: #ff4500;
+            margin-right: 4px;
+        }
+        
+        .btn-play {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-play:hover {
+            background-color: #ff5414;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 24px 0 16px;
+            color: #d7dadc;
+            padding-left: 16px;
+            border-left: 4px solid #ff4500;
+        }
+        
+        @media (max-width: 960px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
         }
         
         @media (max-width: 768px) {
