@@ -677,11 +677,11 @@ function acabarRelacionamento($conexao, $idrelacionamento)
 }
 
 
-function editarComentario($conexao, $idcomentario, $comentario, $criado, $post_forun_idpost_forun, $post_forun_usuario_idusuario, $post_forun_topico_forun_idtopico_forun){
-    $sql = "UPDATE comentario SET comentario = ?, criado = ?, post_forun_idpost_forun = ?, post_forun_usuario_idusuario =?, post_forun_topico_forun_idtopico_forun = ? WHERE idcomentario = ?";
+function editarComentario($conexao, $idcomentario, $comentario, $criado){
+    $sql = "UPDATE comentario SET comentario = ?, criado = ? WHERE idcomentario = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'ssiiii', $comentario, $criado, $post_forun_idpost_forun, $post_forun_usuario_idusuario, $post_forun_topico_forun_idtopico_forun, $idcomentario);
+    mysqli_stmt_bind_param($comando, 'ssi', $comentario, $criado, $idcomentario);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
