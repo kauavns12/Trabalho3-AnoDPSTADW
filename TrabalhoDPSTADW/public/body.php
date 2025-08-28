@@ -1,3 +1,7 @@
+<?php
+require_once "../controle/verificarLogado.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,3 +14,9 @@
 
     
 </head>
+
+<body>
+    <?php 
+    echo $id_usuario;
+    ?>
+</body>

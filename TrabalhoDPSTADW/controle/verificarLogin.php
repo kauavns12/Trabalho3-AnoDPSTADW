@@ -15,11 +15,13 @@
         $linha = mysqli_fetch_array($resultado);
         $senha_banco = $linha['senha'];
         $tipo = $linha['tipo'];
+        $id_usuario = $linha['id']; // Supondo que a coluna do ID seja 'id'
 
         if (password_verify($senha, $senha_banco)) {
             session_start();
             $_SESSION['logado'] = 'sim';
             $_SESSION['tipo'] = $tipo;
+            $_SESSION['id_usuario'] = $id_usuario; // Armazenando o ID na sessão
             header("Location: ../public/home.php");
         }
         else {
