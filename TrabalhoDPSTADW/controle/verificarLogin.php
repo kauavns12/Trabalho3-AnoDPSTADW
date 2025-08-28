@@ -1,10 +1,10 @@
 <?php
     require_once "conexao.php";
 
-    $email = $_POST['email'];
+    $gmail = $_POST['gmail'];
     $senha = $_POST['senha'];
 
-    $sql = "SELECT * FROM tb_usuario WHERE email = '$email'";
+    $sql = "SELECT * FROM usuario WHERE gmail = '$gmail'";
 
     $resultado = mysqli_query($conexao, $sql);
 

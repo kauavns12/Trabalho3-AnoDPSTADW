@@ -1,19 +1,20 @@
 <?php
 
-    require_once "./conexao.php";
-    require_once "./funcoes.php";
-
-    $nome = $_POST['nome'];
-    $gmail = $_POST['email'];
-    $senha = $_POST['senha'];
-    $foto = $_POST['foto'];
-    $tipo = 'c';
-    $status = $_POST['status'];
+$nome = $_POST['nome'];
+$gmail = $_POST['gmail'];
+$senha = $_POST['senha'];
+$foto = $_POST['foto'];
+$tipo = 'c';
+$status = $_POST['status'];
 
 
-    cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status);
+require_once "conexao.php";
+require_once "funcoes.php";
+
+
+cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status);
 
 
 
-    header("Location: index.html");
+header("Location: ../public/index.php");
 ?>
