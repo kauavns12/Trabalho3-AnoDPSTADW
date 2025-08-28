@@ -422,3 +422,8 @@
                 margin-left: 12px;
             }
         }
+
+.cabeca{
+    display: flex;
+    flex-direction: row;
+}

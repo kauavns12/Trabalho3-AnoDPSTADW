@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="Post" action = "../controle/salvarUsuario.php"">
+    <form action="../controle/salvarUsuario.php" method="post" enctype="multipart/form-data">
         <h1>Login</h1>
     
         Nome: <br>
@@ -18,8 +18,9 @@
         Senha: <br>
         <input type="password" name="senha"> <br><br>
 
-        Foto: <br>
-        <input type="text" name="foto"> <br><br>
+         Foto: <br>
+        <input type="file" name="foto"> <br><br>
+
         
         Status: <br>
         <input type="text" name="status"> <br><br>
@@ -31,3 +32,5 @@
    
 </body>
 </html>
+
+
