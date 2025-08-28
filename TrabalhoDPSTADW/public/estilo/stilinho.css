@@ -95,6 +95,8 @@
         .nav-buttons {
             display: flex;
             align-items: center;
+            width: 100%;
+            justify-content: center;
         }
         
         .nav-button {
@@ -423,7 +425,23 @@
             }
         }
 
-.cabeca{
-    display: flex;
-    flex-direction: row;
-}
+        .button-demo {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .button-row:last-child {
+            border-bottom: none;
+        }
+        
+        .button-label {
+            min-width: 150px;
+            color: #818384;
+        }
+
+        .cabeca{
+            display: flex;
+            flex-direction: row;
+        }

@@ -393,8 +393,8 @@
             </div>
             
             <div class="form-group">
-                <label for="email"><i class="fas fa-envelope"></i> E-mail:</label>
-                <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com">
+                <label for="gmail"><i class="fas fa-envelope"></i> E-mail:</label>
+                <input type="email" id="gmail" name="gmail" required placeholder="seu.email@exemplo.com">
                 <span class="input-icon"><i class="fas fa-envelope"></i></span>
             </div>
             
@@ -413,7 +413,7 @@
             </button>
             
             <div class="links">
-                <a href="formUsuario.php"><i class="fas fa-user-plus"></i> Primeiro acesso</a>
+                <a href="formUsuario.html"><i class="fas fa-user-plus"></i> Primeiro acesso</a>
                 <a href="#"><i class="fas fa-question-circle"></i> Esqueci minha senha</a>
             </div>
         </form>

@@ -1,6 +1,9 @@
 <?php
 require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
+
+$foto = "I";
+$nome = "Ítalo";
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +20,20 @@ require_once "../controle/conexao.php";
 </head>
 
 <body>
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>

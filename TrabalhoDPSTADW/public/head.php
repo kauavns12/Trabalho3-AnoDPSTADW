@@ -1,5 +1,9 @@
 <?php
 require_once "../controle/verificarLogado.php";
+require_once "../controle/conexao.php";
+
+$foto = "S";
+$nome = "Sandy";
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +44,15 @@ require_once "../controle/verificarLogado.php";
                 <i class="fas fa-chevron-down dropdown-icon"></i>
             </div>
             
-            <div class="nav-buttons">
-            <button class="nav-button login-btn">Entrar</button>
-            <button class="nav-button signup-btn">Registrar-se</button>
-            </div>
+            <div class="button-demo">
+                    <div>
+                        <a href="../controle/deslogar.php" class="nav-button signup-btn">Deslogar</a>
+                    </div>
+                    
+                    <div>
+                        <a href="./configuracoes.php" class="nav-button login-btn" target="bodyiframe">Configurações</a>
+                    </div>
+                </div>
 
 
     </nav>
