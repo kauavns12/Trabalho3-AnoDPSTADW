@@ -16,7 +16,5 @@ require_once "../controle/verificarLogado.php";
 </head>
 
 <body>
-    <?php 
-    echo $id_usuario;
-    ?>
+  
 </body>

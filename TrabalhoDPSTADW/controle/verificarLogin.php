@@ -15,7 +15,7 @@
         $linha = mysqli_fetch_array($resultado);
         $senha_banco = $linha['senha'];
         $tipo = $linha['tipo'];
-        $id_usuario = $linha['id']; // Supondo que a coluna do ID seja 'id'
+        $id_usuario = $linha['idusuario']; // Supondo que a coluna do ID seja 'id'
 
         if (password_verify($senha, $senha_banco)) {
             session_start();
