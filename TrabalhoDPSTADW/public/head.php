@@ -46,7 +46,7 @@ $nome = "Sandy";
             
             <div class="button-demo">
                     <div>
-                        <a href="../controle/deslogar.php" class="nav-button signup-btn">Deslogar</a>
+                        <a href="../controle/deslogar.php" class="nav-button signup-btn" target="bodyiframe">Deslogar</a>
                     </div>
                     
                     <div>

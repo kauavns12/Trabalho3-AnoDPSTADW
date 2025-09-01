@@ -1,5 +1,8 @@
 <?php
 require_once "../controle/verificarLogado.php";
+
+$foto = $_SESSION['id_usuario'];
+$nome = $_SESSION['nome'];
 ?>
 
 <!DOCTYPE html>
@@ -17,12 +20,40 @@ require_once "../controle/verificarLogado.php";
 
 <body>
 
-
-    <iframe src="head.php" frameborder="0" width="100%" height="20%" name="headiframe"></iframe>
-
-    <iframe src="body.php" frameborder="0" width="80%" height="80%" name="bodyiframe"></iframe>
-
-    <iframe src="arm.php" frameborder="0" width="80%" height="20%" name="armiframe"></iframe>
+<body>
+    <nav class="navbar" class ="cabeca">
+            <a href="#" class="logo">
+                <i class="fas fa-gamepad logo-icon"></i>
+                <span class="logo-text">Friv Games & WIKI</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="body.php" class="active">Início</a></li>
+                <li><a href="jogos.php">Jogos</a></li>
+                <li><a href="comunidade.php">Comunidade</a></li>
+                <li><a href="foruns.php">Fóruns</a></li>
+            </ul>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
+            </div>
+            
+            <div class="user-menu">
+                <div class="user-avatar"><?php echo $foto?></div>
+                <div class="user-name"><?php echo $nome ?></div>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+            </div>
+            
+            <div class="button-demo">
+                    <div>
+                        <a href="../controle/deslogar.php" class="nav-button signup-btn" target="bodyiframe">Deslogar</a>
+                    </div>
+                    
+                    <div>
+                        <a href="./configuracoes.php" class="nav-button login-btn" target="bodyiframe">Configurações</a>
+                    </div>
+                </div>
 
 </body>
 
