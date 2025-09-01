@@ -414,7 +414,6 @@
             
             <div class="links">
                 <a href="formUsuario.html"><i class="fas fa-user-plus"></i> Primeiro acesso</a>
-                <a href="#"><i class="fas fa-question-circle"></i> Esqueci minha senha</a>
             </div>
         </form>
     </div>
