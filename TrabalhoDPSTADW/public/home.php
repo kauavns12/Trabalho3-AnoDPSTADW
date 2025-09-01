@@ -1,8 +1,12 @@
 <?php
 require_once "../controle/verificarLogado.php";
+require_once "../controle/conexao.php";
+require_once "../controle/funcoes.php";
 
-$foto = $_SESSION['id_usuario'];
-$nome = $_SESSION['nome'];
+$id = $_SESSION['id_usuario'];
+pesquisarUsuario_ID($conexao, $id);
+$foto = $user['foto'];
+$nome = $user['nome'];
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +44,8 @@ $nome = $_SESSION['nome'];
             </div>
             
             <div class="user-menu">
-                <div class="user-avatar"><?php echo $foto?></div>
-                <div class="user-name"><?php echo $nome ?></div>
+                <div class="user-avatar"> <img src="../controle/fotos/<?php echo $_SESSION['foto']?>"></div>
+                <div class="user-name"><?php echo $_SESSION['nome'] ?></div>
                 <i class="fas fa-chevron-down dropdown-icon"></i>
             </div>
             
