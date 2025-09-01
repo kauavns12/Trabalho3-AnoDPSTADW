@@ -8,7 +8,7 @@ $senha = $_POST['senha'];
 $nome_arquivo = $_FILES['foto']['name'];
 $caminho_temporario = $_FILES['foto']['tmp_name'];
 $tipo = 'c';
-$status = $_POST['status'];
+$status = 'online';
 
 // pega a extensão do arquivo
 $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
