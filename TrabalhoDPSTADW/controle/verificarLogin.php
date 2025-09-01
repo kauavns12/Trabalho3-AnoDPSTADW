@@ -21,6 +21,7 @@
             session_start();
             $_SESSION['logado'] = 'sim';
             $_SESSION['tipo'] = $tipo;
+            $_SESSION['nome'] = $nome;
             $_SESSION['id_usuario'] = $id_usuario; // Armazenando o ID na sessão
             header("Location: ../public/home.php");
         }
