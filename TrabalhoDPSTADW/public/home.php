@@ -52,7 +52,7 @@ $nome = $user['nome'];
             <div class="button-demo">
                     <div>
                         <a href="../controle/deslogar.php" class="nav-button signup-btn" target="bodyiframe">Deslogar</a>
-                    </div>
+                    </div> <br> <br>
                     
                     <div>
                         <a href="./configuracoes.php" class="nav-button login-btn" target="bodyiframe">Configurações</a>
