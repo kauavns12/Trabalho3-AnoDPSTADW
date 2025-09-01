@@ -8,7 +8,7 @@ $senha = $_POST['senha'];
 $nome_arquivo = $_FILES['foto']['name'];
 $caminho_temporario = $_FILES['foto']['tmp_name'];
 $tipo = 'c';
-$status = 'online';
+
 
 // pega a extensão do arquivo
 $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
@@ -25,7 +25,7 @@ $caminho_destino = "fotos/" . $novo_nome;
 move_uploaded_file($caminho_temporario, $caminho_destino);
 
 
-cadastrarUsuario($conexao, $nome, $gmail, $senha, $novo_nome, $tipo, $status);
+cadastrarUsuario($conexao, $nome, $gmail, $senha, $novo_nome, $tipo);
 
 
 header("Location: ../public/index.php");

@@ -1,12 +1,12 @@
 <?php
 
-function cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status)
+function cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo)
 {
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo) VALUES (?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $gmail, $senha_hash, $foto, $tipo, $status);
+    mysqli_stmt_bind_param($comando, 'sssss', $nome, $gmail, $senha_hash, $foto, $tipo);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -14,13 +14,13 @@ function cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo, $status
     return $funcionou;
 }
 
-function login($conexao, $nome, $gmail, $senha, $foto, $tipo, $status)
+function login($conexao, $nome, $gmail, $senha, $foto, $tipo)
 {
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuario (nome, gmail, senha, foto, tipo, status) VALUES (?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $gmail, $senha_hash, $foto, $tipo, $status);
+    mysqli_stmt_bind_param($comando, 'sssss', $nome, $gmail, $senha_hash, $foto, $tipo);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -53,7 +53,7 @@ function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario)
 
 function pesquisarUsuario_ID($conexao, $idusuario)
 {
-    $sql = "SELECT nome, foto, status FROM usuario WHERE idusuario = ?";
+    $sql = "SELECT nome, foto FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -68,7 +68,7 @@ function pesquisarUsuario_ID($conexao, $idusuario)
 }
 function pesquisarUsuario_Nome($conexao, $nome)
 {
-    $sql = "SELECT nome, foto, status FROM usuario WHERE nome = ?";
+    $sql = "SELECT nome, foto FROM usuario WHERE nome = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 's', $nome);
