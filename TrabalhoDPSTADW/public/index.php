@@ -185,22 +185,31 @@
         }
         
         .password-container {
-            position: relative;
+           position: relative;
         }
-        
+
+        .password-container input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            background-color: var(--input-bg);
+            border: 2px solid #3d3d3d;
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
         .toggle-password {
             position: absolute;
             right: 15px;
-            top: 42px;
+            top: 50%;
+            transform: translateY(-50%);
             background: none;
             border: none;
             cursor: pointer;
             color: var(--text-secondary);
             z-index: 3;
             font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             width: 24px;
             height: 24px;
         }
