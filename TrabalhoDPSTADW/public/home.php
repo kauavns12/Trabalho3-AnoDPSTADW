@@ -13,9 +13,9 @@ require_once "../controle/funcoes.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - FRIV GAMES & WIKI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./estilo/stilinho.css">
+    <link rel="stylesheet" href="./estilo/estilo_jogo.css">
 
-    
+
 </head>
 
 
