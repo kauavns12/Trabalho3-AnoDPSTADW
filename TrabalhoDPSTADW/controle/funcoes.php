@@ -376,7 +376,53 @@ function excluirPostForun($conexao, $idpost_forun)
 
     return $funcionou;
 }
+function listarPost($conexao)
+{
+    $sql = "SELECT * FROM post_forun";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_post = [];
+
+    while ($post = mysqli_fetch_assoc($resultado)) {
+        $lista_post[] = $post;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_post;
+}
+function pesquisarPostID($conexao, $idpost)
+{
+    $sql = "SELECT * FROM post_forun WHERE idpost_forun=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idpost);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $post = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $post;
+}
+function pesquisarPostConteudo($conexao, $conteudo)
+{
+    $sql = "SELECT * FROM post_forun WHERE conteudo=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 's', $conteudo);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $post = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $post;
+}
 function salvarAvaliacaoJogo($conexao, $classificacao, $idusuario, $idjogo)
 {
     $sql = "INSERT INTO avaliacao_jogo (classificacao, usuario_idusuario, jogo_idjogo) VALUES (?,?,?)";

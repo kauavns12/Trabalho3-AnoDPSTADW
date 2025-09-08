@@ -5,6 +5,6 @@ require_once "../funcoes.php";
 
 
 echo "<pre>";
-print_r(listarJogo($conexao));
+print_r(listarCategoria($conexao));
 echo "</pre>";
 ?>
