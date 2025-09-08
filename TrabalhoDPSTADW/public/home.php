@@ -3,10 +3,6 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$id = $_SESSION['id_usuario'];
-pesquisarUsuario_ID($conexao, $id);
-$foto = $user['foto'];
-$nome = $user['nome'];
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +18,7 @@ $nome = $user['nome'];
     
 </head>
 
-<body>
+
 
 <body>
     <nav class="navbar" class ="cabeca">
@@ -32,7 +28,7 @@ $nome = $user['nome'];
             </a>
             
             <ul class="nav-links">
-                <li><a href="body.php" class="active">Início</a></li>
+                <li><a href="home.php" class="active">Início</a></li>
                 <li><a href="jogos.php">Jogos</a></li>
                 <li><a href="comunidade.php">Comunidade</a></li>
                 <li><a href="foruns.php">Fóruns</a></li>

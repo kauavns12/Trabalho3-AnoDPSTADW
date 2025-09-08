@@ -1,9 +1,12 @@
 <?php
 require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
+require_once "../controle/funcoes.php";
 
-$foto = "I";
-$nome = "Ítalo";
+$id = $_SESSION['id_usuario'];
+pesquisarUsuario_ID($conexao, $id);
+$foto = $user['foto'];
+$nome = $user['nome'];
 ?>
 
 <!DOCTYPE html>

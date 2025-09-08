@@ -281,7 +281,23 @@ function editarCategoriaForun($conexao, $idcategoria_forun, $nome, $descricao)
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+function listarCategoria($conexao)
+{
+    $sql = "SELECT * FROM categoria_forun";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_categoria = [];
+
+    while ($categoria = mysqli_fetch_assoc($resultado)) {
+        $lista_categoria[] = $categoria;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_categoria;
+}
 function salvarTopicoForun($conexao, $nome, $conteudo, $idcategoria_forun, $idjogo)
 {
     $sql = "INSERT INTO topico_forun (nome, conteudo, categoria_forun_idcategoria_forun1,jogo_idjogo1) VALUES(?,?,?,?)";
@@ -305,6 +321,23 @@ function editarTopicoForun($conexao, $idtopico_forun, $nome, $conteudo, $idcateg
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+
+function listarTopico($conexao)
+{
+    $sql = "SELECT * FROM topico_forun";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_topico = [];
+
+    while ($topico = mysqli_fetch_assoc($resultado)) {
+        $listar_to[] = $topico;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_topico;
 
 function salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun)
 {
