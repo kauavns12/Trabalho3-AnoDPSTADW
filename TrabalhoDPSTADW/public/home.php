@@ -44,7 +44,7 @@ $nome = $user['nome'];
             </div>
             
             <div class="user-menu">
-                <div class="user-avatar"> <img src="../controle/fotos/<?php echo $_SESSION['foto']?>"></div>
+                <div class="user-avatar"> <img src="../controle/fotos/<?=$_SESSION['foto']?>"></div>
                 <div class="user-name"><?php echo $_SESSION['nome'] ?></div>
                 <i class="fas fa-chevron-down dropdown-icon"></i>
             </div>
