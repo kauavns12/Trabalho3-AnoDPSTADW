@@ -333,12 +333,12 @@ function listarTopico($conexao)
     $lista_topico = [];
 
     while ($topico = mysqli_fetch_assoc($resultado)) {
-        $listar_to[] = $topico;
+        $lista_topico[] = $topico;
     }
 
     mysqli_stmt_close($comando);
     return $lista_topico;
-
+}
 function salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun)
 {
     $sql = "INSERT INTO post_forun (conteudo, usuario_idusuario, topico_forun_idtopico_forun) VALUES (?,?,?)";
