@@ -4,17 +4,137 @@ require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
 $id = $_SESSION['id_usuario'];
-pesquisarUsuario_ID($conexao, $id);
+$user = pesquisarUsuario_ID($conexao, $id);
 $foto = $user['foto'];
 $nome = $user['nome'];
 
-// Buscar jogos do banco de dados
-$sql = "SELECT nome, img FROM friv.jogo";
-$result = $conexao->query($sql);
-$jogos = [];
-if ($result && $result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $jogos[] = $row;
+// Buscar informações do jogo
+$idjogo = isset($_GET['id']) ? intval($_GET['id']) : 1;
+$jogo = pesquisarJogoID($conexao, $idjogo);
+if (!$jogo) {
+    die("Jogo não encontrado!");
+}
+
+// Buscar avaliações do jogo
+$sql_avaliacoes = "SELECT a.classificacao, u.nome 
+                   FROM avaliacao_jogo a 
+                   JOIN usuario u ON a.usuario_idusuario = u.idusuario 
+                   WHERE a.jogo_idjogo = $idjogo";
+$result_avaliacoes = mysqli_query($conexao, $sql_avaliacoes);
+$avaliacoes = [];
+if ($result_avaliacoes) {
+    while ($avaliacao = mysqli_fetch_assoc($result_avaliacoes)) {
+        $avaliacoes[] = $avaliacao;
+    }
+}
+
+// Calcular média das avaliações
+$media_avaliacao = 0;
+if (count($avaliacoes) > 0) {
+    $soma = 0;
+    foreach ($avaliacoes as $avaliacao) {
+        $soma += $avaliacao['classificacao'];
+    }
+    $media_avaliacao = round($soma / count($avaliacoes), 1);
+}
+// Verificar se categorias padrão existem, se não, criá-las
+$categorias_padrao = [
+    ['Dúvidas', 'Tire suas dúvidas sobre os jogos'],
+    ['Dicas', 'Compartilhe dicas e truques'],
+    ['Bugs', 'Reporte problemas técnicos'],
+    ['Sugestões', 'Deixe suas sugestões para melhorias'],
+    ['Off-topic', 'Conversas não relacionadas a jogos']
+];
+
+foreach ($categorias_padrao as $categoria) {
+    $sql_check_categoria = "SELECT idcategoria_forun FROM categoria_forun WHERE nome = '{$categoria[0]}'";
+    $result_check = mysqli_query($conexao, $sql_check_categoria);
+    
+    if (mysqli_num_rows($result_check) == 0) {
+        salvarCategoriaForun($conexao, $categoria[0], $categoria[1]);
+    }
+}
+
+// Agora buscar a categoria padrão para comentários (usaremos a primeira)
+$sql_categoria = "SELECT idcategoria_forun FROM categoria_forun LIMIT 1";
+$result_categoria = mysqli_query($conexao, $sql_categoria);
+$categoria_padrao = mysqli_fetch_assoc($result_categoria);
+$categoria_id = $categoria_padrao['idcategoria_forun'];
+
+// Buscar comentários do jogo
+$sql_comentarios = "SELECT c.*, u.nome as usuario_nome, u.foto as usuario_foto
+                   FROM comentario c 
+                   JOIN usuario u ON c.post_forun_usuario_idusuario = u.idusuario 
+                   JOIN post_forun pf ON c.post_forun_idpost_forun = pf.idpost_forun
+                   JOIN topico_forun tf ON pf.topico_forun_idtopico_forun = tf.idtopico_forun
+                   WHERE tf.jogo_idjogo1 = $idjogo
+                   ORDER BY c.criado DESC";
+$result_comentarios = mysqli_query($conexao, $sql_comentarios);
+$comentarios = [];
+if ($result_comentarios) {
+    while ($comentario = mysqli_fetch_assoc($result_comentarios)) {
+        $comentarios[] = $comentario;
+    }
+}
+
+// Processar formulários
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['classificacao'])) {
+        $classificacao = intval($_POST['classificacao']);
+        
+        // Verificar se usuário já avaliou este jogo
+        $sql_check = "SELECT idavaliacao_jogo FROM avaliacao_jogo 
+                     WHERE usuario_idusuario = $id AND jogo_idjogo = $idjogo";
+        $result_check = mysqli_query($conexao, $sql_check);
+        
+        if (mysqli_num_rows($result_check) > 0) {
+            $row = mysqli_fetch_assoc($result_check);
+            editarAvaliacaoJogo($conexao, $row['idavaliacao_jogo'], $classificacao, $id, $idjogo);
+        } else {
+            salvarAvaliacaoJogo($conexao, $classificacao, $id, $idjogo);
+        }
+        
+        header("Location: jogo.php?id=$idjogo");
+        exit();
+    }
+    
+    if (isset($_POST['comentario'])) {
+        $comentario_texto = mysqli_real_escape_string($conexao, $_POST['comentario']);
+        $criado = date('Y-m-d');
+        
+        // Verificar se já existe um tópico para este jogo
+        $sql_topico = "SELECT idtopico_forun FROM topico_forun WHERE jogo_idjogo1 = $idjogo LIMIT 1";
+        $result_topico = mysqli_query($conexao, $sql_topico);
+        
+        if (mysqli_num_rows($result_topico) > 0) {
+            $topico = mysqli_fetch_assoc($result_topico);
+            $topico_id = $topico['idtopico_forun'];
+        } else {
+            $nome_topico = "Comentários: " . $jogo['nome'];
+            $conteudo_topico = "Tópico para comentários sobre o jogo " . $jogo['nome'];
+            $categoria_id = 1;
+            
+            salvarTopicoForun($conexao, $nome_topico, $conteudo_topico, $categoria_id, $idjogo);
+            $topico_id = mysqli_insert_id($conexao);
+        }
+        
+        salvarPostForun($conexao, $comentario_texto, $id, $topico_id);
+        $post_id = mysqli_insert_id($conexao);
+        
+        cadastrarComentario($conexao, $comentario_texto, $criado, $post_id, $id, $topico_id);
+        
+        header("Location: jogo.php?id=$idjogo");
+        exit();
+    }
+}
+
+// Buscar jogos para o menu
+$sql_jogos = "SELECT nome, img FROM friv.jogo";
+$result_jogos = $conexao->query($sql_jogos);
+$jogos_menu = [];
+if ($result_jogos && $result_jogos->num_rows > 0) {
+    while($row = $result_jogos->fetch_assoc()) {
+        $jogos_menu[] = $row;
     }
 }
 ?>
@@ -24,73 +144,506 @@ if ($result && $result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogos - Friv</title>
+    <title><?php echo $jogo['nome']; ?> - Friv</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./estilo/stilinho.css">
     <style>
-        .jogos-container {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+            line-height: 1.6;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #e94560;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: #c5c5c5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #e94560;
+            background: rgba(233, 69, 96, 0.1);
+        }
+        
+        .search-container {
+            position: relative;
+            flex: 0 1 300px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a8a8a;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: none;
+            border-radius: 25px;
+            background: #0f3460;
+            color: white;
+            outline: none;
+        }
+        
+        .search-box::placeholder {
+            color: #8a8a8a;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #e94560;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-name {
+            color: #e6e6e6;
+            font-weight: 500;
+        }
+        
+        .dropdown-icon {
+            color: #8a8a8a;
+        }
+        
+        .button-demo {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-button {
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .login-btn {
+            background: transparent;
+            color: #e94560;
+            border: 2px solid #e94560;
+        }
+        
+        .login-btn:hover {
+            background: #e94560;
+            color: white;
+        }
+        
+        .signup-btn {
+            background: #e94560;
+            color: white;
+            border: 2px solid #e94560;
+        }
+        
+        .signup-btn:hover {
+            background: transparent;
+            color: #e94560;
+        }
+        
+        /* Game Content Styles */
+        .container {
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
         }
         
-        .jogos-grid {
+        .game-header {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #e94560;
+        }
+        
+        .game-header p {
+            color: #c5c5c5;
+            font-size: 1.2rem;
+        }
+        
+        .game-content {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
         
-        .jogo-card {
-            background-color: #2c2f3b;
-            border-radius: 12px;
+        .game-media {
+            background: #16213e;
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
         
-        .jogo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-        
-        .jogo-img {
+        .game-image {
             width: 100%;
-            height: 150px;
+            height: 300px;
             object-fit: cover;
         }
         
-        .jogo-info {
-            padding: 15px;
+        .game-info {
+            background: #16213e;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #0f3460;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: #e94560;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+        }
+        
+        .info-text h3 {
+            color: #e94560;
+            margin-bottom: 5px;
+        }
+        
+        .info-text p {
+            color: #c5c5c5;
+        }
+        
+        .rating-section {
+            background: #16213e;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #e94560;
+        }
+        
+        .section-title i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .rating-display {
             text-align: center;
+            margin-bottom: 25px;
         }
         
-        .jogo-nome {
-            color: #fff;
-            font-size: 16px;
-            margin: 0;
-            font-weight: 600;
-        }
-        
-        .page-title {
-            color: #fff;
-            font-size: 28px;
+        .average-rating {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #e94560;
             margin-bottom: 10px;
-            border-bottom: 2px solid #6c5ce7;
-            padding-bottom: 10px;
-            display: inline-block;
         }
         
-        .no-jogos {
-            color: #a0a0a0;
+        .rating-count {
+            color: #c5c5c5;
+            font-size: 1.1rem;
+        }
+        
+        .stars-input {
+            direction: rtl;
+            unicode-bidi: bidi-override;
             text-align: center;
-            margin-top: 50px;
-            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .stars-input input[type=radio] {
+            display: none;
+        }
+        
+        .stars-input label {
+            color: #444;
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin: 0 3px;
+        }
+        
+        .stars-input input[type=radio]:checked ~ label {
+            color: #ffc107;
+        }
+        
+        .stars-input label:hover,
+        .stars-input label:hover ~ label {
+            color: #ffc107;
+        }
+        
+        .rating-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-box {
+            background: #0f3460;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #c5c5c5;
+            font-size: 0.9rem;
+        }
+        
+        .comments-section {
+            background: #16213e;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comment-form {
+            background: #0f3460;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #16213e;
+            color: white;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+        
+        .comment-form textarea::placeholder {
+            color: #8a8a8a;
+        }
+        
+        .btn {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: #ff577f;
+        }
+        
+        .comment {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid #0f3460;
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-avatar {
+            flex: 0 0 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #e94560;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .comment-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .comment-content {
+            flex: 1;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .comment-user {
+            font-weight: bold;
+            color: #e94560;
+        }
+        
+        .comment-date {
+            color: #8a8a8a;
+            font-size: 0.9rem;
+        }
+        
+        .comment-text {
+            color: #c5c5c5;
+            line-height: 1.5;
+        }
+        
+        .no-comments {
+            text-align: center;
+            padding: 40px;
+            color: #8a8a8a;
+        }
+        
+        .no-comments i {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: #0f3460;
+        }
+        
+        @media (max-width: 968px) {
+            .game-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .search-container {
+                order: 3;
+                flex: 1 0 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .rating-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .button-demo {
+                gap: 10px;
+            }
+            
+            .nav-button {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar" class="cabeca">
+    <nav class="navbar">
         <a href="#" class="logo">
             <i class="fas fa-gamepad logo-icon"></i>
             <span class="logo-text">Friv Games & WIKI</span>
@@ -98,7 +651,7 @@ if ($result && $result->num_rows > 0) {
         
         <ul class="nav-links">
             <li><a href="body.php">Início</a></li>
-            <li><a href="jogos.php" class="active">Jogos</a></li>
+            <li><a href="jogos.php">Jogos</a></li>
             <li><a href="comunidade.php">Comunidade</a></li>
             <li><a href="foruns.php">Fóruns</a></li>
         </ul>
@@ -125,23 +678,174 @@ if ($result && $result->num_rows > 0) {
         </div>
     </nav>
 
-    <div class="jogos-container">
-        <h1 class="page-title">Nossos Jogos</h1>
+    <div class="container">
+        <div class="game-header">
+            <h1><?php echo $jogo['nome']; ?></h1>
+            <p>Uma experiência de jogo incrível</p>
+        </div>
         
-        <?php if (!empty($jogos)): ?>
-            <div class="jogos-grid">
-                <?php foreach ($jogos as $jogo): ?>
-                    <div class="jogo-card">
-                        <img src="../controle/<?php echo htmlspecialchars($jogo['img']); ?>" alt="<?php echo htmlspecialchars($jogo['nome']); ?>" class="jogo-img">
-                        <div class="jogo-info">
-                            <h3 class="jogo-nome"><?php echo htmlspecialchars($jogo['nome']); ?></h3>
+        <div class="game-content">
+            <div class="game-media">
+                <img src="<?php echo $jogo['img']; ?>" alt="<?php echo $jogo['nome']; ?>" class="game-image">
+            </div>
+            
+            <div class="game-info">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="info-text">
+                        <h3>Desenvolvedor</h3>
+                        <p><?php echo $jogo['desenvolvedor']; ?></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div class="info-text">
+                        <h3>Data de Lançamento</h3>
+                        <p><?php echo date('d/m/Y', strtotime($jogo['data_lanca'])); ?></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                    <div class="info-text">
+                        <h3>Descrição</h3>
+                        <p><?php echo $jogo['descricao']; ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="rating-section">
+            <div class="section-title">
+                <i class="fas fa-star"></i>
+                <h2>Avaliação do Jogo</h2>
+            </div>
+            
+            <div class="rating-display">
+                <div class="average-rating">
+                    <?php echo $media_avaliacao; ?> <i class="fas fa-star" style="color: #ffc107;"></i>
+                </div>
+                <div class="rating-count">
+                    Baseado em <?php echo count($avaliacoes); ?> avaliações
+                </div>
+            </div>
+            
+            <form method="POST" action="">
+                <div class="stars-input">
+                    <input type="radio" id="estrela5" name="classificacao" value="5">
+                    <label for="estrela5"><i class="fas fa-star"></i></label>
+                    
+                    <input type="radio" id="estrela4" name="classificacao" value="4">
+                    <label for="estrela4"><i class="fas fa-star"></i></label>
+                    
+                    <input type="radio" id="estrela3" name="classificacao" value="3">
+                    <label for="estrela3"><i class="fas fa-star"></i></label>
+                    
+                    <input type="radio" id="estrela2" name="classificacao" value="2">
+                    <label for="estrela2"><i class="fas fa-star"></i></label>
+                    
+                    <input type="radio" id="estrela1" name="classificacao" value="1">
+                    <label for="estrela1"><i class="fas fa-star"></i></label>
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Avaliar</button>
+                </div>
+            </form>
+            
+            <div class="rating-stats">
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-value"><?php echo $media_avaliacao >= 3 ? 'Y' : 'N'; ?></div>
+                    <div class="stat-label">ANALIAÇÃO GERAL</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value"><?php echo count($avaliacoes); ?></div>
+                    <div class="stat-label">TOTAL DE AVALIAÇÕES</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="stat-value">
+                        <?php 
+                        $sql_minha_avaliacao = "SELECT classificacao FROM avaliacao_jogo 
+                                               WHERE usuario_idusuario = $id AND jogo_idjogo = $idjogo";
+                        $result_minha_avaliacao = mysqli_query($conexao, $sql_minha_avaliacao);
+                        
+                        if (mysqli_num_rows($result_minha_avaliacao) > 0) {
+                            $minha_avaliacao = mysqli_fetch_assoc($result_minha_avaliacao);
+                            echo $minha_avaliacao['classificacao'] >= 3 ? 'Y' : 'N';
+                        } else {
+                            echo '-';
+                        }
+                        ?>
+                    </div>
+                    <div class="stat-label">SUA AVALIAÇÃO</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comments-section">
+            <div class="section-title">
+                <i class="fas fa-comments"></i>
+                <h2>Comentários</h2>
+            </div>
+            
+            <div class="comment-form">
+                <form method="POST" action="">
+                    <textarea name="comentario" required placeholder="Digite seu comentário aqui..."></textarea>
+                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar Comentário</button>
+                </form>
+            </div>
+            
+            <?php if (count($comentarios) > 0): ?>
+                <?php foreach ($comentarios as $comentario): ?>
+                    <div class="comment">
+                        <div class="comment-avatar">
+                            <?php if (!empty($comentario['usuario_foto'])): ?>
+                                <img src="<?php echo $comentario['usuario_foto']; ?>" alt="<?php echo $comentario['usuario_nome']; ?>">
+                            <?php else: ?>
+                                <?php echo strtoupper(substr($comentario['usuario_nome'], 0, 1)); ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <div class="comment-user"><?php echo $comentario['usuario_nome']; ?></div>
+                                <div class="comment-date"><?php echo date('d/m/Y', strtotime($comentario['criado'])); ?></div>
+                            </div>
+                            <div class="comment-text">
+                                <?php echo $comentario['comentario']; ?>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <p class="no-jogos">Nenhum jogo encontrado.</p>
-        <?php endif; ?>
+            <?php else: ?>
+                <div class="no-comments">
+                    <i class="far fa-comment-dots"></i>
+                    <h3>Nenhum comentário ainda</h3>
+                    <p>Seja o primeiro a comentar sobre este jogo!</p>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 </body>
 </html>
+
+<?php
+// Fechar conexão
+mysqli_close($conexao);
+?>
