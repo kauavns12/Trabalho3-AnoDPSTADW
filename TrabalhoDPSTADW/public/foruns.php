@@ -60,8 +60,8 @@ require_once "../controle/funcoes.php";
     <div class="espacinho">
         <form action="../controle/cadastrarpost.php" method="post">
 
-            Em qual tópico você quer postar? <br> 
-            <select name='idtopico_forun'> 
+            <label for="idtopico_forun">Em qual tópico você quer postar?</label> <br> 
+            <select name='idtopico_forun'id="idtopico_forun"> 
         <?php
             $topicos = listarTopico($conexao);
             
@@ -72,18 +72,29 @@ require_once "../controle/funcoes.php";
             }
          ?>
 </select> <br><br>
-            Qual o conteúdo do post? <br>
-            <input type="text" name='conteudo'> <br><br>
+            <label for="conteudo">Qual o conteúdo do post?</label> <br>
+            <input type="text" name="conteudo" id="conteudo" placeholder="Digite o conteúdo da sua postagem..."> <br><br>
             <input type="submit" value="Publicar">
         </form>
     </div>
-
-    <div>
-        <?php 
-            echo "<pre>";
-            print_r(listarPost($conexao));
-            echo "</pre>";
-        ?>
+        <h2 class="page-title">Algumas Postagens</h2>
+     <div class="post-list">
+            <?php 
+                $posts = listarPost($conexao);
+                foreach($posts as $post) {
+                    $post_id = $post['idpost_forun'];
+                    
+                    echo "<a href='post_individual.php?id=$post_id' class='post-link'></a>";
+                    echo "<div class='post-card'>";
+                    echo "<div class='post-header'>";
+                    echo "<span class='post-topic'>r/" . htmlspecialchars($post['topico_forun_idtopico_forun']) . "</span>";
+                    echo "<span> • </span>";
+                    echo "<div class='post-content'>" . htmlspecialchars($post['conteudo']) . "</div>";
+                    echo "<div class='post-footer'>";
+                    echo "</div>";
+                }
+            ?>
+        </div>
         
     </div>
 </body>

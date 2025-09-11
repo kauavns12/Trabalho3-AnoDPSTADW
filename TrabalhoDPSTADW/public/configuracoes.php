@@ -3,40 +3,49 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$id = $_SESSION['id_usuario'];
-pesquisarUsuario_ID($conexao, $id);
-$foto = $user['foto'];
-$nome = $user['nome'];
+
+//listarUsuario($conexao);
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./estilo/stilinho.css">
-
-    
+    <title>Document</title>
 </head>
-
 <body>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>NOME</td>
+                <td>EMAIL</td>
+                <td>FOTO</td>
+            </tr>
+        </thead>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <tbody>
+            <td>1</td>
+            <td>Paulo</td>
+            <td>paulo@gmail.com</td>
+            <td>IMG</td>
+        </tbody>
+    </table>
 </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

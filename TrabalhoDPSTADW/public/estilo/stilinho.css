@@ -504,8 +504,172 @@
             flex-direction: row;
         }
 
-        .espacinho{
-            padding: 8px 16px;
+/* Coluna do formulário */
+        .left-column {
+            flex: 0 0 320px;
+        }
+        
+        /* Coluna dos posts */
+        .right-column {
+            flex: 1;
+        }
+        
+        /* Card de Postagem - Estilo Rede Social */
+        .espacinho {
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .espacinho form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .espacinho label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1b;
+            font-size: 14px;
+        }
+        
+        .espacinho select, 
+        .espacinho input[type="text"] {
+            background-color: #f6f7f8;
+            border: 1px solid #e2e5e9;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #1c1c1c;
+            transition: all 0.2s;
+        }
+        
+        .espacinho select:focus, 
+        .espacinho input[type="text"]:focus {
+            outline: none;
+            border-color: #8774e1;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px rgba(135, 116, 225, 0.2);
+        }
+        
+        .espacinho input[type="submit"] {
+            background: linear-gradient(to right, #8774e1, #6a5acd);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .espacinho input[type="submit"]:hover {
+            background: linear-gradient(to right, #6a5acd, #5d4cb1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Estilo para a listagem de posts */
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .post-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #8774e1, #6a5acd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
         }
 
+       
+        .post-topic {
+            background-color: #f6f7f8;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #8774e1;
+        }
         
+        .post-content {
+            margin: 12px 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #1c1c1c;
+        }
+        
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #f0f1f2;
+        }
+                    
+        /* Título da página */
+        .page-title {
+            color: orchid;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f1f2;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-column {
+                flex: 1;
+            }
+            
+            .espacinho {
+                position: static;
+            }
+        }
+        /* Link para post individual */
+        .post-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
