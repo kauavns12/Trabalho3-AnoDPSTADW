@@ -6,7 +6,9 @@ $nome = $_POST['nome'];
 $descricao = $_POST['descricao'];
 $desenvolvedor = $_POST['desenvolvedor'];
 $data_lanca = $_POST['data_lanca'];
-$caminho_temporario = $_FILES['foto']['tmp_name'];
+$nome_arquivo = $_FILES['img']['name'];
+$caminho_temporario = $_FILES['img']['tmp_name'];
+$idgenero = $_POST['idgenero'];
 
 
 // pega a extensão do arquivo
@@ -24,7 +26,7 @@ $caminho_destino = "fotos/" . $novo_nome;
 move_uploaded_file($caminho_temporario, $caminho_destino);
 
 
-cadastrarUsuario($conexao, $nome, $gmail, $senha, $novo_nome, $tipo);
+salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero);
 
 
 header("Location: ../public/formJogo.php");
