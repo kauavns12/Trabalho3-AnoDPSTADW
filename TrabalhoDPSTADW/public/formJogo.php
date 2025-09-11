@@ -14,6 +14,56 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Jogo</title>
     <link rel="stylesheet" href="./estilo/estilo_formJogo.css">
+    <script src="../controle/jquery-3.7.1.min.js"></script>
+    <script src="../controle/jquery.validate.min.js"></script>
+
+        <script>
+        // programar a validação do formulário
+$('document').ready(function () {
+    $('#formulario').validate({
+        rules: {
+            nome: {
+                required: true,
+                minlength: 3,
+            },
+            descricao: {
+                required: true,
+                minlength: 20,
+            },
+
+            desenvolvedor: {
+                required: true,
+                minlength: 3,
+            },
+
+            data_lanca: {
+                required: true, 
+                equalTo: '#date',
+            },
+
+        },
+        messages: {
+            nome: {
+                required: "Esse campo não pode ser vazio",
+                minlength: "Tamanho mínimo de 3 símbolos"
+            },
+            descricao: {
+                required: "Esse campo não pode ser vazio",
+                minlength: "Insira uma descrição mais detalhada (mínimo 20 símbolos)"
+            },
+            desenvolvedor: {
+                required: "Esse campo não pode ser vazio",
+                minlength: "Tamanho mínimo de 3 símbolos"
+            },
+            data_lanca: {
+                required: "Esse campo não pode ser vazio",
+                equalTo: "."
+            },
+
+        }
+    })
+})
+ </script>
     
 </head>
 <body>
