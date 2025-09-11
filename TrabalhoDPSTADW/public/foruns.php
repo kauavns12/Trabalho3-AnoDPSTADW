@@ -60,17 +60,18 @@ require_once "../controle/funcoes.php";
     <div class="espacinho">
         <form action="../controle/cadastrarpost.php" method="post">
 
-            Em qual tópico você quer postar? <br>  
+            Em qual tópico você quer postar? <br> 
+            <select name='idtopico_forun'> 
         <?php
             $topicos = listarTopico($conexao);
-            echo "<select name='idtopico_forun'>";
+            
             foreach($topicos as $topico) {
-                echo "<option value='{$topico['idtopico_forun']}'>{$topico['nome']}</option>";
+                $id = $topico['idtopico_forun'];
+                $nome = $topico['nome'];
+                echo "<option value='$id'>$nome</option>";
             }
-            echo "</select>";
-            echo "<br><br>";
-        ?>
-
+         ?>
+</select> <br><br>
             Qual o conteúdo do post? <br>
             <input type="text" name='conteudo'> <br><br>
             <input type="submit" value="Publicar">

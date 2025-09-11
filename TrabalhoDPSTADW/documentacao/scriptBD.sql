@@ -43,7 +43,6 @@ CREATE TABLE IF NOT EXISTS `friv`.`usuario` (
   `foto` VARCHAR(255) NULL,
   `tipo` CHAR(1) NOT NULL,
   PRIMARY KEY (`idusuario`),
-  UNIQUE INDEX `senha_UNIQUE` (`senha` ASC) VISIBLE,
   UNIQUE INDEX `idusuario_UNIQUE` (`idusuario` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -439,10 +438,10 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 
 -- Inserir usuarios (senhas são hashes de "senha123")
 INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
-('João Silva', 'joao.silva@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'joao.jpg', 'U'),
-('Maria Santos', 'maria.santos@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'maria.jpg', 'U'),
-('Admin System', 'admin@friv.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin.png', 'A'),
-('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'pedro.jpg', 'U');
+('João Silva', 'joao.silva@gmail.com', '$2y$10$Fp35ITV/u9vfPRHA.7EhSO/RRyMmF4.c.uVu7WnmD/DP/YbNhSVX', 'joao.jpg', 'U'),
+('Maria Santos', 'maria.santos@gmail.com', '$2y$10$rQF3rE/QYlbvs37y4k5K8OZ1p3mmwQyhdI7frnZe57YSfFX41JeG.', 'maria.jpg', 'U'),
+('Admin System', 'admin@friv.com', '$2y$10$4/pxrXDjBbpqWucBs46FMuuApXTexc8BU0cenBWNcXHq05IRUJnui', 'admin.png', 'A'),
+('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'pedro.jpg', 'U');
 
 -- Inserir preferencias de usuarios
 INSERT INTO `friv`.`preferencia` (`usuario_idusuario`, `genero_idgenero`) VALUES
