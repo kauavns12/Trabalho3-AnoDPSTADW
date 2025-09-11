@@ -769,3 +769,14 @@ function editarComentario($conexao, $idcomentario, $comentario, $criado){
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+function ListarComentarioPost($conexao, $idpost){
+    $sql = "SELECT * FROM comentario WHERE post_forun_idpost_forun = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idpost);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+
+}

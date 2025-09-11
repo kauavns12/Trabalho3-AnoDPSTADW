@@ -84,11 +84,10 @@ require_once "../controle/funcoes.php";
                 foreach($posts as $post) {
                     $post_id = $post['idpost_forun'];
                     
-                    echo "<a href='post_individual.php?id=$post_id' class='post-link'></a>";
+                    echo "<a href='post_individual.php?id=$post_id' class='post-link'>Visitar Post</a>";
                     echo "<div class='post-card'>";
                     echo "<div class='post-header'>";
                     echo "<span class='post-topic'>r/" . htmlspecialchars($post['topico_forun_idtopico_forun']) . "</span>";
-                    echo "<span> • </span>";
                     echo "<div class='post-content'>" . htmlspecialchars($post['conteudo']) . "</div>";
                     echo "<div class='post-footer'>";
                     echo "</div>";

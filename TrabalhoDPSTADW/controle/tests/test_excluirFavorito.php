@@ -4,5 +4,5 @@
 
     $idfavorito = 1; 
 
-    excluirFavorito($conexao, $idfavorito);
+    excluirFavorito($conexao, $idfavorito)
 ?>
