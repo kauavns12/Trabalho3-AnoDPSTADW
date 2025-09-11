@@ -1,33 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../controle/jquery-3.7.1.min.js"></script>
+    <script src="../controle/jquery.validate.min.js"></script>
+    <script>
+        // programar a validação do formulário
+        $('document').ready(function () {
+            $('#formulario').validate({
+                rules: {
+                    nome: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    gmail: {
+                        required: true,
+                        minlength: 5,
+                    },
+                    senha: {
+                        minlength: 8,
+                        required: true,
+                    },
+                    senha2: {
+                        equalTo: '#senha',
+                    }
+                },
+                messages: {
+                    nome: {
+                        required: "Esse campo não pode ser vazio",
+                        minlength: "Tamanho mínimo de 3 símbolos"
+                    },
+                    gmail: {
+                        required: "Esse campo não pode ser vazio",
+                        minlength: "Insira um endereço de e-mail válido."
+
+                    },
+                    senha: {
+                        required: "Esse campo não pode ser vazio",
+                        minlength: "Tamanho mínimo de 8 símbolos"
+                    },
+                    senha2: {
+                        equalTo: "As senhas não são iguais.",
+                    },
+                    gmail2: {
+                        equalTo: "Os e-mails não são iguais."
+                    }
+                }
+            })
+        })
+    </script>
 </head>
+
 <body>
-    <form action="../controle/salvarUsuario.php" method="post" enctype="multipart/form-data">
+    <form id="formulario" action="../controle/salvarUsuario.php" method="post" enctype="multipart/form-data">
         <h1>Login</h1>
-    
+
         Nome: <br>
-        <input type="text" name="nome"> <br><br>
-    
-        Email: <br>
-        <input type="text" name="gmail"> <br><br>
-        
+        <input type="text" name="nome" id="nome"> <br><br>
+
+        E-mail: <br>
+        <input type="text" name="gmail" id="gmail"> <br><br>
+
+        Confirmar de e-mail: <br>
+        <input type="text" id="gmail2"> <br><br>
+
         Senha: <br>
-        <input type="password" name="senha"> <br><br>
+        <input type="password" name="senha" id="senha"> <br><br>
 
-         Foto: <br>
-        <input type="file" name="foto"> <br><br>
+        Confirmar senha: <br>
+        <input type="text" name="senha2" id="senha2"> <br><br>
 
-        
+        Foto: <br>
+        <input type="file" name="foto" id="foto"> <br><br>
+
+
 
         <input type="submit" value="Acessar">
     </form>
     <br>
 
-   
-</body>
-</html>
 
+</body>
+
+</html>

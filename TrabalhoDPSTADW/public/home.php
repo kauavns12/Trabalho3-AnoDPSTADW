@@ -36,7 +36,7 @@ require_once "../controle/funcoes.php";
             
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
+                <input  type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
             </div>
             
             <div class="user-menu">
