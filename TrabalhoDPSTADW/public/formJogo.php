@@ -1,3 +1,12 @@
+<?php
+require_once "../controle/conexao.php";
+
+// Carregar gêneros do banco diretamente
+$sql = "SELECT idgenero, nome FROM genero ORDER BY nome";
+$resultado = mysqli_query($conexao, $sql);
+$generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -37,7 +46,12 @@
             <div class="form-group">
                 <label>Gênero: <span class="selected-limit">(Selecione até 2 opções)</span></label>
                 <div class="generos-container" id="generos-container">
-                    <!-- Os gêneros serão inseridos via JavaScript -->
+                    <?php foreach ($generos as $genero): ?>
+                    <div class="genero-option">
+                        <input type="checkbox" name="genero[]" value="<?php echo $genero['idgenero']; ?>" id="genero-<?php echo $genero['idgenero']; ?>">
+                        <label for="genero-<?php echo $genero['idgenero']; ?>"><?php echo htmlspecialchars($genero['nome']); ?></label>
+                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             
@@ -51,36 +65,11 @@
     </form>
 
     <script>
-        // Array com os gêneros disponíveis
-        const generos = [
-            "Ação", "Aventura", "RPG", "Estratégia", 
-            "FPS", "Esportes", "Corrida", "Luta",
-            "Puzzle", "Simulação", "Terror", "Indie"
-        ];
-        
-        // Referência ao container de gêneros
-        const generosContainer = document.getElementById('generos-container');
         let selectedGeneros = [];
         
-        // Criar os elementos de gênero
-        generos.forEach(genero => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'genero-option';
-            optionDiv.innerHTML = `
-                <input type="checkbox" name="genero[]" value="${genero.toLowerCase()}" id="genero-${genero.toLowerCase()}">
-                <label for="genero-${genero.toLowerCase()}">${genero}</label>
-            `;
-            
-            // Adicionar evento de clique
-            const checkbox = optionDiv.querySelector('input');
-            checkbox.addEventListener('change', () => toggleGenero(checkbox, genero));
-            
-            generosContainer.appendChild(optionDiv);
-        });
-        
         // Função para controlar a seleção de gêneros
-        function toggleGenero(checkbox, genero) {
-            const index = selectedGeneros.indexOf(genero);
+        function toggleGenero(checkbox, generoId) {
+            const index = selectedGeneros.indexOf(generoId);
             
             if (checkbox.checked) {
                 // Verificar se já selecionou o máximo permitido
@@ -92,7 +81,7 @@
                 
                 // Adicionar à lista de selecionados
                 if (index === -1) {
-                    selectedGeneros.push(genero);
+                    selectedGeneros.push(generoId);
                 }
             } else {
                 // Remover da lista de selecionados
@@ -111,10 +100,10 @@
             
             allOptions.forEach(option => {
                 const checkbox = option.querySelector('input');
-                const generoValue = checkbox.value;
+                const generoId = checkbox.value;
                 
                 // Verificar se este gênero está selecionado
-                const isSelected = selectedGeneros.some(g => g.toLowerCase() === generoValue);
+                const isSelected = selectedGeneros.includes(generoId.toString());
                 
                 if (isSelected) {
                     option.classList.add('selected');
@@ -123,6 +112,17 @@
                 }
             });
         }
+        
+        // Adicionar eventos aos checkboxes após o carregamento
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="genero[]"]');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    toggleGenero(this, this.value);
+                });
+            });
+        });
         
         // Validação do formulário
         const form = document.querySelector('form');

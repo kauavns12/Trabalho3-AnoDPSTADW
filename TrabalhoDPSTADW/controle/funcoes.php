@@ -82,29 +82,32 @@ function pesquisarUsuario_Nome($conexao, $nome)
     return $user;
 }
 
-function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero)
-{
+function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $ids_generos) {
+    // Converter data do formato DD/MM/AAAA para AAAA-MM-DD
+    $data_mysql = DateTime::createFromFormat('d/m/Y', $data_lancamento)->format('Y-m-d');
 
     $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES (?,?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'sssss', $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem);
+    mysqli_stmt_bind_param($comando, 'sssss', $nome, $descricao, $desenvolvedor, $data_mysql, $imagem);
     mysqli_stmt_execute($comando);
 
-
     $idjogo = mysqli_insert_id($conexao);
-
-
-    $sql2 = "INSERT INTO genero_jogo (genero_idgenero, jogo_idjogo) VALUES (?,?)";
-    $comando2 = mysqli_prepare($conexao, $sql2);
-
-    mysqli_stmt_bind_param($comando2, 'ii', $idgenero, $idjogo);
-    $funcionou = mysqli_stmt_execute($comando2);
-
+    
+    // Inserir múltiplos gêneros
+    $funcionou = true;
+    foreach ($ids_generos as $idgenero) {
+        $sql2 = "INSERT INTO genero_jogo (genero_idgenero, jogo_idjogo) VALUES (?,?)";
+        $comando2 = mysqli_prepare($conexao, $sql2);
+        
+        mysqli_stmt_bind_param($comando2, 'ii', $idgenero, $idjogo);
+        if (!mysqli_stmt_execute($comando2)) {
+            $funcionou = false;
+        }
+        mysqli_stmt_close($comando2);
+    }
 
     mysqli_stmt_close($comando);
-    mysqli_stmt_close($comando2);
-
     return $funcionou;
 }
 

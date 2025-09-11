@@ -8,8 +8,12 @@ $desenvolvedor = $_POST['desenvolvedor'];
 $data_lanca = $_POST['data_lanca'];
 $nome_arquivo = $_FILES['img']['name'];
 $caminho_temporario = $_FILES['img']['tmp_name'];
-$idgenero = $_POST['idgenero'];
+$generos = $_POST['genero']; // Array com IDs dos gêneros
 
+// Validação - máximo 2 gêneros
+if (count($generos) > 2) {
+    die("Erro: Máximo de 2 gêneros permitido.");
+}
 
 // pega a extensão do arquivo
 $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
@@ -26,8 +30,12 @@ $caminho_destino = "fotos/" . $novo_nome;
 move_uploaded_file($caminho_temporario, $caminho_destino);
 
 
-salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $idgenero);
+// Converter IDs para inteiros
+$ids_generos = array_map('intval', $generos);
 
+// Salvar o jogo e suas relações com gêneros
+$resultado = salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lanca, $novo_nome, $ids_generos);
 
-header("Location: ../public/formJogo.php");
+    header("Location: ../public/formJogo.php");
+    
 ?>
