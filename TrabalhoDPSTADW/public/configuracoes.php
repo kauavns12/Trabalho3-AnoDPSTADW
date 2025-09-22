@@ -16,7 +16,7 @@ require_once "../controle/funcoes.php";
 
 <body>
     <div>
-        <a href="editarUsuario.php?id=<?= $idusuario?>" class="nav-button signup-btn" target="bodyiframe">Editar Dados Pessoais</a>
+        <a href="editarUsuario.php?id" class="nav-button signup-btn" target="bodyiframe">Editar Dados Pessoais</a>
     </div> <br> <br>
 </body>
 

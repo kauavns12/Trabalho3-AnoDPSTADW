@@ -1,66 +1,44 @@
 <?php
-require_once "../controle/verificarLogado.php";
+// editarUsuario.php
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-// Verificar se o ID do usuário foi passado pela URL
-if (isset($_GET['idusuario'])) {
-    $idusuario = $_GET['idusuario'];
-     // Consultar os dados do usuário no banco de dados
-    $query = "SELECT * FROM usuario WHERE idusuario = ?";
-    $stmt = $conexao->prepare($query);
-    $stmt->bind_param("i", $idusuario);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    $usuario = $resultado->fetch_assoc();
+session_start();
 
-    // Verificar se o usuário foi encontrado
-    if (!$usuario) {
-        echo "Usuário não encontrado.";
-        exit;
-    }
-} else {
-    echo "ID do usuário não fornecido.";
-    exit;
-}
+// aqui pegue o id do usuário logado da sessão
+$id_usuario = $_SESSION['id_usuario'];
+
+// busca dados do usuário
+$sql = "SELECT * FROM usuario WHERE idusuario = $id_usuario";
+$resultado = mysqli_query($conexao, $sql);
+$usuario = mysqli_fetch_assoc($resultado);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Dados Pessoais</title>
-    <link rel="stylesheet" href="estilo.css">
+    <title>Editar Dados</title>
 </head>
 <body>
-    <form id="formulario" action="atualizar_dados.php" method="post" enctype="multipart/form-data">
-        <h1>Editar Dados Pessoais</h1>
+<form action="../controle/atualizarUsuario.php" method="post" enctype="multipart/form-data">
+    <!-- precisamos mandar o id para saber quem atualizar -->
+    <input type="hidden" name="idusuario" value="<?php echo $usuario['idusuario']; ?>">
 
-        <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
+    Nome:<br>
+    <input type="text" name="nome" value="<?php echo $usuario['nome']; ?>"><br><br>
 
-        Nome: <br>
-        <input type="text" name="nome" value="<?= $usuario['nome'] ?>" required><br><br>
+    E-mail:<br>
+    <input type="text" name="gmail" value="<?php echo $usuario['gmail']; ?>"><br><br>
 
-        E-mail: <br>
-        <input type="email" name="gmail" value="<?= $usuario['gmail'] ?>" required><br><br>
+    Nova Senha (deixe em branco se não quiser mudar):<br>
+    <input type="password" name="senha"><br><br>
 
-        Confirmar e-mail: <br>
-        <input type="email" name="gmail2" value="<?= $usuario['gmail'] ?>" required><br><br>
+    Foto:<br>
+    <input type="file" name="foto"><br>
+    (Foto atual: <img src="../controle/fotos/<?php echo $usuario['foto']; ?>" width="50">)<br><br>
 
-        Senha: <br>
-        <input type="password" name="senha" id="senha" required><br><br>
-
-        Confirmar senha: <br>
-        <input type="password" name="senha2" id="senha2" required><br><br>
-
-        Foto: <br>
-        <input type="file" name="foto" id="foto"><br><br>
-
-        <input type="submit" value="Atualizar">
-    </form>
+    <input type="submit" value="Salvar alterações">
+</form>
 </body>
 </html>
-
-?>
-
