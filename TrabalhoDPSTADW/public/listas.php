@@ -17,7 +17,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
 <body>
     <div>
-    <a href="criarlista.php">Criar nova lista</a>
+    <a href="formLista.php">Criar nova lista</a>
     </div> <br> <br>
 
     <?php
@@ -36,21 +36,19 @@ $id_usuario = $_SESSION['id_usuario'];
                 <td colspan="2">Ação</td>
             </tr>
         <?php
-        foreach ($lista_usuario as $usuario) {
-            $idlista = $usuario['idusuario'];
-            $nome = $usuario['nome'];
-            $email = $usuario['gmail'];
-            $senha = $usuario['senha'];
-            $foto = $usuario['foto'];
+        foreach ($lista_lista as $lista) {
+            $idlista = $lista['idlista'];
+            $nome = $lista['nome'];
+            $descricao = $lista['descricao'];
+            $situacao = $lista['situacao'];
 
             echo "<tr>";
-            echo "<td>$idusuario</td>";
             echo "<td>$nome</td>";
-            echo "<td>$email</td>";
-            echo "<td>$senha</td>";
-            echo "<td><img src='fotos/$foto'></td>";
-            echo "<td><a href='../controle/deletarUsuario.php?idusuario=$idusuario'>Excluir</a></td>";
-            echo "<td><a href='formUsuario.html?id=$idusuario'>Editar</a></td>";
+            echo "<td>$descricao</td>";
+            echo "<td>$situacao</td>";
+
+            echo "<td><a href='../controle/deletarUsuario.php?idlista=$idlista'>Excluir lista</a></td>";
+            echo "<td><a href='formUsuario.html?id=$idlista'>Editar lista</a></td>";
             echo "</tr>";
         }
     }

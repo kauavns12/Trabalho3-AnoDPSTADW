@@ -584,6 +584,19 @@ function listarLista($conexao)
     mysqli_stmt_close($comando);
     return $lista_lista;
 }
+function listarJogoLista($conexao){
+    $sql = "SELECT * FROM lista_jogo";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_lista = [];
+
+    while ($lista = mysqli_fetch_assoc($resultado)) {
+        $lista_lista[] = $lista;
+    }
+}
 function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $usuario_idusuario)
 {
     $sql = "INSERT INTO histo_jogo (tempo_ini, tempo_fim, usuario_idusuario) VALUES (?,?,?)";
