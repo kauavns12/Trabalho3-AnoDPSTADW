@@ -555,6 +555,8 @@ function excluir_Lista($conexao, $idlista)
     return $funcionou;
 }
 
+
+
 function editar_Lista($conexao, $nome, $descricao, $situacao, $idlista)
 {
     $sql = "UPDATE lista SET nome=?, descricao=?, situacao=?  WHERE idlista=?";
@@ -567,7 +569,23 @@ function editar_Lista($conexao, $nome, $descricao, $situacao, $idlista)
     return $funcionou;
 
 }
+function listarLista($conexao)
+{
+    $sql = "SELECT * FROM lista";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_lista = [];
+
+    while ($lista = mysqli_fetch_assoc($resultado)) {
+        $lista_lista[] = $lista;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_lista;
+}
 function salvarHistoricoJogo($conexao, $tempo_ini, $tempo_fim, $usuario_idusuario)
 {
     $sql = "INSERT INTO histo_jogo (tempo_ini, tempo_fim, usuario_idusuario) VALUES (?,?,?)";
@@ -779,4 +797,121 @@ function ListarComentarioPost($conexao, $idpost){
 
     return $funcionou;
 
+}
+//
+///
+////
+function deletarComentarioUsuario($conexao, $idusuario)
+{
+    $sql = "DELETE FROM comentario WHERE post_forun_usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+
+function deletarConquistaUsu($conexao, $idusuario){
+    $sql = "DELETE FROM conquista_usu WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+
+function deletarHistoJogo($conexao, $idusuario){
+    $sql = "DELETE FROM histo_jogo WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+
+function deletarAvaliacaoJogo($conexao, $idusuario){
+    $sql = "DELETE FROM avaliacao_jogo WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+function deletarFavoritoUsu($conexao, $idusuario){
+    $sql = "DELETE FROM favorito WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+
+function deletarTopicoUsu($conexao, $idusuario){
+    $sql = "DELETE FROM topico_usu WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+function deletarListaUsu($conexao, $idusuario){
+    $sql = "DELETE FROM lista WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+function deletarPreferencia($conexao, $idusuario){
+    $sql = "DELETE FROM preferencia WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+function deletarPostUsu($conexao, $idusuario){
+    $sql = "DELETE FROM post_forun WHERE usuario_idusuario = ?";
+    $comando =  mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+function deletarRelacionametoUsu($conexao, $idusuario){
+    $sql1 = "DELETE FROM relacionamento WHERE seguidor = ?";
+    $comando1 =  mysqli_prepare($conexao, $sql1);
+    mysqli_stmt_bind_param($comando1, 'i', $idusuario);
+
+    $funcionou1 = mysqli_stmt_execute($comando1);
+    mysqli_stmt_close($comando1);
+
+    return $funcionou1;
+
+    $sql2 = "DELETE FROM relacionamento WHERE seguindo = ?";
+    $comando2 =  mysqli_prepare($conexao, $sql2);
+    mysqli_stmt_bind_param($comando2, 'i', $idusuario);
+
+    $funcionou2 = mysqli_stmt_execute($comando2);
+    mysqli_stmt_close($comando2);
+
+    return $funcionou2;
 }

@@ -18,6 +18,17 @@ require_once "../controle/funcoes.php";
     <div>
         <a href="editarUsuario.php?id" class="nav-button signup-btn" target="bodyiframe">Editar Dados Pessoais</a>
     </div> <br> <br>
+
+     <div>
+        <a href="listarUsuario_adm.php?id" class="nav-button signup-btn" target="bodyiframe">Usuários Cadastrados</a>
+    </div> <br> <br>
+    <div>
+        <a href="listas.php?id" class="nav-button signup-btn" target="bodyiframe">Acessar as listas</a>
+    </div> <br> <br>
+
+        <div>
+        <a href="../controle/deletarconta.php?id" class="nav-button signup-btn" target="bodyiframe">Deletar Usuário</a>
+    </div> <br> <br>
 </body>
 
 </html>
