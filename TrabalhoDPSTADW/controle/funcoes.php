@@ -83,9 +83,7 @@ function pesquisarUsuario_Nome($conexao, $nome)
 }
 
 function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $ids_generos) {
-    // Converter data do formato DD/MM/AAAA para AAAA-MM-DD
-    $data_mysql = DateTime::createFromFormat('d/m/Y', $data_lancamento)->format('Y-m-d');
-
+    
     $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES (?,?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
 

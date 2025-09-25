@@ -35,9 +35,9 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                     },
                     data_lanca: {
                         required: true,
-                        date: true
+                        minlength: 8,
                     },
-                    'genero[]': {
+                    genero: {
                         required: true
                     },
                     img: {
@@ -105,7 +105,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             
             <div class="form-group">
                 <label for="data_lanca">Lançamento:</label>
-                <input type="date" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
+                <input type="text" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
             </div>
             
             <div class="form-group">
