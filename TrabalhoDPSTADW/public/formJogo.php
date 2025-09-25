@@ -17,57 +17,72 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     <script src="../controle/jquery-3.7.1.min.js"></script>
     <script src="../controle/jquery.validate.min.js"></script>
 
-        <script>
-        // programar a validação do formulário
-$('document').ready(function () {
-    $('#formulario').validate({
-        rules: {
-            nome: {
-                required: true,
-                minlength: 3,
-            },
-            descricao: {
-                required: true,
-                minlength: 20,
-            },
-
-            desenvolvedor: {
-                required: true,
-                minlength: 3,
-            },
-
-            data_lanca: {
-                required: true, 
-                equalTo: '#date',
-            },
-
-        },
-        messages: {
-            nome: {
-                required: "Esse campo não pode ser vazio",
-                minlength: "Tamanho mínimo de 3 símbolos"
-            },
-            descricao: {
-                required: "Esse campo não pode ser vazio",
-                minlength: "Insira uma descrição mais detalhada (mínimo 20 símbolos)"
-            },
-            desenvolvedor: {
-                required: "Esse campo não pode ser vazio",
-                minlength: "Tamanho mínimo de 3 símbolos"
-            },
-            data_lanca: {
-                required: "Esse campo não pode ser vazio",
-                equalTo: "."
-            },
-
-        }
-    })
-})
- </script>
-    
+    <script>
+        $(document).ready(function () {
+            $('#formulario').validate({
+                rules: {
+                    nome: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    descricao: {
+                        required: true,
+                        minlength: 20,
+                    },
+                    desenvolvedor: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    data_lanca: {
+                        required: true,
+                        date: true
+                    },
+                    'genero[]': {
+                        required: true
+                    },
+                    img: {
+                        required: true,
+                        accept: "image/*"
+                    }
+                },
+                messages: {
+                    nome: {
+                        required: "Esse campo não pode ser vazio",
+                        minlength: "Tamanho mínimo de 3 símbolos"
+                    },
+                    descricao: {
+                        required: "Esse campo não pode ser vazio",
+                        minlength: "Insira uma descrição mais detalhada (mínimo 20 símbolos)"
+                    },
+                    desenvolvedor: {
+                        required: "Esse campo não pode ser vazio",
+                        minlength: "Tamanho mínimo de 3 símbolos"
+                    },
+                    data_lanca: {
+                        required: "Esse campo não pode ser vazio",
+                        date: "Data inválida"
+                    },
+                    'genero[]': {
+                        required: "Selecione pelo menos um gênero"
+                    },
+                    img: {
+                        required: "Selecione uma imagem",
+                        accept: "Apenas arquivos de imagem são permitidos"
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") == "genero[]") {
+                        error.insertAfter("#generos-container");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-    <form action="../controle/salvarJogo.php" method="post" enctype="multipart/form-data" class="form-container">
+    <form action="../controle/salvarJogo.php" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
             <h1>Cadastro de Jogo</h1>
         </div>
@@ -75,22 +90,22 @@ $('document').ready(function () {
         <div class="form-body">
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" required>
+                <input type="text" name="nome" id="nome">
             </div>
             
             <div class="form-group">
                 <label for="descricao">Descrição:</label>
-                <input type="text" name="descricao" id="descricao" required>
+                <input type="text" name="descricao" id="descricao">
             </div>
             
             <div class="form-group">
                 <label for="desenvolvedor">Desenvolvedor:</label>
-                <input type="text" name="desenvolvedor" id="desenvolvedor" required>
+                <input type="text" name="desenvolvedor" id="desenvolvedor">
             </div>
             
             <div class="form-group">
                 <label for="data_lanca">Lançamento:</label>
-                <input type="text" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA" required>
+                <input type="date" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
             </div>
             
             <div class="form-group">
@@ -107,7 +122,7 @@ $('document').ready(function () {
             
             <div class="form-group">
                 <label for="img">Foto:</label>
-                <input type="file" name="img" id="img" accept="image/*" required>
+                <input type="file" name="img" id="img" accept="image/*">
             </div>
             
             <button type="submit" class="btn-submit">Cadastrar Jogo</button>
