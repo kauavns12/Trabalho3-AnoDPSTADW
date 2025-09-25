@@ -37,7 +37,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                         required: true,
                         minlength: 8,
                     },
-                    genero: {
+                    'genero[]': {
                         required: true
                     },
                     img: {
@@ -60,7 +60,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                     },
                     data_lanca: {
                         required: "Esse campo não pode ser vazio",
-                        date: "Data inválida"
+                        minlength: "Data no formato DD/MM/AAAA"
                     },
                     'genero[]': {
                         required: "Selecione pelo menos um gênero"
@@ -79,6 +79,44 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                 }
             });
         });
+
+        // Função para salvar novo gênero via AJAX
+        function salvarGenero() {
+            const novoGenero = document.getElementById('novo_genero').value;
+            
+            if (novoGenero.trim() === '') {
+                alert('Por favor, digite um nome para o gênero.');
+                return;
+            }
+
+            if (novoGenero.length < 3) {
+                alert('O nome do gênero deve ter pelo menos 3 caracteres.');
+                return;
+            }
+            
+            // Enviar via AJAX
+            fetch('../controle/salvarGenero.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'nome=' + encodeURIComponent(novoGenero)
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes('sucesso')) {
+                    alert('Gênero cadastrado com sucesso!');
+                    document.getElementById('novo_genero').value = '';
+                    // Recarregar a página para mostrar o novo gênero
+                    location.reload();
+                } else {
+                    alert('Erro ao cadastrar gênero: ' + data);
+                }
+            })
+            .catch(error => {
+                alert('Erro de conexão ao cadastrar gênero.');
+            });
+        }
     </script>
 </head>
 <body>
@@ -106,6 +144,16 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             <div class="form-group">
                 <label for="data_lanca">Lançamento:</label>
                 <input type="text" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
+            </div>
+            
+            <!-- Seção para adicionar novo gênero -->
+            <div class="form-group">
+                <label for="novo_genero">Adicionar Novo Gênero:</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="text" name="novo_genero" id="novo_genero" placeholder="Digite um novo gênero" style="flex: 1;">
+                    <button type="button" onclick="salvarGenero()" class="btn-adicionar" style="padding: 8px 15px;">+ Adicionar</button>
+                </div>
+                <small style="color: #666;">O gênero será salvo e aparecerá na lista abaixo</small>
             </div>
             
             <div class="form-group">
@@ -195,6 +243,14 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             if (selectedGeneros.length === 0) {
                 e.preventDefault();
                 alert('Por favor, selecione pelo menos um gênero.');
+            }
+        });
+
+        // Permitir pressionar Enter para adicionar gênero
+        document.getElementById('novo_genero').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                salvarGenero();
             }
         });
     </script>

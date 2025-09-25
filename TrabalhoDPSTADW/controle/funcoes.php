@@ -154,19 +154,19 @@ function pesquisarJogoNome($conexao, $nome)
     mysqli_stmt_close($comando);
     return $jogo;
 }
-
-function salvarGenero($conexao, $nome)
-{
+function salvarGenero($conexao, $nome) {
     $sql = "INSERT INTO genero (nome) VALUES (?)";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 's', $nome);
-
-    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_execute($comando);
+    
+    $funcionou = (mysqli_stmt_affected_rows($comando) > 0);
     mysqli_stmt_close($comando);
-
+    
     return $funcionou;
 }
+
 
 function editarGenero($conexao, $idgenero, $nome)
 {
