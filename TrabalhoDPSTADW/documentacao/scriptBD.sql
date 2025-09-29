@@ -405,7 +405,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
+USE friv;
 -- Inserir generos
 INSERT INTO `friv`.`genero` (`nome`) VALUES
 ('Ação'),
@@ -441,7 +441,8 @@ INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('João Silva', 'joao.silva@gmail.com', '$2y$10$Fp35ITV/u9vfPRHA.7EhSO/RRyMmF4.c.uVu7WnmD/DP/YbNhSVX', '68d52563a4b5d.png', 'c'),
 ('Maria Santos', 'maria.santos@gmail.com', '$2y$10$rQF3rE/QYlbvs37y4k5K8OZ1p3mmwQyhdI7frnZe57YSfFX41JeG.', '68d5360e867da.jpeg', 'c'),
 ('Admin System', 'admin@friv.com', '$2y$10$4/pxrXDjBbpqWucBs46FMuuApXTexc8BU0cenBWNcXHq05IRUJnui', '68d5375cae2fa.jpg', 'c'),
-('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '68d5375cae2fa.jpg', 'c');
+('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '68d5375cae2fa.jpg', 'c'),
+('Italo', 'italo@gmail.com', '$2y$10$TFQN0Ur.Vbeu3g7MCe4HEeZ1OZ6h3widDE6N43eSZLmBrPHEcxM7i', '68dab251ddaae.jpeg', 'A');
 
 -- Inserir preferencias de usuarios
 INSERT INTO `friv`.`preferencia` (`usuario_idusuario`, `genero_idgenero`) VALUES

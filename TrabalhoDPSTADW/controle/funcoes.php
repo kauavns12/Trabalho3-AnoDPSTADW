@@ -179,6 +179,17 @@ function editarGenero($conexao, $idgenero, $nome)
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+function listarGenero($conexao) {
+    $sql = "SELECT * FROM genero";
+    $resultado = mysqli_query($conexao, $sql);
+    $generos = [];
+
+    while ($linha = mysqli_fetch_assoc($resultado)) {
+        $generos[] = $linha;
+    }
+
+    return $generos;
+}
 
 function pesquisarJogoGenero($conexao, $idgenero)
 {
@@ -212,6 +223,26 @@ function pesquisarJogoGenero($conexao, $idgenero)
 
     mysqli_stmt_close($comando);
     return $jogos;
+}
+function pesquisarGeneroID($conexao, $idgenero)
+{
+    $sql = "SELECT * FROM genero WHERE idgenero = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idgenero);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_genero = [];
+
+    if ($resultado) {
+        while ($genero = mysqli_fetch_assoc($resultado)) {
+            $lista_genero[] = $genero;
+        }
+    }
+
+    mysqli_stmt_close($comando);
+
+    return $lista_genero;
 }
 function salvarConquista($conexao, $nome, $descricao)
 {
@@ -925,4 +956,58 @@ function deletarRelacionametoUsu($conexao, $idusuario){
     mysqli_stmt_close($comando2);
 
     return $funcionou2;
+}
+
+///
+
+function listarPreferencia($conexao)
+{
+    $sql = "SELECT * FROM preferencia";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_preferencia = [];
+
+    while ($pref = mysqli_fetch_assoc($resultado)) {
+        $lista_preferencia[] = $pref;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_preferencia;
+}
+function listarPreferenciaUsu($conexao, $idusuario)
+{
+    $sql = "SELECT * FROM preferencia WHERE usuario_idusuario = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_preferencia = [];
+
+    while ($pref = mysqli_fetch_assoc($resultado)) {
+        $lista_preferencia[] = $pref;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_preferencia;
+}
+function listarPreferenciaGen($conexao, $idgenero)
+{
+    $sql = "SELECT * FROM preferencia WHERE genero_idgenero = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idgenero);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_preferencia = [];
+
+    while ($pref = mysqli_fetch_assoc($resultado)) {
+        $lista_preferencia[] = $pref;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_preferencia;
 }

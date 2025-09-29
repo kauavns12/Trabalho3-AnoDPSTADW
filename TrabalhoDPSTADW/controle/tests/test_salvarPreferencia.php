@@ -1,11 +1,11 @@
 <?php
      require_once "../conexao.php";
-     require_once "../funcoes.php";
-     
-    $idusuario = 2;
-    $idgenero = 1;
+     require_once "../funcoes.php"; 
+
+    $idusuario2 = 5;
+    $idgenero2 = 6;
    
-    salvarPreferencia($conexao, $idusuario, $idgenero);
+    salvarPreferencia($conexao, $idusuario2, $idgenero2);
 
 ?>
 

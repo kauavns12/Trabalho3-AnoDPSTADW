@@ -61,6 +61,8 @@
     }
         ?>
         </table>
+
+         <td><a href='home.php'>Voltar</a></td>
 </body>
 
 </html>

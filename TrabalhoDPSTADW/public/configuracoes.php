@@ -3,6 +3,7 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
+$id_usuario = $_SESSION['id_usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +27,20 @@ require_once "../controle/funcoes.php";
         <a href="listas.php?id" class="nav-button signup-btn" target="bodyiframe">Acessar as listas</a>
     </div> <br> <br>
 
-        <div>
+    <div>
         <a href="../controle/deletarconta.php?id" class="nav-button signup-btn" target="bodyiframe">Deletar Usuário</a>
     </div> <br> <br>
+
+    <div>
+        <a href="lista_preferencia_usu.php" class="nav-button signup-btn" target="bodyiframe">Listar Preferências do Usuário</a>
+    </div> <br> <br>
+    <div>
+        
+    <br><br>
+    <div>
+        <td><a href='home.php'>Voltar</a></td>
+    </div>
+    <br><br>
 </body>
 
 </html>

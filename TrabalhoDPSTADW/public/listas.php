@@ -54,6 +54,7 @@ $id_usuario = $_SESSION['id_usuario'];
     }
         ?>
         </table>
+         <td><a href='home.php'>Voltar</a></td>
 
 </body>
 
