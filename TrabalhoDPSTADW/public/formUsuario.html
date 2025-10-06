@@ -153,6 +153,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            flex-shrink: 0; /* Impede que a pré-visualização encolha */
         }
 
         .photo-preview img {
@@ -201,22 +202,146 @@
             background-color: #e9ecef;
         }
 
-        @media (max-width: 480px) {
+        /* =========================== */
+        /* CÓDIGO DE RESPONSIVIDADE */
+        /* =========================== */
+        
+        /* Tablets (768px para baixo) */
+        @media (max-width: 768px) {
             .container {
-                max-width: 100%;
+                max-width: 90%;
             }
             
             .form-container {
                 padding: 20px;
             }
             
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Celulares (480px para baixo) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                max-width: 100%;
+                border-radius: 6px;
+            }
+            
+            .header {
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .form-container {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .form-group input {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            
             .photo-upload-container {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 10px;
             }
             
             .photo-preview {
+                width: 70px;
+                height: 70px;
                 align-self: center;
+            }
+            
+            .file-input-container {
+                width: 100%;
+            }
+            
+            .file-input-label {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .submit-btn {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Celulares muito pequenos (360px para baixo) */
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .header .date {
+                font-size: 0.8rem;
+            }
+            
+            .form-container {
+                padding: 12px;
+            }
+            
+            .form-group input {
+                padding: 8px;
+            }
+            
+            .photo-preview {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .photo-preview .placeholder {
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* Modo paisagem em celulares */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 5px;
+                align-items: flex-start;
+            }
+            
+            .container {
+                max-width: 100%;
+                margin: 10px 0;
+            }
+            
+            .form-container {
+                padding: 10px 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* Telas grandes (1200px para cima) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 450px;
             }
         }
     </style>
@@ -225,7 +350,7 @@
     <div class="container">
         <div class="header">
             <h1>FRIV GAMES & WIKI</h1>
-
+            <div class="date">08 DATO DE</div>
         </div>
         
         <div class="form-container">
