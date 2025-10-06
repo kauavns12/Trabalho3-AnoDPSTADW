@@ -322,7 +322,7 @@ require_once "../controle/funcoes.php";
             <i class="fas fa-chevron-down dropdown-icon"></i>
         </div>
         
-        <div class="button-demo">
+        <div>
             <div>
                 <a href="../controle/deslogar.php" class="nav-button">Deslogar</a>
             </div>
