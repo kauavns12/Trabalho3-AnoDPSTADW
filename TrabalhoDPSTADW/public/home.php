@@ -57,4 +57,17 @@ require_once "../controle/funcoes.php";
 
 </body>
 
+<?php
+
+echo "<pre>";
+print_r(listarPost($conexao));
+echo "</pre>";
+
+echo "<pre>";
+print_r(listarUsuario($conexao));
+echo "</pre>";
+
+?>
+
+
 </html>
