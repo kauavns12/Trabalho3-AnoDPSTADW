@@ -120,15 +120,6 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     </script>
 </head>
 <body>
-    <?php
-    // Exibir mensagens de sucesso ou erro
-    if (isset($_GET['sucesso']) && $_GET['sucesso'] == 1) {
-        echo '<div class="mensagem sucesso">Jogo cadastrado com sucesso!</div>';
-    }
-    if (isset($_GET['erro']) && $_GET['erro'] == 1) {
-        echo '<div class="mensagem erro">Erro ao cadastrar jogo. Tente novamente.</div>';
-    }
-    ?>
     <form action="../controle/salvarJogo.php" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
             <h1>Cadastro de Jogo</h1>
