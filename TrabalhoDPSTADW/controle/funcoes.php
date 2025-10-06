@@ -82,8 +82,9 @@ function pesquisarUsuario_Nome($conexao, $nome)
     return $user;
 }
 
-function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $ids_generos) {
-    
+function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancamento, $imagem, $ids_generos)
+{
+
     $sql = "INSERT INTO jogo (nome, descricao, desenvolvedor, data_lanca, img) VALUES (?,?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
 
@@ -91,13 +92,13 @@ function salvarJogo($conexao, $nome, $descricao, $desenvolvedor, $data_lancament
     mysqli_stmt_execute($comando);
 
     $idjogo = mysqli_insert_id($conexao);
-    
+
     // Inserir múltiplos gêneros
     $funcionou = true;
     foreach ($ids_generos as $idgenero) {
         $sql2 = "INSERT INTO genero_jogo (genero_idgenero, jogo_idjogo) VALUES (?,?)";
         $comando2 = mysqli_prepare($conexao, $sql2);
-        
+
         mysqli_stmt_bind_param($comando2, 'ii', $idgenero, $idjogo);
         if (!mysqli_stmt_execute($comando2)) {
             $funcionou = false;
@@ -154,16 +155,17 @@ function pesquisarJogoNome($conexao, $nome)
     mysqli_stmt_close($comando);
     return $jogo;
 }
-function salvarGenero($conexao, $nome) {
+function salvarGenero($conexao, $nome)
+{
     $sql = "INSERT INTO genero (nome) VALUES (?)";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 's', $nome);
     mysqli_stmt_execute($comando);
-    
+
     $funcionou = (mysqli_stmt_affected_rows($comando) > 0);
     mysqli_stmt_close($comando);
-    
+
     return $funcionou;
 }
 
@@ -179,7 +181,8 @@ function editarGenero($conexao, $idgenero, $nome)
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function listarGenero($conexao) {
+function listarGenero($conexao)
+{
     $sql = "SELECT * FROM genero";
     $resultado = mysqli_query($conexao, $sql);
     $generos = [];
@@ -596,7 +599,6 @@ function editar_Lista($conexao, $nome, $descricao, $situacao, $idlista)
     mysqli_stmt_close($comando);
 
     return $funcionou;
-
 }
 function listarLista($conexao)
 {
@@ -615,7 +617,8 @@ function listarLista($conexao)
     mysqli_stmt_close($comando);
     return $lista_lista;
 }
-function listarJogoLista($conexao){
+function listarJogoLista($conexao)
+{
     $sql = "SELECT * FROM lista_jogo";
     $comando = mysqli_prepare($conexao, $sql);
 
@@ -819,7 +822,8 @@ function acabarRelacionamento($conexao, $idrelacionamento)
 }
 
 
-function editarComentario($conexao, $idcomentario, $comentario, $criado){
+function editarComentario($conexao, $idcomentario, $comentario, $criado)
+{
     $sql = "UPDATE comentario SET comentario = ?, criado = ? WHERE idcomentario = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
@@ -829,7 +833,8 @@ function editarComentario($conexao, $idcomentario, $comentario, $criado){
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function ListarComentarioPost($conexao, $idpost){
+function ListarComentarioPost($conexao, $idpost)
+{
     $sql = "SELECT * FROM comentario WHERE post_forun_idpost_forun = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idpost);
@@ -838,7 +843,6 @@ function ListarComentarioPost($conexao, $idpost){
     mysqli_stmt_close($comando);
 
     return $funcionou;
-
 }
 //
 ///
@@ -855,7 +859,8 @@ function deletarComentarioUsuario($conexao, $idusuario)
     return $funcionou;
 }
 
-function deletarConquistaUsu($conexao, $idusuario){
+function deletarConquistaUsu($conexao, $idusuario)
+{
     $sql = "DELETE FROM conquista_usu WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -866,7 +871,8 @@ function deletarConquistaUsu($conexao, $idusuario){
     return $funcionou;
 }
 
-function deletarHistoJogo($conexao, $idusuario){
+function deletarHistoJogo($conexao, $idusuario)
+{
     $sql = "DELETE FROM histo_jogo WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -877,7 +883,8 @@ function deletarHistoJogo($conexao, $idusuario){
     return $funcionou;
 }
 
-function deletarAvaliacaoJogo($conexao, $idusuario){
+function deletarAvaliacaoJogo($conexao, $idusuario)
+{
     $sql = "DELETE FROM avaliacao_jogo WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -887,7 +894,8 @@ function deletarAvaliacaoJogo($conexao, $idusuario){
 
     return $funcionou;
 }
-function deletarFavoritoUsu($conexao, $idusuario){
+function deletarFavoritoUsu($conexao, $idusuario)
+{
     $sql = "DELETE FROM favorito WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -898,7 +906,8 @@ function deletarFavoritoUsu($conexao, $idusuario){
     return $funcionou;
 }
 
-function deletarTopicoUsu($conexao, $idusuario){
+function deletarTopicoUsu($conexao, $idusuario)
+{
     $sql = "DELETE FROM topico_usu WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -908,7 +917,8 @@ function deletarTopicoUsu($conexao, $idusuario){
 
     return $funcionou;
 }
-function deletarListaUsu($conexao, $idusuario){
+function deletarListaUsu($conexao, $idusuario)
+{
     $sql = "DELETE FROM lista WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -918,7 +928,8 @@ function deletarListaUsu($conexao, $idusuario){
 
     return $funcionou;
 }
-function deletarPreferencia($conexao, $idusuario){
+function deletarPreferencia($conexao, $idusuario)
+{
     $sql = "DELETE FROM preferencia WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -928,7 +939,8 @@ function deletarPreferencia($conexao, $idusuario){
 
     return $funcionou;
 }
-function deletarPostUsu($conexao, $idusuario){
+function deletarPostUsu($conexao, $idusuario)
+{
     $sql = "DELETE FROM post_forun WHERE usuario_idusuario = ?";
     $comando =  mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -938,7 +950,8 @@ function deletarPostUsu($conexao, $idusuario){
 
     return $funcionou;
 }
-function deletarRelacionametoUsu($conexao, $idusuario){
+function deletarRelacionametoUsu($conexao, $idusuario)
+{
     $sql1 = "DELETE FROM relacionamento WHERE seguidor = ?";
     $comando1 =  mysqli_prepare($conexao, $sql1);
     mysqli_stmt_bind_param($comando1, 'i', $idusuario);
@@ -1010,4 +1023,70 @@ function listarPreferenciaGen($conexao, $idgenero)
 
     mysqli_stmt_close($comando);
     return $lista_preferencia;
+}
+//
+function listarJogosPopulares($conexao, $limite = 3)
+{
+    $sql = "SELECT j.*, COUNT(f.idfavorito) as total_favoritos 
+                            FROM jogo j 
+                            LEFT JOIN favorito f ON j.idjogo = f.jogo_idjogo 
+                            GROUP BY j.idjogo 
+                            ORDER BY total_favoritos DESC 
+                            LIMIT ?";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $limite);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $jogos = [];
+    while ($jogo = mysqli_fetch_assoc($resultado)) {
+        $jogos[] = $jogo;
+    }
+
+    mysqli_stmt_close($comando);
+    return $jogos;
+}
+
+function listarUsuariosAleatorios($conexao, $limite = 5)
+{
+    $sql = "SELECT idusuario, nome, gmail, foto FROM usuario 
+                        WHERE idusuario != ? 
+                        ORDER BY RAND() 
+                        LIMIT ?";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    $idUsuarioAtual = $_SESSION['idusuario'] ?? 0;
+    mysqli_stmt_bind_param($comando, 'ii', $idUsuarioAtual, $limite);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $usuarios = [];
+    while ($usuario = mysqli_fetch_assoc($resultado)) {
+        $usuarios[] = $usuario;
+    }
+
+    mysqli_stmt_close($comando);
+    return $usuarios;
+}
+
+function listarPostsComUsuarios($conexao)
+{
+    $sql = "SELECT pf.*, u.nome, u.foto, tf.nome as topico_nome
+                        FROM post_forun pf 
+                        INNER JOIN usuario u ON pf.usuario_idusuario = u.idusuario 
+                        INNER JOIN topico_forun tf ON pf.topico_forun_idtopico_forun = tf.idtopico_forun
+                        ORDER BY pf.idpost_forun DESC 
+                        LIMIT 10";
+
+    $result = $conexao->query($sql);
+    $posts = [];
+
+    if ($result && $result->num_rows > 0) {
+        while ($post = $result->fetch_assoc()) {
+            $posts[] = $post;
+        }
+    }
+
+    return $posts;
 }
