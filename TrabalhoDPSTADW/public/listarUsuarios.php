@@ -19,7 +19,7 @@ require_once "../controle/funcoes.php";
         }
     </style>
 </head>
-
+<?php include 'cabeçalho.php'; ?>
 <body>
     <h1>Lista de Usuário</h1>
 

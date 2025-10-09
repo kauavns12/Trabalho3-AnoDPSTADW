@@ -16,6 +16,7 @@ require_once "../controle/funcoes.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./estilo/estilo_formUsuario.css">
 </head>
+
 <body>
     <!-- Elementos decorativos de fundo -->
     <div class="decoration"></div>

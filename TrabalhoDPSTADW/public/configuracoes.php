@@ -14,9 +14,7 @@ $id_usuario = $_SESSION['idusuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-    <?php
-    echo exibirMenu($paginaAtiva = '')
-    ?>
+<?php include 'cabeçalho.php'; ?>
 <body>
     <div>
         <a href="editarUsuario.php?id" class="nav-button signup-btn" target="bodyiframe">Editar Dados Pessoais</a>
@@ -30,7 +28,7 @@ $id_usuario = $_SESSION['idusuario'];
     </div> <br> <br>
 
     <div>
-        <a href="../controle/deletarconta.php?id" class="nav-button signup-btn" target="bodyiframe">Deletar Usuário</a>
+        <a href="../controle/deletarUsuario.php?id" class="nav-button signup-btn" target="bodyiframe">Deletar Usuário</a>
     </div> <br> <br>
 
     <div>

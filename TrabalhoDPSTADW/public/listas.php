@@ -21,7 +21,7 @@ $id_usuario = $_SESSION['id_usuario'];
     </div> <br> <br>
 
     <?php
-    $lista_lista = listarLista($conexao);
+    $lista_lista = listarListaUsu($conexao,$id_usuario);
 
     if (count($lista_lista) == 0) {
         echo "Não existem listas criadas";
@@ -30,7 +30,6 @@ $id_usuario = $_SESSION['id_usuario'];
         <table border="1">
             <tr>
                 <td>Nome</td>
-                <td>Usuario</td>
                 <td>Descrição</td>
                 <td>Situação</td>
                 <td colspan="2">Ação</td>

@@ -18,9 +18,7 @@ require_once "../controle/funcoes.php";
 
 
 </head>
-    <?php
-    echo exibirMenu($paginaAtiva = '')
-    ?>
+<?php include 'cabeçalho.php'; ?>
 <body>
 <div class="espacinho">
         <form action="../controle/cadastarcategoriapost.php" method="post">

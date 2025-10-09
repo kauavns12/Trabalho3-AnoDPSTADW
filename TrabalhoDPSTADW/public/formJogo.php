@@ -1,6 +1,6 @@
 <?php
 
-
+require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 
 
@@ -122,6 +122,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         }
     </script>
 </head>
+<?php include 'cabeçalho.php'; ?>
 <body>
     <form action="../controle/salvarJogo.php" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">

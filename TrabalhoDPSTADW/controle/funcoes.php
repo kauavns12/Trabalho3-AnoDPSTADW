@@ -567,7 +567,7 @@ function salvar_Lista($conexao, $nome, $descricao, $situacao, $idusuario)
     $sql = "INSERT INTO lista (nome, descricao, situacao, usuario_idusuario1) VALUES (?,?,?,?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $descricao, $situacao, $idusuario);
+    mysqli_stmt_bind_param($comando, 'ssii', $nome, $descricao, $situacao, $idusuario);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -604,6 +604,24 @@ function listarLista($conexao)
 {
     $sql = "SELECT * FROM lista";
     $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_lista = [];
+
+    while ($lista = mysqli_fetch_assoc($resultado)) {
+        $lista_lista[] = $lista;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_lista;
+}
+function listarListaUsu ($conexao, $idusuario){
+    $sql = "SELECT * FROM lista WHERE usuario_idusuario1=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
 
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);

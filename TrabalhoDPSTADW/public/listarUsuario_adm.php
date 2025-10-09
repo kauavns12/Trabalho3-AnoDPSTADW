@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-
+<?php include 'cabeçalho.php'; ?>
 <body>
     <h1>Lista de Usuários Cadastrados</h1>
 
@@ -62,7 +62,7 @@
         ?>
         </table>
 
-         <td><a href='home.php'>Voltar</a></td>
+         <td><a href='configuracoes.php'>Voltar</a></td>
 </body>
 
 </html>

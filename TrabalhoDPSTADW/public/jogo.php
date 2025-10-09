@@ -149,41 +149,8 @@ if ($result_jogos && $result_jogos->num_rows > 0) {
     <link rel="stylesheet" href="./estilo/estilo_jogo.css">
     
 </head>
+<?php include 'cabeçalho.php'; ?>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <i class="fas fa-gamepad logo-icon"></i>
-            <span class="logo-text">Friv Games & WIKI</span>
-        </a>
-        
-        <ul class="nav-links">
-                <li><a href="home.php">Início</a></li>
-                <li><a href="jogos.php">Jogos</a></li>
-                <li><a href="comunidade.php">Comunidade</a></li>
-                <li><a href="foruns.php">Fóruns</a></li>
-        </ul>
-        
-        <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
-        </div>
-        
-        <div class="user-menu">
-            <div class="user-avatar"> <img src="../controle/fotos/<?php echo $_SESSION['foto']?>"></div>
-            <div class="user-name"><?php echo $_SESSION['nome'] ?></div>
-            <i class="fas fa-chevron-down dropdown-icon"></i>
-        </div>
-        
-        <div class="button-demo">
-            <div>
-                <a href="../controle/deslogar.php" class="nav-button signup-btn" target="bodyiframe">Deslogar</a>
-            </div>
-            
-            <div>
-                <a href="./configuracoes.php" class="nav-button login-btn" target="bodyiframe">Configurações</a>
-            </div>
-        </div>
-    </nav>
 
     <div class="container">
         <div class="game-header">
