@@ -1,8 +1,8 @@
 <?php
-     require_once "./conexao.php";
-     require_once "./funcoes.php";
-     require_once "./verificarLogado.php";
-     require_once "./verificarLogin.php";
+     require_once "conexao.php";
+     require_once "funcoes.php";
+     require_once "verificarLogado.php";
+     
     
     $idtopico_forun = $_POST['idtopico_forun'];
     $idusuario = $_SESSION['idusuario'];
@@ -10,5 +10,3 @@
     
     salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun);
 ?>
-
-

@@ -90,7 +90,7 @@ require_once "../controle/funcoes.php";
                     echo "<span class='post-topic'>r/" . htmlspecialchars($post['topico_forun_idtopico_forun']) . "</span>";
                     echo "<div class='post-content'>" . htmlspecialchars($post['conteudo']) . "</div>";
                     echo "<div class='post-footer'>";
-                    echo "</div>"
+                    echo "</div>";
                 }
             ?>
         </div>

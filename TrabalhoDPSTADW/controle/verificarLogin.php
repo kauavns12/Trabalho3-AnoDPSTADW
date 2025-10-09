@@ -22,7 +22,7 @@
             session_start();
             $_SESSION['logado'] = 'sim';
             $_SESSION['tipo'] = $tipo;
-            $_SESSION['id_usuario'] = $id_usuario;
+            $_SESSION['idusuario'] = $id_usuario;
             $_SESSION['nome'] = $nome;
             $_SESSION['foto'] = $foto; // Armazenando a foto na sessão
             header("Location: ../public/home.php");

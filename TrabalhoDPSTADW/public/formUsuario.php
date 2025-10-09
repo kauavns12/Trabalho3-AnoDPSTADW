@@ -1,3 +1,11 @@
+<?php
+require_once "../controle/verificarLogado.php";
+require_once "../controle/verificarLogin.php";
+require_once "../controle/conexao.php";
+require_once "../controle/funcoes.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
