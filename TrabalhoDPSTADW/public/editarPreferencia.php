@@ -42,6 +42,6 @@ $generos = listarGenero($conexao); // função que retorna todos os gêneros cad
         <br><input type="submit" value="Salvar Alterações">
     </form>
 
-    <br><a href="home.php">Voltar</a>
+    <br><a href="configuracoes.php">Voltar</a>
 </body>
 </html>

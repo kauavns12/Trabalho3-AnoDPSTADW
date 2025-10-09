@@ -6,7 +6,7 @@ require_once "../controle/funcoes.php";
 session_start();
 
 // aqui pegue o id do usuário logado da sessão
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['idusuario'];
 
 // busca dados do usuário
 $sql = "SELECT * FROM usuario WHERE idusuario = $id_usuario";

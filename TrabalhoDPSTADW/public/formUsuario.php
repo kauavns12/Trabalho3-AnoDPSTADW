@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
->>>>>>> 4f940661fd28ceed293d7362f3789e6998c7ada7
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 ?>

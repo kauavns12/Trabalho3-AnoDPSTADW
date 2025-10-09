@@ -47,6 +47,6 @@ if (!empty($_FILES['foto']['name'])) {
 }
 
 // redireciona para home
-header("Location: ../public/home.php");
+header("Location: ../public/configuracoes.php");
 exit;
 ?>

@@ -17,11 +17,9 @@
     <div class="login-container">
         <div class="logo">
             <h1>FRIV GAMES & WIKI</h1>
-<<<<<<< HEAD
+
             <p>Login</p>
-=======
-            <h3>LOGUIN</h3>
->>>>>>> 4f940661fd28ceed293d7362f3789e6998c7ada7
+
         </div>
         
         <form class="login-form" action="../controle/verificarLogin.php" method="post">
