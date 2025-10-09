@@ -14,6 +14,9 @@ $generos = listarGenero($conexao); // função que retorna todos os gêneros cad
     <meta charset="UTF-8">
     <title>Editar Preferências</title>
 </head>
+    <?php
+    echo exibirMenu($paginaAtiva = '')
+    ?>
 <body>
     <h2>Editar Preferências</h2>
     <form action="../controle/salvarPreferenciaEditada.php" method="post">

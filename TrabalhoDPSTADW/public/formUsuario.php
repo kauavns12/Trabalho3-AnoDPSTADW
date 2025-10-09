@@ -1,6 +1,5 @@
 <?php
-require_once "../controle/verificarLogado.php";
-require_once "../controle/verificarLogin.php";
+
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 ?>
@@ -425,7 +424,13 @@ require_once "../controle/funcoes.php";
 
     <script>
         // Configuração da validação do formulário
+        // Validação do formulário
         $(document).ready(function () {
+            // Método personalizado para verificar se o e-mail é @gmail.com
+            $.validator.addMethod("gmailOnly", function(value, element) {
+                return this.optional(element) || /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value);
+            }, "O e-mail deve terminar com @gmail.com");
+
             $('#formulario').validate({
                 rules: {
                     nome: {
@@ -435,6 +440,7 @@ require_once "../controle/funcoes.php";
                     gmail: {
                         required: true,
                         minlength: 5,
+                        gmailOnly: true // ← regra personalizada aqui
                     },
                     gmail2: {
                         required: true,
@@ -456,7 +462,8 @@ require_once "../controle/funcoes.php";
                     },
                     gmail: {
                         required: "Esse campo não pode ser vazio",
-                        minlength: "Insira um endereço de e-mail válido."
+                        minlength: "Insira um endereço de e-mail válido.",
+                        gmailOnly: "O e-mail deve terminar com @gmail.com"
                     },
                     gmail2: {
                         required: "Esse campo não pode ser vazio",

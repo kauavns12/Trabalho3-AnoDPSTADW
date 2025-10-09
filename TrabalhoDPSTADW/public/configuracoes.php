@@ -14,7 +14,9 @@ $id_usuario = $_SESSION['id_usuario'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
+    <?php
+    echo exibirMenu($paginaAtiva = '')
+    ?>
 <body>
     <div>
         <a href="editarUsuario.php?id" class="nav-button signup-btn" target="bodyiframe">Editar Dados Pessoais</a>

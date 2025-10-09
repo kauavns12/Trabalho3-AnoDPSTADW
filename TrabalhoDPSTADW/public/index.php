@@ -353,7 +353,7 @@
     <div class="login-container">
         <div class="logo">
             <h1>FRIV GAMES & WIKI</h1>
-            <p>Loguin</p>
+            <p>Login</p>
         </div>
         
         <form class="login-form" action="../controle/verificarLogin.php" method="post">
@@ -368,14 +368,14 @@
             <button type="submit" class="btn-login">Acessar</button>
             
             <div class="links">
-                <a href="formUsuario.html">Primeiro Acesso</a>
+                <a href="formUsuario.php">Primeiro Acesso</a>
             </div>
         </form>
     </div>
 
     
     <div class="image-credit">
-        FRIV GAMES & WIKI © 2023
+        FRIV GAMES & WIKI © 2025
     </div>
 
 </body>

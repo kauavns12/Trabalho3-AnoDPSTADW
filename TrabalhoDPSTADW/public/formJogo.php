@@ -1,5 +1,8 @@
 <?php
+
+
 require_once "../controle/conexao.php";
+
 
 // Carregar gêneros do banco diretamente
 $sql = "SELECT idgenero, nome FROM genero ORDER BY nome";

@@ -3,7 +3,7 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$id = $_SESSION['id_usuario'];
+$id = $_SESSION['idusuario'];
 $user = pesquisarUsuario_ID($conexao, $id);
 $foto = $user['foto'];
 $nome = $user['nome'];

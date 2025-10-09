@@ -56,44 +56,37 @@ require_once "../controle/funcoes.php";
         </div>
     </nav>
     <br><br><br>
-
-    <div class="espacinho">
-        <form action="../controle/cadastrarpost.php" method="post">
-
-            <label for="idtopico_forun">Em qual tópico você quer postar?</label> <br> 
-            <select name='idtopico_forun'id="idtopico_forun"> 
+            <div>
+                <a href="./cadastrarcategoria.php" class="nav-button login-btn" target="bodyiframe">Insira uma Nova Categoria</a>
+            </div>
+    
+            <div>
+                <a href="./cadastrartopico.php" class="nav-button login-btn" target="bodyiframe">Insira um Novo Tópico</a>
+            </div>
+            <div>
+                <a href="./cadastrarpost.php" class="nav-button login-btn" target="bodyiframe">Insira um novo Post</a>
+            </div>
+    <br>
+    
+    <br>
+    
+    <h2 class="page-title">Algumas Postagens</h2>
+    <div class="post-list">
         <?php
-            $topicos = listarTopico($conexao);
-            
-            foreach($topicos as $topico) {
-                $id = $topico['idtopico_forun'];
-                $nome = $topico['nome'];
-                echo "<option value='$id'>$nome</option>";
-            }
-         ?>
-</select> <br><br>
-            <label for="conteudo">Qual o conteúdo do post?</label> <br>
-            <input type="text" name="conteudo" id="conteudo" placeholder="Digite o conteúdo da sua postagem..."> <br><br>
-            <input type="submit" value="Publicar">
-        </form>
+        $posts = listarPost($conexao);
+        foreach ($posts as $post) {
+            $post_id = $post['idpost_forun'];
+
+            echo "<a href='post_individual.php?id=$post_id' class='post-link'>Visitar Post</a>";
+            echo "<div class='post-card'>";
+            echo "<div class='post-header'>";
+            echo "<span class='post-topic'>r/" . htmlspecialchars($post['topico_forun_idtopico_forun']) . "</span>";
+            echo "<div class='post-content'>" . htmlspecialchars($post['conteudo']) . "</div>";
+            echo "<div class='post-footer'>";
+            echo "</div>";
+        }
+        ?>
     </div>
-        <h2 class="page-title">Algumas Postagens</h2>
-     <div class="post-list">
-            <?php 
-                $posts = listarPost($conexao);
-                foreach($posts as $post) {
-                    $post_id = $post['idpost_forun'];
-                    
-                    echo "<a href='post_individual.php?id=$post_id' class='post-link'>Visitar Post</a>";
-                    echo "<div class='post-card'>";
-                    echo "<div class='post-header'>";
-                    echo "<span class='post-topic'>r/" . htmlspecialchars($post['topico_forun_idtopico_forun']) . "</span>";
-                    echo "<div class='post-content'>" . htmlspecialchars($post['conteudo']) . "</div>";
-                    echo "<div class='post-footer'>";
-                    echo "</div>";
-                }
-            ?>
-        </div>
-        
+
     </div>
 </body>

@@ -9,4 +9,5 @@
     $conteudo = $_POST['conteudo'];
     
     salvarPostForun($conexao, $conteudo, $idusuario, $idtopico_forun);
+    header('Location: ../public/home.php')
 ?>

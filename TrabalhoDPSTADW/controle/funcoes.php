@@ -1090,3 +1090,46 @@ function listarPostsComUsuarios($conexao)
 
     return $posts;
 }
+
+function exibirMenu($paginaAtiva = '') {
+
+    
+    $menu = '
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-gamepad logo-icon"></i>
+            <span class="logo-text">Friv Games & WIKI</span>
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="home.php" class="' . ($paginaAtiva == 'home' ? 'active' : '') . '">INÍCIO</a></li>
+            <li><a href="jogos.php" class="' . ($paginaAtiva == 'jogos' ? 'active' : '') . '">JOGOS</a></li>
+            <li><a href="comunidade.php" class="' . ($paginaAtiva == 'comunidade' ? 'active' : '') . '">COMUNIDADE</a></li>
+            <li><a href="foruns.php" class="' . ($paginaAtiva == 'foruns' ? 'active' : '') . '">FÓRUNS</a></li>
+        </ul>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
+        </div>
+        
+        <div class="user-menu">
+            <div class="user-avatar">
+                <img src="../controle/fotos/' . ($_SESSION['foto'] ?? 'default.png') . '" alt="Avatar">
+            </div>
+            <div class="user-name">' . ($_SESSION['nome'] ?? 'Usuário') . '</div>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+        </div>
+        
+        <div>
+            <div>
+                <a href="../controle/deslogar.php" class="nav-button">Deslogar</a>
+            </div>
+            <div>
+                <a href="./configuracoes.php" class="nav-button">Configurações</a>
+            </div>
+        </div>
+    </nav>';
+    
+    return $menu;
+}
