@@ -24,7 +24,7 @@ $novo_nome = uniqid() . "." . $extensao;
 //criando um novo caminho para o arquivo (usando o endereço da página)
 //lembre-se de criar a pasta "fotos/" dentro da pasta "codigo".
 //deve ajustar as permissões da pasta "fotos".
-$caminho_destino = "../fotos/" . $novo_nome;
+$caminho_destino = "fotos/" . $novo_nome;
 
 //movendo o arquivo para o servidor
 move_uploaded_file($caminho_temporario, $caminho_destino);
