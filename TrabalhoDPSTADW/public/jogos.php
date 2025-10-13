@@ -39,7 +39,7 @@ require_once "../controle/funcoes.php";
             </tr>
         <?php
         foreach ($jogos as $jogo) {
-            $idusuario = $usuario['idusuario'];
+            $idjogo = $jogo['idusuario'];
             $nome = $usuario['nome'];
             $email = $usuario['gmail'];
             $senha = $usuario['senha'];
