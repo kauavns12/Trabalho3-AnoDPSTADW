@@ -147,11 +147,11 @@ if ($result_jogos && $result_jogos->num_rows > 0) {
     <title><?php echo $jogo['nome']; ?> - Friv</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./estilo/estilo_jogo.css">
-    
+    <link rel="stylesheet" href="./estilo/cabeçalho.css">
 </head>
-<?php include 'cabeçalho.php'; ?>
-<body>
 
+<body>
+    <?php include 'cabeçalho.php'; ?>
     <div class="container">
         <div class="game-header">
             <h1><?php echo $jogo['nome']; ?></h1>

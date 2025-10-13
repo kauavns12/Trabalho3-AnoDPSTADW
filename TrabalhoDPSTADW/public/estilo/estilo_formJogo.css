@@ -1,185 +1,368 @@
-        :root {
-            --dark-bg: #121212;
-            --darker-bg: #0a0a0a;
-            --card-bg: #1e1e1e;
-            --input-bg: #2d2d2d;
-            --text-primary: #e4e4e4;
-            --text-secondary: #a0a0a0;
-            --accent: #8a2be2;
-            --accent-hover: #9932cc;
-            --error: #cf6679;
-            --success: #03dac6;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        
-        .form-container {
-            width: 100%;
-            max-width: 600px;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            animation: fadeIn 0.5s ease-out;
-            border: 1px solid #333;
-        }
-        
-        .form-header {
-            background: linear-gradient(to right, var(--accent), var(--accent-hover));
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-        
-        .form-header h1 {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        .form-body {
-            padding: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-        
-        .form-group input[type="text"],
-        .form-group input[type="file"] {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--input-bg);
-            border: 2px solid #3d3d3d;
-            border-radius: 8px;
-            font-size: 16px;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-        
-        .form-group input[type="text"]:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3);
-        }
-        
-        .generos-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .genero-option {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            background-color: var(--input-bg);
-            border: 2px solid #3d3d3d;
-            border-radius: 8px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .genero-option:hover {
-            border-color: var(--accent);
-        }
-        
-        .genero-option input {
-            margin-right: 10px;
-            accent-color: var(--accent);
-        }
-        
-        .selected-limit {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            display: block;
-        }
-        
-        .genero-option.selected {
-            border-color: var(--accent);
-            background-color: rgba(138, 43, 226, 0.1);
-        }
-        
-        .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(to right, var(--accent), var(--accent-hover));
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .form-container {
-                max-width: 100%;
-                border-radius: 10px;
-            }
-            
-            .form-body {
-                padding: 20px;
-            }
-            
-            .form-header {
-                padding: 20px;
-            }
-            
-            .form-header h1 {
-                font-size: 24px;
-            }
-            
-            .generos-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+/* CSS do Formulário de Cadastro de Jogo - Mantendo o mesmo estilo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: 
+        linear-gradient(135deg, #1a0b2e 0%, #16213e 50%, #0f3460 100%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><radialGradient id="a" cx=".2" cy=".2"><stop offset="0%" stop-color="%237c3aed" stop-opacity=".1"/><stop offset="100%" stop-color="%231a0b2e" stop-opacity="0"/></radialGradient><radialGradient id="b" cx=".8" cy=".8"><stop offset="0%" stop-color="%234f46e5" stop-opacity=".1"/><stop offset="100%" stop-color="%2316213e" stop-opacity="0"/></radialGradient><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2325366d" stroke-width="0.5"/></pattern></defs><rect width="200" height="200" fill="%231a0b2e"/><rect width="200" height="200" fill="url(%23a)"/><rect width="200" height="200" fill="url(%23b)"/><rect width="200" height="200" fill="url(%23grid)"/></svg>');
+    background-size: cover;
+    background-blend-mode: overlay;
+    min-height: 100vh;
+    color: #e0e0ff;
+    position: relative;
+    padding: 20px;
+}
+
+/* Efeitos de partículas animadas */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 50%);
+    animation: pulse 15s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Overlay escuro para melhor contraste */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 5, 25, 0.7);
+    z-index: 0;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: rgba(26, 11, 46, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(101, 78, 163, 0.4);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.form-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid rgba(101, 78, 163, 0.4);
+}
+
+.form-header h1 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+.form-body {
+    padding: 40px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #a78bfa;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.selected-limit {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(101, 78, 163, 0.5);
+    border-radius: 8px;
+    background-color: rgba(15, 23, 42, 0.7);
+    color: #e0e0ff;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="file"]:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+    background-color: rgba(30, 41, 59, 0.8);
+    outline: none;
+}
+
+.form-group input[type="text"]::placeholder {
+    color: #94a3b8;
+}
+
+/* Estilo para a seção de gêneros */
+.generos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+    padding: 15px;
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(101, 78, 163, 0.3);
+}
+
+.genero-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(26, 11, 46, 0.7);
+    border: 1px solid rgba(101, 78, 163, 0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.genero-option:hover {
+    background: rgba(101, 78, 163, 0.2);
+    border-color: rgba(167, 139, 250, 0.5);
+}
+
+.genero-option.selected {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(79, 70, 229, 0.3) 100%);
+    border-color: #7c3aed;
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.3);
+}
+
+.genero-option input[type="checkbox"] {
+    display: none;
+}
+
+.genero-option label {
+    color: #e0e0ff;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0;
+    flex: 1;
+}
+
+.genero-option.selected label {
+    color: #a78bfa;
+    font-weight: 600;
+}
+
+/* Botões */
+.btn-adicionar {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    white-space: nowrap;
+}
+
+.btn-adicionar:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #6d28d9 0%, #4338ca 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(124, 58, 237, 0.6);
+}
+
+/* Estilos para mensagens de erro do jQuery Validate */
+.error {
+    color: #ef4444;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+    font-weight: 500;
+}
+
+.form-group input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* Elementos decorativos de fundo */
+.decoration {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+    z-index: 0;
+    animation: float 20s infinite ease-in-out;
+}
+
+.decoration:nth-child(1) {
+    top: 10%;
+    left: 5%;
+    width: 120px;
+    height: 120px;
+    animation-delay: 0s;
+}
+
+.decoration:nth-child(2) {
+    bottom: 10%;
+    right: 5%;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
+    animation-delay: -5s;
+}
+
+.decoration:nth-child(3) {
+    top: 40%;
+    right: 15%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(10px, 15px) scale(1.05); }
+    50% { transform: translate(-5px, 20px) scale(0.95); }
+    75% { transform: translate(-10px, -5px) scale(1.02); }
+}
+
+/* Texto de ajuda */
+small {
+    color: #94a3b8 !important;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .form-container {
+        margin: 20px auto;
+        max-width: 90%;
+    }
+    
+    .form-body {
+        padding: 30px 25px;
+    }
+    
+    .form-header h1 {
+        font-size: 1.7rem;
+    }
+    
+    .generos-container {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .form-container {
+        margin: 15px auto;
+        max-width: 100%;
+    }
+    
+    .form-body {
+        padding: 25px 20px;
+    }
+    
+    .form-header {
+        padding: 25px 20px;
+    }
+    
+    .form-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .generos-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="file"] {
+        padding: 10px 12px;
+    }
+    
+    .btn-adicionar {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .decoration {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .form-body {
+        padding: 20px 15px;
+    }
+    
+    .form-header {
+        padding: 20px 15px;
+    }
+    
+    .form-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .btn-submit {
+        padding: 12px;
+        font-size: 1rem;
+    }
+}

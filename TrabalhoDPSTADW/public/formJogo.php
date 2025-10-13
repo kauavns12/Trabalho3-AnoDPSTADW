@@ -19,6 +19,8 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     <link rel="stylesheet" href="./estilo/estilo_formJogo.css">
     <script src="../controle/jquery-3.7.1.min.js"></script>
     <script src="../controle/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="./estilo/cabeçalho.css">
+
 
     <script>
         $(document).ready(function () {
@@ -123,7 +125,8 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     </script>
 </head>
 <?php include 'cabeçalho.php'; ?>
-<body>
+<body> 
+    
     <form action="../controle/salvarJogo.php" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
             <h1>Cadastro de Jogo</h1>
