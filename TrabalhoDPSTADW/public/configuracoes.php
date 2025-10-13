@@ -28,7 +28,7 @@ $id_usuario = $_SESSION['idusuario'];
     </div> <br> <br>
 
     <div>
-        <a href="../controle/deletarUsuario.php?id" class="nav-button signup-btn" target="bodyiframe">Deletar Usuário</a>
+        <a href="../controle/deletarconta.php?id" class="nav-button signup-btn" target="bodyiframe">Deletar Conta</a>
     </div> <br> <br>
 
     <div>

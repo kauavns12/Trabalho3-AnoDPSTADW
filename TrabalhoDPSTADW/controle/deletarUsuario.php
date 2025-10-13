@@ -8,9 +8,9 @@ if (isset($_GET['idusuario'])) {
 
     excluirUsuario($conexao, $idusuario); // Executa a exclusão, sem se preocupar com o resultado
 
-    header("Location: ../public/index.php");
+    header("Location: ../public/listarUsuario_adm.php");
     exit();
 } else {
-    header("Location: ../public/home.php"); // Mesmo se não tiver ID, volta
+    header("Location: ../public/listarUsuario_adm.php"); // Mesmo se não tiver ID, volta
     exit();
 }
