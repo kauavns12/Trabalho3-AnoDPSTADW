@@ -100,12 +100,14 @@ body::before {
     justify-content: center;
 }
 
-.game-image {
+/* CORREÇÃO PRINCIPAL: Estilo para a imagem do jogo */
+.game-media img {
     width: 100%;
     max-width: 400px;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
 }
 
 .game-info {
@@ -186,26 +188,6 @@ body::before {
     font-size: 1.5rem;
 }
 
-.rating-display {
-    text-align: center;
-    margin-bottom: 25px;
-    padding: 20px;
-    background: rgba(15, 23, 42, 0.5);
-    border-radius: 8px;
-}
-
-.average-rating {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #ffc107;
-    margin-bottom: 10px;
-}
-
-.rating-count {
-    color: #94a3b8;
-    font-size: 1rem;
-}
-
 .stars-input {
     display: flex;
     justify-content: center;
@@ -255,46 +237,6 @@ body::before {
     background: linear-gradient(135deg, #6d28d9 0%, #4338ca 100%);
     transform: translateY(-2px);
     box-shadow: 0 7px 20px rgba(124, 58, 237, 0.6);
-}
-
-.rating-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.stat-box {
-    background: rgba(15, 23, 42, 0.5);
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid rgba(101, 78, 163, 0.3);
-    transition: transform 0.3s;
-}
-
-.stat-box:hover {
-    transform: translateY(-3px);
-}
-
-.stat-icon {
-    font-size: 2rem;
-    color: #a78bfa;
-    margin-bottom: 10px;
-}
-
-.stat-value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #a78bfa;
-    margin-bottom: 5px;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .comment-form {
@@ -461,10 +403,6 @@ body::before {
         font-size: 2rem;
     }
     
-    .rating-stats {
-        grid-template-columns: 1fr;
-    }
-    
     .comment-header {
         flex-direction: column;
         align-items: flex-start;
@@ -492,10 +430,6 @@ body::before {
     
     .stars-input label {
         font-size: 1.5rem;
-    }
-    
-    .average-rating {
-        font-size: 2rem;
     }
     
     .decoration {
