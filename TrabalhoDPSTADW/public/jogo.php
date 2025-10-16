@@ -20,6 +20,20 @@ if (!$jogo) {
     die("Jogo não encontrado!");
 }
 
+// CORREÇÃO: Verificar e corrigir o caminho da imagem
+if (!empty($jogo['img'])) {
+    // Se a imagem já tem caminho completo, usa como está
+    if (strpos($jogo['img'], 'http') === 0) {
+        $imagem_jogo = $jogo['img'];
+    } else {
+        // Se é um caminho relativo, ajusta para o caminho correto
+        $imagem_jogo = "./" . ltrim($jogo['img'], './');
+    }
+} else {
+    // Imagem padrão caso não exista
+    $imagem_jogo = "./estilo/imagens/sem-imagem.jpg";
+}
+
 // Processar avaliação
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['classificacao'])) {
     $classificacao = intval($_POST['classificacao']);
@@ -30,8 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['classificacao'])) {
 
 // Processar comentário
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comentario'])) {
-    $comentario = mysqli_real_escape_string($conexao, $_POST['comentario']);
-    processarComentario($conexao, $comentario, $idusuario, $idjogo);
+    $comentario = trim($_POST['comentario']);
+    
+    // CORREÇÃO: Validar e limitar o comentário
+    if (!empty($comentario)) {
+        // Limitar para 500 caracteres
+        $comentario = substr(mysqli_real_escape_string($conexao, $comentario), 0, 500);
+        processarComentario($conexao, $comentario, $idusuario, $idjogo);
+    }
+    
     header("Location: jogo.php?id=$idjogo");
     exit();
 }

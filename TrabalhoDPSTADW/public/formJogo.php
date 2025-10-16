@@ -12,6 +12,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,16 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
+            // REMOVER: Não usar máscara para campo date
+            // $('#data_lanca').mask('00/00/0000');
+
+            // Validação personalizada para a data
+            $.validator.addMethod("validDate", function(value, element) {
+                // Para campo date, o valor já vem no formato YYYY-MM-DD
+                return this.optional(element) || /^\d{4}-\d{2}-\d{2}$/.test(value);
+            }, "Por favor, insira uma data válida");
+
             $('#formulario').validate({
                 rules: {
                     nome: {
@@ -41,7 +51,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                     },
                     data_lanca: {
                         required: true,
-                        minlength: 8,
+                        validDate: true
                     },
                     'genero[]': {
                         required: true
@@ -50,7 +60,6 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                         required: true,
                         accept: "image/*"
                     }
-                
                 },
                 messages: {
                     nome: {
@@ -66,8 +75,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                         minlength: "Tamanho mínimo de 3 símbolos"
                     },
                     data_lanca: {
-                        required: "Esse campo não pode ser vazio",
-                        minlength: "Data no formato DD/MM/AAAA"
+                        required: "Esse campo não pode ser vazio"
                     },
                     'genero[]': {
                         required: "Selecione pelo menos um gênero"
@@ -76,7 +84,6 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                         required: "Selecione uma imagem",
                         accept: "Apenas arquivos de imagem são permitidos"
                     }
-        
                 },
                 errorPlacement: function(error, element) {
                     if (element.attr("name") == "genero[]") {
@@ -87,79 +94,38 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                 }
             });
         });
-
-        // Função para salvar novo gênero via AJAX
-        function salvarGenero() {
-            const novoGenero = document.getElementById('novo_genero').value;
-            
-            if (novoGenero.trim() === '') {
-                alert('Por favor, digite um nome para o gênero.');
-                return;
-            }
-
-            if (novoGenero.length < 3) {
-                alert('O nome do gênero deve ter pelo menos 3 caracteres.');
-                return;
-            }
-            
-            // Enviar via AJAX
-            fetch('../controle/salvarGenero.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'nome=' + encodeURIComponent(novoGenero)
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data.includes('sucesso')) {
-                    alert('Gênero cadastrado com sucesso!');
-                    document.getElementById('novo_genero').value = '';
-                    // Recarregar a página para mostrar o novo gênero
-                    location.reload();
-                } else {
-                    alert('Erro ao cadastrar gênero: ' + data);
-                }
-            })
-            .catch(error => {
-                alert('Erro de conexão ao cadastrar gênero.');
-            });
-        }
     </script>
 </head>
 <?php include 'cabeçalho.php'; ?>
-<body> 
-    
+
+<body>
+
     <form action="../controle/salvarJogo.php" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
             <h1>Cadastro de Jogo</h1>
         </div>
-        
+
         <div class="form-body">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome">
             </div>
-            
+
             <div class="form-group">
                 <label for="descricao">Descrição:</label>
                 <input type="text" name="descricao" id="descricao">
             </div>
-            
+
             <div class="form-group">
                 <label for="desenvolvedor">Desenvolvedor:</label>
                 <input type="text" name="desenvolvedor" id="desenvolvedor">
             </div>
-            
+
             <div class="form-group">
                 <label for="data_lanca">Lançamento:</label>
-<<<<<<< Updated upstream
-                <input type="date" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
-=======
-                <input type="text" name="data_lanca" id="data_lanca">
->>>>>>> Stashed changes
+                <input type="date" name="data_lanca" id="data_lanca" class="date-input">
             </div>
-            
+
             <!-- Seção para adicionar novo gênero -->
             <div class="form-group">
                 <label for="novo_genero">Adicionar Novo Gênero:</label>
@@ -169,24 +135,24 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                 </div>
                 <small style="color: #666;">O gênero será salvo e aparecerá na lista abaixo</small>
             </div>
-            
+
             <div class="form-group">
                 <label>Gênero: <span class="selected-limit">(Selecione até 2 opções)</span></label>
                 <div class="generos-container" id="generos-container">
                     <?php foreach ($generos as $genero): ?>
-                    <div class="genero-option">
-                        <input type="checkbox" name="genero[]" value="<?php echo $genero['idgenero']; ?>" id="genero-<?php echo $genero['idgenero']; ?>">
-                        <label for="genero-<?php echo $genero['idgenero']; ?>"><?php echo htmlspecialchars($genero['nome']); ?></label>
-                    </div>
+                        <div class="genero-option">
+                            <input type="checkbox" name="genero[]" value="<?php echo $genero['idgenero']; ?>" id="genero-<?php echo $genero['idgenero']; ?>">
+                            <label for="genero-<?php echo $genero['idgenero']; ?>"><?php echo htmlspecialchars($genero['nome']); ?></label>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label for="img">Foto:</label>
                 <input type="file" name="img" id="img" accept="image/*">
             </div>
-            
+
             <button type="submit" class="btn-submit">Cadastrar Jogo</button>
         </div>
     </form>
@@ -197,11 +163,11 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     </script>
     <script>
         let selectedGeneros = [];
-        
+
         // Função para controlar a seleção de gêneros
         function toggleGenero(checkbox, generoId) {
             const index = selectedGeneros.indexOf(generoId);
-            
+
             if (checkbox.checked) {
                 // Verificar se já selecionou o máximo permitido
                 if (selectedGeneros.length >= 2) {
@@ -209,7 +175,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                     alert('Você pode selecionar no máximo 2 gêneros.');
                     return;
                 }
-                
+
                 // Adicionar à lista de selecionados
                 if (index === -1) {
                     selectedGeneros.push(generoId);
@@ -220,22 +186,22 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                     selectedGeneros.splice(index, 1);
                 }
             }
-            
+
             // Atualizar a aparência visual
             updateGenerosAppearance();
         }
-        
+
         // Atualizar a aparência visual dos gêneros selecionados
         function updateGenerosAppearance() {
             const allOptions = document.prepareSelectorAll('.genero-option');
-            
+
             allOptions.forEach(option => {
                 const checkbox = option.prepareSelector('input');
                 const generoId = checkbox.value;
-                
+
                 // Verificar se este gênero está selecionado
                 const isSelected = selectedGeneros.includes(generoId.toString());
-                
+
                 if (isSelected) {
                     option.classList.add('selected');
                 } else {
@@ -243,18 +209,18 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                 }
             });
         }
-        
+
         // Adicionar eventos aos checkboxes após o carregamento
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.prepareSelectorAll('input[type="checkbox"][name="genero[]"]');
-            
+
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     toggleGenero(this, this.value);
                 });
             });
         });
-        
+
         // Validação do formulário
         const form = document.prepareSelector('form');
         form.addEventListener('submit', function(e) {
@@ -272,6 +238,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             }
         });
     </script>
-    
+
 </body>
+
 </html>
