@@ -54,7 +54,7 @@
             echo "<td>$nome</td>";
             echo "<td>$gmail</td>";
             echo "<td><img src='../controle/fotos/$foto'></td>";
-            echo "<td><a href='../controle/deletarconta.php?id=$idusuario'>Banir</a></td>";
+            echo "<td><a href='../controle/deletarUsuario.php?idusuario=$idusuario'>Banir</a></td>";
             echo "<td><a href='editarUsuario_adm.php?id=$idusuario'>Promover ADM</a></td>";
             echo "</tr>";
         }

@@ -49,14 +49,20 @@ function pesquisarUsuario_ID($conexao, $idusuario)
 
 function pesquisarUsuario_Nome($conexao, $nome)
 {
-    $sql = "SELECT nome, foto FROM usuario WHERE nome = ?";
+    $sql = "SELECT nome, foto FROM usuario WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 's', $nome);
+    
+    $nome_param = "%" . $nome . "%";
+    mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
+    
     $resultado = mysqli_stmt_get_result($comando);
-    $user = mysqli_fetch_assoc($resultado);
+    $lista_usuarios = [];
+    while ($user = mysqli_fetch_assoc($resultado)) {
+        $lista_usuarios[] = $user;
+    }
     mysqli_stmt_close($comando);
-    return $user;
+    return $lista_usuarios;
 }
 
 function listarUsuario($conexao)
@@ -160,14 +166,20 @@ function pesquisarJogoID($conexao, $idjogo)
 
 function pesquisarJogoNome($conexao, $nome)
 {
-    $sql = "SELECT * FROM jogo WHERE nome = ?";
+    $sql = "SELECT * FROM jogo WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 's', $nome);
+    
+    $nome_param = "%" . $nome . "%";
+    mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
+    
     $resultado = mysqli_stmt_get_result($comando);
-    $jogo = mysqli_fetch_assoc($resultado);
+    $lista_jogos = [];
+    while ($jogo = mysqli_fetch_assoc($resultado)) {
+        $lista_jogos[] = $jogo;
+    }
     mysqli_stmt_close($comando);
-    return $jogo;
+    return $lista_jogos;
 }
 
 function listarJogo($conexao)
@@ -282,24 +294,18 @@ function pesquisarGeneroID($conexao, $idgenero)
 
 function pesquisarJogoGenero($conexao, $idgenero)
 {
-    $sql = "SELECT jogo_idjogo FROM genero_jogo WHERE genero_idgenero=?";
+    // Versão otimizada com JOIN
+    $sql = "SELECT j.* FROM jogo j 
+            INNER JOIN genero_jogo gj ON j.idjogo = gj.jogo_idjogo 
+            WHERE gj.genero_idgenero = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idgenero);
     mysqli_stmt_execute($comando);
+    
     $resultado = mysqli_stmt_get_result($comando);
-    $jogos = array();
-
-    while ($linha = mysqli_fetch_assoc($resultado)) {
-        $idjogo = $linha['jogo_idjogo'];
-        $sql2 = "SELECT * FROM jogo WHERE idjogo = ?";
-        $comando2 = mysqli_prepare($conexao, $sql2);
-        mysqli_stmt_bind_param($comando2, 'i', $idjogo);
-        mysqli_stmt_execute($comando2);
-        $resultado2 = mysqli_stmt_get_result($comando2);
-        if ($jogo = mysqli_fetch_assoc($resultado2)) {
-            $jogos[] = $jogo;
-        }
-        mysqli_stmt_close($comando2);
+    $jogos = [];
+    while ($jogo = mysqli_fetch_assoc($resultado)) {
+        $jogos[] = $jogo;
     }
     mysqli_stmt_close($comando);
     return $jogos;
@@ -341,18 +347,20 @@ function excluirAvaliacaoJogo($conexao, $idavaliacao_jogo)
 
 function buscarAvaliacoesJogo($conexao, $idjogo)
 {
-    $sql = "SELECT a.classificacao, u.nome 
-            FROM avaliacao_jogo a 
-            JOIN usuario u ON a.usuario_idusuario = u.idusuario 
+    $sql = "SELECT a.classificacao, u.nome
+            FROM avaliacao_jogo a
+            JOIN usuario u ON a.usuario_idusuario = u.idusuario
             WHERE a.jogo_idjogo = ?";
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, "i", $idjogo);
     mysqli_stmt_execute($stmt);
+    
     $result = mysqli_stmt_get_result($stmt);
     $avaliacoes = [];
     while ($avaliacao = mysqli_fetch_assoc($result)) {
         $avaliacoes[] = $avaliacao;
     }
+    mysqli_stmt_close($stmt);
     return $avaliacoes;
 }
 
@@ -370,15 +378,19 @@ function calcularMediaAvaliacoes($avaliacoes)
 
 function buscarMinhaAvaliacao($conexao, $usuario_id, $jogo_id)
 {
-    $sql = "SELECT classificacao FROM avaliacao_jogo 
-           WHERE usuario_idusuario = ? AND jogo_idjogo = ?";
+    $sql = "SELECT classificacao FROM avaliacao_jogo
+            WHERE usuario_idusuario = ? AND jogo_idjogo = ?";
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, "ii", $usuario_id, $jogo_id);
     mysqli_stmt_execute($stmt);
+    
     $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
-        return mysqli_fetch_assoc($result);
+        $avaliacao = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $avaliacao;
     }
+    mysqli_stmt_close($stmt);
     return null;
 }
 
@@ -588,14 +600,20 @@ function pesquisarPostID($conexao, $idpost)
 
 function pesquisarPostConteudo($conexao, $conteudo)
 {
-    $sql = "SELECT * FROM post_forun WHERE conteudo=?";
+    $sql = "SELECT * FROM post_forun WHERE conteudo LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 's', $conteudo);
+    
+    $conteudo_param = "%" . $conteudo . "%";
+    mysqli_stmt_bind_param($comando, 's', $conteudo_param);
     mysqli_stmt_execute($comando);
+    
     $resultado = mysqli_stmt_get_result($comando);
-    $post = mysqli_fetch_assoc($resultado);
+    $lista_posts = [];
+    while ($post = mysqli_fetch_assoc($resultado)) {
+        $lista_posts[] = $post;
+    }
     mysqli_stmt_close($comando);
-    return $post;
+    return $lista_posts;
 }
 
 function listarPostsComUsuarios($conexao)
@@ -853,14 +871,20 @@ function listarConquista($conexao)
 
 function pesquisarConquistaNome($conexao, $nome)
 {
-    $sql = "SELECT * FROM conquista WHERE nome=?";
+    $sql = "SELECT * FROM conquista WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 's', $nome);
+    
+    $nome_param = "%" . $nome . "%";
+    mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
+    
     $resultado = mysqli_stmt_get_result($comando);
-    $conquista = mysqli_fetch_assoc($resultado);
+    $lista_conquistas = [];
+    while ($conquista = mysqli_fetch_assoc($resultado)) {
+        $lista_conquistas[] = $conquista;
+    }
     mysqli_stmt_close($comando);
-    return $conquista;
+    return $lista_conquistas;
 }
 
 function conquistaUsu($conexao, $idconquista, $idusuario)

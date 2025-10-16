@@ -11,6 +11,6 @@ if (isset($_GET['idusuario'])) {
     header("Location: ../public/listarUsuario_adm.php");
     exit();
 } else {
-    header("Location: ../public/listarUsuario_adm.php"); // Mesmo se não tiver ID, volta
+    header("Location: ../public/home.php"); // Mesmo se não tiver ID, volta
     exit();
 }

@@ -1,10 +1,10 @@
 <?php
-require_once "../controle/verificarLogado.php";
-require_once "../controle/conexao.php";
-require_once "../controle/funcoes.php";
+require_once "verificarLogado.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 
-$id_usuario = $_SESSION['idusuario'];
+$idusuario = $_SESSION['idusuario'];
 
-excluirUsuario($conexao, $id_usuario);
-header("Location: ../public/listarUsuario_adm.php");
+excluirUsuario($conexao, $idusuario);
+header("Location: ../public/index.php");
 ?>
