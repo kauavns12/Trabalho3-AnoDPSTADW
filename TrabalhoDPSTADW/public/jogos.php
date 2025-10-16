@@ -39,7 +39,6 @@ require_once "../controle/funcoes.php";
         foreach ($jogos as $jogo) {
             $idjogo = $jogo['idjogo'];
             $nome = $jogo['nome'];
-            $descricao = $jogo['descricao'];
             $desenvolvedor = $jogo['desenvolvedor'];
             $data = $jogo['data_lanca'];
             $foto = $jogo['img'];
@@ -53,9 +52,6 @@ require_once "../controle/funcoes.php";
             echo "</tr>";
         }
     }
-
-
-
 
     ?>
 

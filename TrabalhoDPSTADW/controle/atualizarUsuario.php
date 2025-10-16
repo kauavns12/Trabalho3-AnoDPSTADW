@@ -12,7 +12,7 @@ $senha = $_POST['senha']; // pode estar vazio
 
 // buscar foto atual
 $sqlFoto = "SELECT foto FROM usuario WHERE idusuario=$id";
-$resFoto = mysqli_query($conexao, $sqlFoto);
+$resFoto = mysqli_prepare($conexao, $sqlFoto);
 $dadosFoto = mysqli_fetch_assoc($resFoto);
 $foto = $dadosFoto['foto'];
 
@@ -37,7 +37,7 @@ if(!empty($senha)){
             WHERE idusuario=$id";
 }
 
-mysqli_query($conexao, $sql);
+mysqli_prepare($conexao, $sql);
 
 // --- ATUALIZA A SESSÃO ---
 $_SESSION['nome'] = $nome;

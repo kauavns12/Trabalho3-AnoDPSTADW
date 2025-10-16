@@ -209,7 +209,7 @@ function buscarJogoPorID($conexao, $idjogo)
 function buscarTodosJogos($conexao)
 {
     $sql = "SELECT nome, img FROM jogo";
-    $result = mysqli_query($conexao, $sql);
+    $result = mysqli_prepare($conexao, $sql);
     $jogos = [];
     if ($result && mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -267,7 +267,7 @@ function editarGenero($conexao, $idgenero, $nome)
 function listarGenero($conexao)
 {
     $sql = "SELECT * FROM genero";
-    $resultado = mysqli_query($conexao, $sql);
+    $resultado = mysqli_prepare($conexao, $sql);
     $generos = [];
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $generos[] = $linha;
@@ -475,7 +475,7 @@ function verificarCategoriasPadrao($conexao)
 function buscarCategoriaPadrao($conexao)
 {
     $sql = "SELECT idcategoria_forun FROM categoria_forun LIMIT 1";
-    $result = mysqli_query($conexao, $sql);
+    $result = mysqli_prepare($conexao, $sql);
     return mysqli_fetch_assoc($result);
 }
 
@@ -618,19 +618,27 @@ function pesquisarPostConteudo($conexao, $conteudo)
 
 function listarPostsComUsuarios($conexao)
 {
-    $sql = "SELECT pf.*, u.nome, u.foto, tf.nome as topico_nome
+    $sql = "SELECT pf.*, u.nome, u.foto, tf.nome AS topico_nome
             FROM post_forun pf 
             INNER JOIN usuario u ON pf.usuario_idusuario = u.idusuario 
             INNER JOIN topico_forun tf ON pf.topico_forun_idtopico_forun = tf.idtopico_forun
             ORDER BY pf.idpost_forun DESC 
             LIMIT 10";
-    $result = $conexao->query($sql);
+
     $posts = [];
-    if ($result && $result->num_rows > 0) {
-        while ($post = $result->fetch_assoc()) {
+
+    $result = mysqli_query($conexao, $sql);
+
+    if ($result) {
+        while ($post = mysqli_fetch_assoc($result)) {
             $posts[] = $post;
         }
+        mysqli_free_result($result); // Libera memória do resultado
+    } else {
+        // Em ambiente real, troque por log
+        echo "Erro ao buscar posts: " . mysqli_error($conexao);
     }
+
     return $posts;
 }
 
@@ -897,11 +905,18 @@ function conquistaUsu($conexao, $idconquista, $idusuario)
     return $funcionou;
 }
 
-function listarConquistaUsu($conexao)
+function listarConquistaUsu($conexao, $idusuario)
 {
-    $sql = "SELECT * FROM conquista_usu";
+    $sql = "SELECT * FROM conquista_usu WHERE usuario_idusuario = ? ";
     $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
     mysqli_stmt_execute($comando);
+
+    
+
+
+
+
     $resultado = mysqli_stmt_get_result($comando);
     $lista_ConquistaUsuario = [];
     while ($conquistsausu = mysqli_fetch_assoc($resultado)) {

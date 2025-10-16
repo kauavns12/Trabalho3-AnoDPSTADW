@@ -440,7 +440,6 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('João Silva', 'joao.silva@gmail.com', '$2y$10$Fp35ITV/u9vfPRHA.7EhSO/RRyMmF4.c.uVu7WnmD/DP/YbNhSVX', '68d52563a4b5d.png', 'c'),
 ('Maria Santos', 'maria.santos@gmail.com', '$2y$10$rQF3rE/QYlbvs37y4k5K8OZ1p3mmwQyhdI7frnZe57YSfFX41JeG.', '68d5360e867da.jpeg', 'c'),
-('Admin System', 'admin@friv.com', '$2y$10$4/pxrXDjBbpqWucBs46FMuuApXTexc8BU0cenBWNcXHq05IRUJnui', '68d5375cae2fa.jpg', 'c'),
 ('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '68d5375cae2fa.jpg', 'c'),
 ('Administrador', 'adm@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', '68dab251ddaae.jpeg', 'A');
 

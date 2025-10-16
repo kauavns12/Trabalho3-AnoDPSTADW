@@ -6,7 +6,7 @@ require_once "../controle/conexao.php";
 
 // Carregar gêneros do banco diretamente
 $sql = "SELECT idgenero, nome FROM genero ORDER BY nome";
-$resultado = mysqli_query($conexao, $sql);
+$resultado = mysqli_prepare($conexao, $sql);
 $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 ?>
 
@@ -150,7 +150,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             
             <div class="form-group">
                 <label for="data_lanca">Lançamento:</label>
-                <input type="text" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
+                <input type="date" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
             </div>
             
             <!-- Seção para adicionar novo gênero -->
@@ -216,10 +216,10 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         
         // Atualizar a aparência visual dos gêneros selecionados
         function updateGenerosAppearance() {
-            const allOptions = document.querySelectorAll('.genero-option');
+            const allOptions = document.prepareSelectorAll('.genero-option');
             
             allOptions.forEach(option => {
-                const checkbox = option.querySelector('input');
+                const checkbox = option.prepareSelector('input');
                 const generoId = checkbox.value;
                 
                 // Verificar se este gênero está selecionado
@@ -235,7 +235,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         
         // Adicionar eventos aos checkboxes após o carregamento
         document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="genero[]"]');
+            const checkboxes = document.prepareSelectorAll('input[type="checkbox"][name="genero[]"]');
             
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
@@ -245,7 +245,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
         });
         
         // Validação do formulário
-        const form = document.querySelector('form');
+        const form = document.prepareSelector('form');
         form.addEventListener('submit', function(e) {
             if (selectedGeneros.length === 0) {
                 e.preventDefault();
