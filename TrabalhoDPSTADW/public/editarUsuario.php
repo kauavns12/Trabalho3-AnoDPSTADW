@@ -10,7 +10,7 @@ $id_usuario = $_SESSION['idusuario'];
 
 // busca dados do usuário
 $sql = "SELECT * FROM usuario WHERE idusuario = $id_usuario";
-$resultado = mysqli_prepare($conexao, $sql);
+$resultado = mysqli_query($conexao, $sql);
 $usuario = mysqli_fetch_assoc($resultado);
 ?>
 

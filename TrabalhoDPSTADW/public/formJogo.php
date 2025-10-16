@@ -6,7 +6,7 @@ require_once "../controle/conexao.php";
 
 // Carregar gêneros do banco diretamente
 $sql = "SELECT idgenero, nome FROM genero ORDER BY nome";
-$resultado = mysqli_prepare($conexao, $sql);
+$resultado = mysqli_query($conexao, $sql);
 $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 ?>
 

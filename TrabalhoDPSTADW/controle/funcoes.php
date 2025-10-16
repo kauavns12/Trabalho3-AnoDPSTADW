@@ -209,7 +209,7 @@ function buscarJogoPorID($conexao, $idjogo)
 function buscarTodosJogos($conexao)
 {
     $sql = "SELECT nome, img FROM jogo";
-    $result = mysqli_prepare($conexao, $sql);
+    $result = mysqli_query($conexao, $sql);
     $jogos = [];
     if ($result && mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -267,7 +267,7 @@ function editarGenero($conexao, $idgenero, $nome)
 function listarGenero($conexao)
 {
     $sql = "SELECT * FROM genero";
-    $resultado = mysqli_prepare($conexao, $sql);
+    $resultado = mysqli_query($conexao, $sql);
     $generos = [];
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $generos[] = $linha;
@@ -475,7 +475,7 @@ function verificarCategoriasPadrao($conexao)
 function buscarCategoriaPadrao($conexao)
 {
     $sql = "SELECT idcategoria_forun FROM categoria_forun LIMIT 1";
-    $result = mysqli_prepare($conexao, $sql);
+    $result = mysqli_query($conexao, $sql);
     return mysqli_fetch_assoc($result);
 }
 
@@ -755,9 +755,18 @@ function listarFavoritoUsuario($conexao, $idusuario)
     $sql = "SELECT * FROM favorito WHERE usuario_idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
-    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_favorito = [];
+    if ($resultado) {
+        while ($favorito = mysqli_fetch_assoc($resultado)) {
+            $lista_favorito[] = $favorito;
+        }
+    }
+
     mysqli_stmt_close($comando);
-    return $funcionou;
+    return $lista_favorito;
 }
 
 function listarFavoritoTodosUsuario($conexao)
