@@ -845,6 +845,15 @@ function listarListaUsu($conexao, $idusuario)
     return $lista_lista;
 }
 
+function adicionarJogoLista($conexao, $idlista, $idusuario, $idjogo){
+    $sql = "INSERT INTO lista_jogo (lista_idlista, lista_usuario_idusuario, jogo_idjogo) VALUES (?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'iii', $idlista, $idusuario, $idjogo);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+}
+
 function listarJogoLista($conexao)
 {
     $sql = "SELECT * FROM lista_jogo";
