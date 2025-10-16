@@ -858,9 +858,26 @@ function listarJogoLista($conexao)
     return $lista_lista;
 }
 
+function pesquisarListaID ($conexao, $idlista) {
+    $sql = "SELECT * FROM lista WHERE idlista = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idlista);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+    $lista_lista = [];
+    while ($lista = mysqli_fetch_assoc($resultado)) {
+        $lista_lista[] = $lista;
+    }
+    mysqli_stmt_close($comando);
+    return $lista_lista;
+}
+
+
+
 // =============================================
 // FUNÇÕES DE CONQUISTA
 // =============================================
+
 
 function salvarConquista($conexao, $nome, $descricao)
 {

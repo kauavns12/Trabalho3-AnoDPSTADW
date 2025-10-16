@@ -3,7 +3,7 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['idusuario'];
 ?>
 
 <!DOCTYPE html>
@@ -41,13 +41,19 @@ $id_usuario = $_SESSION['id_usuario'];
             $descricao = $lista['descricao'];
             $situacao = $lista['situacao'];
 
+            if ($situacao == 0) {
+                $sitnome = 'Privado';
+            } else {
+                $sitnome = 'Público';
+            }
+
             echo "<tr>";
             echo "<td>$nome</td>";
             echo "<td>$descricao</td>";
-            echo "<td>$situacao</td>";
+            echo "<td>$sitnome</td>";
 
             echo "<td><a href='../controle/deletarUsuario.php?idlista=$idlista'>Excluir lista</a></td>";
-            echo "<td><a href='formUsuario.html?id=$idlista'>Editar lista</a></td>";
+            echo "<td><a href='formJogoLista.php?id=$idlista'>Adicionar jogo na lista</a></td>";
             echo "</tr>";
         }
     }

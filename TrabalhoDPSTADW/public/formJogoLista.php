@@ -3,6 +3,8 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
+$idlista = $_GET['idlista'];
+
 
 ?>
 <!DOCTYPE html>
@@ -25,18 +27,24 @@ require_once "../controle/funcoes.php";
 <div class="espacinho">
         <form action="../controle/cadastrarlista.php" method="post">
 
-            <label for="nome"> Qual o nome da sua lista? </label> <br>
-            <input type="text" name="nome" id="nome" placeholder="Digite o nome da sua lista"> <br><br>
+            <label for="jogo">Qual jogo você quer adicionar?</label> <br>
+            <select name='jogo' id="jogo">
+                <?php 
+                $jogos = listarJogo($conexao);
 
+                if (count($jogos) == 0) {
+                echo "Esse usuário não possui listas criadas";
+            } else {
+                
+                    foreach ($jogos as $jogo) {
+                        $idjogo = $jogo['idjogo'];
+                        $nome = $jogo['nome'];
 
-            <label for="descrição">Descrição?</label> <br>
-            <input type="text" name="descrição" id="descrição" placeholder="Descreva"> <br><br>
-
-
-            <label for="situação">Qual a situação da sua lista?</label> <br>
-            <select name='situação' id="situação">
-                    <option value='0'>Privado</option>;
-                    <option value='1'>Público</option>;
+                      echo  '<option value=$idjogo >$nome</option>';
+                    }
+                }
+                
+                ?>
             </select> <br><br>
             <label> <br>
 

@@ -21,42 +21,26 @@ if (!$usuariovisto) {
     die("Jogo não encontrado!");
 }
 
-// Buscar dados adicionais
-$listas = listarListaUsu($conexao, $idusuvisto);
-$preferencias = listarPreferenciaUsu($conexao, $idusuvisto);
-$generos = [];
-foreach ($preferencias as $preferencia) {
-            $idgenero = $preferencia['genero_idgenero'];
-            $generos[] = pesquisarGeneroID($conexao, $idgenero);
-            
-        }
-$jogos = [];
-$favoritos = listarFavoritoUsuario($conexao, $idusuvisto);
-foreach ($favoritos as $favorito) {
-            $idjogo = $favorito['jogo_idjogo'];
-
-            $jogos[] = pesquisarJogoID($conexao, $idjogo);
-        }
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilo/cabeçalho.css">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./estilo/cabeçalho.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
 </head>
 
 <body>
     <?php include 'cabeçalho.php'; ?>
-
+    
     <div>
         <h1><?php echo $nomeusuv; ?></h1>
     </div>
-
+    
     <div>
         <div>
             <img src="../controle/fotos/ <?php $foto ?>">
@@ -65,6 +49,7 @@ foreach ($favoritos as $favorito) {
     <div>
         <div>
             <?php
+                $listas = listarListaUsu($conexao, $idusuvisto);
             if (count($listas) == 0) {
                 echo "Esse usuário não possui listas criadas";
             } else {
@@ -80,7 +65,7 @@ foreach ($favoritos as $favorito) {
                         $idlista = $lista['idlista'];
                         $nome = $lista['nome'];
                         $descricao = $lista['descricao'];
-
+                        
                         echo "<tr>";
                         echo "<td>$nome</td>";
                         echo "<td>$descricao</td>";
@@ -88,12 +73,19 @@ foreach ($favoritos as $favorito) {
                         echo "<td><a href='.php?id=$idlista'>Visualizar</a></td>";
                         echo "</tr>";
                     }
-            }
-            ?>
+                }
+                ?>
         </div>
-
+        
         <div>
             <?php
+            $preferencias = listarPreferenciaUsu($conexao, $idusuvisto);
+
+            foreach ($preferencias as $preferencia) {
+                $idgenero = $preferencia['genero_idgenero'];
+                        $generos = pesquisarGeneroID($conexao, $idgenero);
+                        
+                    }
             if (count($generos) == 0) {
                 echo "Esse usuário não possui preferencias";
             } else {
@@ -110,14 +102,21 @@ foreach ($favoritos as $favorito) {
 
                         echo "<tr>";
                         echo "<td>$nome</td>";
-                        echo "<td><a href='.php?id=$idlista'>Visualizar</a></td>";
+                        echo "<td><a href='.php?id=$idgenero'>Visualizar</a></td>";
                         echo "</tr>";
                     }
-            }
-            ?>
+                }
+                ?>
         </div>
         <div>
             <?php
+                $jogos = [];
+                $favoritos = listarFavoritoUsuario($conexao, $idusuvisto);
+                foreach ($favoritos as $favorito) {
+                            $idjogo = $favorito['jogo_idjogo'];
+                            
+                            $jogos[] = pesquisarJogoID($conexao, $idjogo);
+                        }
             if (count($jogos) == 0) {
                 echo "Esse usuário não possui favoritos";
             } else {
