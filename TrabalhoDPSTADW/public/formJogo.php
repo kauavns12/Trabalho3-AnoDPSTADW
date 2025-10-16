@@ -18,7 +18,8 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     <title>Cadastro de Jogo</title>
     <link rel="stylesheet" href="./estilo/estilo_formJogo.css">
     <script src="../controle/jquery-3.7.1.min.js"></script>
-    <script src="../controle/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="../controle/jquery.mask.min.js"></script>
     <link rel="stylesheet" href="./estilo/cabeçalho.css">
 
 
@@ -49,6 +50,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                         required: true,
                         accept: "image/*"
                     }
+                
                 },
                 messages: {
                     nome: {
@@ -74,6 +76,7 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                         required: "Selecione uma imagem",
                         accept: "Apenas arquivos de imagem são permitidos"
                     }
+        
                 },
                 errorPlacement: function(error, element) {
                     if (element.attr("name") == "genero[]") {
@@ -150,7 +153,11 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             
             <div class="form-group">
                 <label for="data_lanca">Lançamento:</label>
+<<<<<<< Updated upstream
                 <input type="date" name="data_lanca" id="data_lanca" placeholder="DD/MM/AAAA">
+=======
+                <input type="text" name="data_lanca" id="data_lanca">
+>>>>>>> Stashed changes
             </div>
             
             <!-- Seção para adicionar novo gênero -->
@@ -183,7 +190,11 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             <button type="submit" class="btn-submit">Cadastrar Jogo</button>
         </div>
     </form>
-
+    <script>
+        $(document).ready(function() {
+            $('data_lanca').mask('00/00/0000');
+        });
+    </script>
     <script>
         let selectedGeneros = [];
         
@@ -261,5 +272,6 @@ $generos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
             }
         });
     </script>
+    
 </body>
 </html>

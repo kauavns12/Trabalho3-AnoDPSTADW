@@ -53,6 +53,7 @@ $user = pesquisarUsuario_ID($conexao, $idusuario);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($jogo['nome']); ?> - Friv Games</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="./estilo/cabeçalho.css">
     <link rel="stylesheet" href="./estilo/estilo_jogo.css">
 </head>
@@ -135,7 +136,7 @@ $user = pesquisarUsuario_ID($conexao, $idusuario);
 
             <div class="comment-form">
                 <form method="POST" action="">
-                    <textarea name="comentario" required placeholder="Digite seu comentário sobre o jogo..."></textarea>
+                    <textarea name="comentario" id="comentario"required placeholder="Digite seu comentário sobre o jogo..."></textarea>
                     <button type="submit" class="btn">
                         <i class="fas fa-paper-plane"></i> Enviar Comentário
                     </button>

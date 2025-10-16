@@ -12,22 +12,27 @@ require_once "../controle/funcoes.php";
     <title>Menu - FRIV GAMES & WIKI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./estilo/cabeçalho.css">
+    <link rel="stylesheet" href="./estilo/estilo_jogos.css">
 </head>
 
 <body>
+    <!-- Elementos decorativos de fundo -->
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
     
- <?php include 'cabeçalho.php'; ?>
+    <?php include 'cabeçalho.php'; ?>
     <br><br><br>
 
-    <?php
-
+    <div class="jogos-container">
+        <?php
+        
         $jogos = listarJogo($conexao);
-
     if (count($jogos) == 0) {
         echo "Não existem jogos cadastrados";
     } else {
     ?>
-        <table border="1">
+        <table class="jogos-table">
             <tr>
                 <td>FOTO</td>
                 <td>NOME</td>
@@ -43,16 +48,31 @@ require_once "../controle/funcoes.php";
             $data = $jogo['data_lanca'];
             $foto = $jogo['img'];
 
-            echo "<tr>";
-            echo "<td><img src='fotos/$foto'></td>";
-            echo "<td>$nome</td>";
-            echo "<td>$desenvolvedor</td>";
-            echo "<td>$data</td>";
-            echo "<td><a href='jogo.php?id=$idjogo'>Visualizar</a></td>";
-            echo "</tr>";
+        
+
+                // Verificar se a imagem existe
+                $caminhoImagem = "../controle/fotos/$foto";
+                $imagemPadrao = "../controle/fotos/default_game.png"; // Crie uma imagem padrão
+                
+                if (!file_exists($caminhoImagem) || empty($foto)) {
+                    $caminhoImagem = $imagemPadrao;
+                }
+
+                echo "<tr>";
+                echo "<td><div class='imagem-container'><img src='$caminhoImagem' alt='$nome' class='jogo-imagem' onerror=\"this.src='$imagemPadrao'\"></div></td>";
+                echo "<td>$nome</td>";
+                echo "<td>$desenvolvedor</td>";
+                echo "<td>$data</td>";
+                echo "<td><a href='jogo.php?id=$idjogo'><i class='fas fa-eye'></i> Visualizar</a></td>";
+                echo "</tr>";
+            }
+            echo "</table>";
         }
-    }
+
 
     ?>
-
+    
+    </div>
+</body>
+</html>
 
