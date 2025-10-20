@@ -844,14 +844,43 @@ function listarListaUsu($conexao, $idusuario)
     mysqli_stmt_close($comando);
     return $lista_lista;
 }
-
-function adicionarJogoLista($conexao, $idlista, $idusuario, $idjogo){
-    $sql = "INSERT INTO lista_jogo (lista_idlista, lista_usuario_idusuario, jogo_idjogo) VALUES (?,?,?)";
+function adicionarJogoLista($conexao, $idlista, $idusuario, $idjogo) {
+    $sql = "INSERT INTO lista_jogo (lista_idlista, lista_usuario_idusuario, jogo_idjogo) VALUES (?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'iii', $idlista, $idusuario, $idjogo);
     $funcionou = mysqli_stmt_execute($comando);
+
+    if (!$funcionou) {
+        $erro = mysqli_errno($conexao);
+        if ($erro === 1062) {
+            // Código de erro 1062 = entrada duplicada
+            return 'duplicado';
+        }
+        return false;
+    }
+
     mysqli_stmt_close($comando);
-    return $funcionou;
+    return true;
+}
+
+function listarJogosDisponiveisParaLista($conexao, $idlista)
+{
+    $sql = "SELECT * FROM jogo 
+            WHERE idjogo NOT IN (
+                SELECT jogo_idjogo FROM lista_jogo WHERE lista_idlista = ?
+            )";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idlista);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $jogos = [];
+    while ($jogo = mysqli_fetch_assoc($resultado)) {
+        $jogos[] = $jogo;
+    }
+    mysqli_stmt_close($comando);
+    return $jogos;
 }
 
 function listarJogoLista($conexao)
@@ -881,6 +910,57 @@ function pesquisarListaID ($conexao, $idlista) {
     return $lista_lista;
 }
 
+
+function listarJogosDaLista($conexao, $idlista)
+{
+    $sql = "SELECT 
+                j.idjogo,
+                j.nome,
+                j.descricao,
+                j.desenvolvedor,
+                j.data_lanca,
+                j.img,
+                GROUP_CONCAT(g.nome SEPARATOR ', ') AS generos
+            FROM 
+                lista_jogo lj
+            INNER JOIN 
+                jogo j ON j.idjogo = lj.jogo_idjogo
+            LEFT JOIN 
+                genero_jogo gj ON gj.jogo_idjogo = j.idjogo
+            LEFT JOIN 
+                genero g ON g.idgenero = gj.genero_idgenero
+            WHERE 
+                lj.lista_idlista = ?
+            GROUP BY 
+                j.idjogo, j.nome, j.descricao, j.desenvolvedor, j.data_lanca, j.img";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idlista);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $jogos = [];
+    while ($jogo = mysqli_fetch_assoc($resultado)) {
+        $jogos[] = $jogo;
+    }
+
+    mysqli_stmt_close($comando);
+    return $jogos;
+}
+
+
+function jogoNaLista($conexao, $idlista, $idjogo) {
+    $sql = "SELECT 1 FROM lista_jogo WHERE lista_idlista = ? AND jogo_idjogo = ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, 'ii', $idlista, $idjogo);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+
+    $existe = mysqli_stmt_num_rows($stmt) > 0;
+
+    mysqli_stmt_close($stmt);
+    return $existe;
+}
 
 
 // =============================================
@@ -1326,7 +1406,7 @@ function exibirMenu($paginaAtiva = '') {
         
         <div class="search-container">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
+            <a href="pesquisar.php" class="' . ($paginaAtiva == 'pesquisar' ? 'active' : '') . '">PESQUISAR</a>
         </div>
         
         <div class="user-menu">

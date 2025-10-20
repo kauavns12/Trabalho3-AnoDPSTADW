@@ -3,9 +3,7 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$idlista = $_GET['id']; // chega aqui?
-var_dump($_GET);
-die;
+$idlista = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,7 +23,7 @@ die;
 
 <body>
 <div>
-        <form action="../controle/cadastrarjogolista.php?id=<?php $idlista; ?>" method="POST">
+        <form action="../controle/cadastrarjogolista.php?id=<?php echo $idlista; ?>" method="POST">
 
             <label for="jogo">Qual jogo você quer adicionar?</label> <br>
             <select name='jogo' id="jogo">
@@ -51,6 +49,6 @@ die;
             <input type="submit" value="Publicar">
         </form>
     </div>
-
+    
 
 </body>
