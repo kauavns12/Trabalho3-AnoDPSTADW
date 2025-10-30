@@ -282,15 +282,11 @@ function pesquisarGeneroID($conexao, $idgenero)
     mysqli_stmt_bind_param($comando, 'i', $idgenero);
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
-    $lista_genero = [];
-    if ($resultado) {
-        while ($genero = mysqli_fetch_assoc($resultado)) {
-            $lista_genero[] = $genero;
-        }
-    }
+    $generos = mysqli_fetch_assoc($resultado);
     mysqli_stmt_close($comando);
-    return $lista_genero;
+    return $generos;
 }
+
 
 function pesquisarJogoGenero($conexao, $idgenero)
 {

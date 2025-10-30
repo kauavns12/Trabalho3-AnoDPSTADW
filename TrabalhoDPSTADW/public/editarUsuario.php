@@ -9,11 +9,11 @@ session_start();
 $id_usuario = $_SESSION['idusuario'];
 
 // busca dados do usuário
-$sql = "SELECT * FROM usuario WHERE idusuario = $id_usuario";
-$resultado = mysqli_query($conexao, $sql);
-$usuario = mysqli_fetch_assoc($resultado);
-?>
+$usuario = pesquisarUsuario_ID($conexao, $id_usuario);
 
+
+?>
+<?php include 'cabeçalho.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,7 +32,7 @@ $usuario = mysqli_fetch_assoc($resultado);
     <input type="text" name="gmail" value="<?php echo $usuario['gmail']; ?>"><br><br>
 
     Nova Senha (deixe em branco se não quiser mudar):<br>
-    <input type="password" name="senha"><br><br>
+    <input type="password" name="senha" placeholder="********"><br><br>
 
     Foto:<br>
     <input type="file" name="foto"><br>

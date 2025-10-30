@@ -56,9 +56,9 @@ if (!$usuariovisto) {
                 ?>
                 <table border="1">
                     <tr>
-                        <td>Nome</td>
+                        <td>Lista</td>
                         <td>Descrição</td>
-                        <td colspan="2">Ação</td>
+                        
                     </tr>
                     <?php
                     foreach ($listas as $lista) {
@@ -70,7 +70,6 @@ if (!$usuariovisto) {
                         echo "<td>$nome</td>";
                         echo "<td>$descricao</td>";
                         ;
-                        echo "<td><a href='.php?id=$idlista'>Visualizar</a></td>";
                         echo "</tr>";
                     }
                 }
@@ -80,11 +79,12 @@ if (!$usuariovisto) {
         <div>
             <?php
             $preferencias = listarPreferenciaUsu($conexao, $idusuvisto);
-
+            $generos = [];
+                
             foreach ($preferencias as $preferencia) {
                 $idgenero = $preferencia['genero_idgenero'];
-                        $generos = pesquisarGeneroID($conexao, $idgenero);
-                        
+                        $generos[] = pesquisarGeneroID($conexao, $idgenero);
+                    
                     }
             if (count($generos) == 0) {
                 echo "Esse usuário não possui preferencias";
@@ -92,17 +92,15 @@ if (!$usuariovisto) {
                 ?>
                 <table border="1">
                     <tr>
-                        <td>Nome</td>
-                        <td colspan="2">Ação</td>
+                        <td>Gênero</td>
+                    
                     </tr>
                     <?php
                     foreach ($generos as $genero) {
-                        $idgenero = $genero['idgenero'];
                         $nome = $genero['nome'];
 
                         echo "<tr>";
                         echo "<td>$nome</td>";
-                        echo "<td><a href='.php?id=$idgenero'>Visualizar</a></td>";
                         echo "</tr>";
                     }
                 }
