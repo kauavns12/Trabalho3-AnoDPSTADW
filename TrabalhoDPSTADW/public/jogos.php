@@ -16,7 +16,7 @@ require_once "../controle/funcoes.php";
 </head>
 
 <body>
-    <!-- Elementos decorativos de fundo -->
+
     <div class="decoration"></div>
     <div class="decoration"></div>
     <div class="decoration"></div>
