@@ -60,7 +60,7 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
      $usuarios  = pesquisarUsuario_Nome($conexao,$valor);
 
     if (count($usuarios) == 0){
-        echo "Nenhum jogo encontrado";
+        echo "Nenhum usuário encontrado";
     } else {
         echo "<br> <table border='1'>";
         echo "<tr>";
@@ -69,7 +69,7 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
         echo "<th> Ação </th>";
         echo "<tr>";
         foreach ($usuarios as $usuario){
-            $idusu = $usuario['idjogo'];
+            $idusu = $usuario['idusuario'];
             $fotou = $usuario['foto'];
             echo "<tr>";
             echo "<td>" . $jogo["nome"]  . "</td>";
@@ -83,14 +83,65 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
 ?>
 
 <?php
-pesquisarConquistaNome($conexao,$valor);
 
+if (isset($_GET["valor"]) && !empty($_GET["valor"])){
+     $valor = $_GET["valor"];
+     require_once "../controle/conexao.php";
+     require_once "../controle/funcoes.php";
+
+     
+     $conquistas  = pesquisarConquistaNome($conexao,$valor);
+
+    if (count($conquistas) == 0){
+        echo "Nenhuma conquista encontrada";
+    } else {
+        echo "<br> <table border='1'>";
+        echo "<tr>";
+        echo "<th> Nome </th>";
+        echo "<th> Descrição </th>";
+        echo "<th> Ação </th>";
+        echo "<tr>";
+        foreach ($conquistas as $conquista){
+            $idcon = $conquista['idconquista'];
+            echo "<tr>";
+            echo "<td>" . $conquista["nome"]  . "</td>";
+            echo "<td>" . $conquista["descricao"]  . "</td>";
+            echo "<td><a href='.php?id=$idcon'><i class='fas fa-eye'></i> Visualizar</a></td>";
+            echo "<tr>";
+        }
+    }
+}
 
 
 ?>
+<?php
+if (isset($_GET["valor"]) && !empty($_GET["valor"])){
+     $valor = $_GET["valor"];
+     require_once "../controle/conexao.php";
+     require_once "../controle/funcoes.php";
+
+     
+     $posts  = pesquisarPostConteudo($conexao,$valor);
+
+    if (count($posts) == 0){
+        echo "Nenhum post encontrado";
+    } else {
+        echo "<br> <table border='1'>";
+        echo "<tr>";
+        echo "<th> Conteúdo </th>";
+        echo "<th> Ação </th>";
+        echo "<tr>";
+        foreach ($posts as $post){
+            $idpost = $post['idconquista'];
+            echo "<tr>";
+            echo "<td>" . $post["conteudo"]  . "</td>";
+            echo "<td><a href='post_individual.php?id=$idpost'><i class='fas fa-eye'></i> Visualizar</a></td>";
+            echo "<tr>";
+        }
+    }
+}
+?>
 
 
-
-//pesquisarPostConteudo($conexao,$valor);
 
 </body>

@@ -31,7 +31,7 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
         </div>
 
         <div class="form-container">
-            <form id="formulario" action="atualizar_dados.php" method="post" enctype="multipart/form-data">
+            <form id="formulario" action=../controle/atualizarUsuario.php method="post" enctype="multipart/form-data">
                 <!-- precisamos mandar o id para saber quem atualizar -->
                 <input type="hidden" name="idusuario" value="<?php echo $id_usuario; ?>">
 
