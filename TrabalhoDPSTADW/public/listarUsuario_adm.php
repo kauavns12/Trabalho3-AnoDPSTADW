@@ -1,10 +1,10 @@
 <?php
-    require_once "../controle/verificarLogado.php";
+require_once "../controle/verificarLogado.php";
 
 
-    //if ($_SESSION['tipo'] == 'c') {
-   //     header("Location: home.php");
-   // }
+if ($_SESSION['tipo'] == 'c') {
+    header("Location: home.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,7 @@
     </style>
 </head>
 <?php include 'cabeçalho.php'; ?>
+
 <body>
     <h1>Lista de Usuários Cadastrados</h1>
 
@@ -48,6 +49,7 @@
             $nome = $usuario['nome'];
             $gmail = $usuario['gmail'];
             $foto = $usuario['foto'];
+            $tipo = $usuario['tipo'];
 
             echo "<tr>";
             echo "<td>$idusuario</td>";
@@ -62,7 +64,7 @@
         ?>
         </table>
 
-         <td><a href='configuracoes.php'>Voltar</a></td>
+        <td><a href='configuracoes.php'>Voltar</a></td>
 </body>
 
 </html>

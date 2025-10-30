@@ -60,6 +60,7 @@ if (!$usuariovisto) {
                     <tr>
                         <td>Lista</td>
                         <td>Descrição</td>
+                        <td>Ação</td>
                         
                     </tr>
                     <?php
@@ -71,7 +72,7 @@ if (!$usuariovisto) {
                         echo "<tr>";
                         echo "<td>$nome</td>";
                         echo "<td>$descricao</td>";
-                        ;
+                        echo "<td><a href='jogosdalista.php?id=$idlista'>Visualizar lista</a></td>";
                         echo "</tr>";
                     }
                 }

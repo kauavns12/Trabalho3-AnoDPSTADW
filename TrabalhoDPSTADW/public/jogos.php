@@ -37,7 +37,7 @@ require_once "../controle/funcoes.php";
                 <td>NOME</td>
                 <td>DESENVOLVEDOR</td>
                 <td>DATA DE LANÇAMENTO</td>
-                <td colspan="2">Ação</td>
+                <td colspan="2">AÇÃO</td>
             </tr>
         <?php
         foreach ($jogos as $jogo) {
@@ -61,7 +61,7 @@ require_once "../controle/funcoes.php";
             echo "<td>$desenvolvedor</td>";
             echo "<td>$data</td>";
             echo "<td><a href='jogo.php?id=$idjogo'><i class='fas fa-eye'></i> Visualizar</a></td>";
-            echo "<td><a href='../controle/adicionarFavorito ?id=$idjogo' class='favorito-btn'><i class='far fa-star'></i> Favorito</a></td>";
+            echo "<td><a href='../controle/adicionarFavorito.php?id=$idjogo' class='favorito-btn'><i class='far fa-star'></i>Favoritar</a></td>";
             echo "</tr>";
         }
         echo "</table>";

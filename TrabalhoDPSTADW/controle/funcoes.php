@@ -777,6 +777,25 @@ function listarFavoritoTodosUsuario($conexao)
     }
     return $lista_favoritoTodosUsuario;
 }
+function verificarSeEhFavorito($conexao, $idusuario, $idjogo) {
+    $sql = "SELECT idfavorito FROM favorito WHERE usuario_idusuario = ? AND jogo_idjogo = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idjogo);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+    $favorito = mysqli_fetch_assoc($resultado);
+    mysqli_stmt_close($comando);
+    
+    // if ($favorito) {
+        //     return $favorito['favorito'];
+    // } else {
+        //return false;
+    // }
+
+
+    return $favorito ? $favorito['idfavorito'] : false;
+
+}
 
 // =============================================
 // FUNÇÕES DE LISTA

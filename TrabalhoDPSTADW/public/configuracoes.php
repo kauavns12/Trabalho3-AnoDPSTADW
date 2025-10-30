@@ -29,10 +29,10 @@ $id_usuario = $_SESSION['idusuario'];
             <h1 class="settings-title">Configurações</h1>
             <p class="settings-subtitle">Gerencie suas preferências e configurações da conta</p>
         </div>
-        
+
         <div class="settings-card">
             <h2 class="settings-section-title">📋 Gerenciamento de Conta</h2>
-            
+
             <a href="editarUsuario.php?id" class="settings-btn" target="bodyiframe">
                 <div class="settings-btn-content">
                     <span class="settings-btn-icon">✏️</span>
@@ -40,15 +40,17 @@ $id_usuario = $_SESSION['idusuario'];
                 </div>
                 <span class="settings-btn-arrow">→</span>
             </a>
-            
-            <a href="listarUsuario_adm.php?id" class="settings-btn" target="bodyiframe">
-                <div class="settings-btn-content">
-                    <span class="settings-btn-icon">👥</span>
-                    <span>Usuários Cadastrados</span>
-                </div>
-                <span class="settings-btn-arrow">→</span>
-            </a>
-            
+
+            <?php if ($_SESSION['tipo'] === 'A'): ?>
+                <a href="listarUsuario_adm.php?id" class="settings-btn" target="bodyiframe">
+                    <div class="settings-btn-content">
+                        <span class="settings-btn-icon">👥</span>
+                        <span>Usuários Cadastrados</span>
+                    </div>
+                    <span class="settings-btn-arrow">→</span>
+                </a>
+            <?php endif; ?>
+
             <a href="listas.php?id" class="settings-btn" target="bodyiframe">
                 <div class="settings-btn-content">
                     <span class="settings-btn-icon">📚</span>
@@ -57,10 +59,10 @@ $id_usuario = $_SESSION['idusuario'];
                 <span class="settings-btn-arrow">→</span>
             </a>
         </div>
-        
+
         <div class="settings-card">
             <h2 class="settings-section-title">⚙️ Preferências</h2>
-            
+
             <a href="lista_preferencia_usu.php" class="settings-btn" target="bodyiframe">
                 <div class="settings-btn-content">
                     <span class="settings-btn-icon">⭐</span>
@@ -69,10 +71,10 @@ $id_usuario = $_SESSION['idusuario'];
                 <span class="settings-btn-arrow">→</span>
             </a>
         </div>
-        
+
         <div class="settings-card">
             <h2 class="settings-section-title">⚠️ Zona de Perigo</h2>
-            
+
             <a href="../controle/deletarconta.php?id" class="settings-btn danger-btn" target="bodyiframe">
                 <div class="settings-btn-content">
                     <span class="settings-btn-icon">🗑️</span>
@@ -81,7 +83,7 @@ $id_usuario = $_SESSION['idusuario'];
                 <span class="settings-btn-arrow">→</span>
             </a>
         </div>
-        
+
         <a href='home.php' class="back-btn">
             <span>←</span>
             <span>Voltar para Home</span>

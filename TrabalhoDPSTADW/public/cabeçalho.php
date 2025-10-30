@@ -15,7 +15,9 @@
     
     <div class="search-container">
         <i class="fas fa-search search-icon"></i>
-        <input type="text" class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
+        <form action="pesquisar.php">
+            <input type="text" name='valor' class="search-box" placeholder="Pesquisar jogos, tópicos ou usuários">
+        </form>
     </div>
     
     <div class="user-menu">

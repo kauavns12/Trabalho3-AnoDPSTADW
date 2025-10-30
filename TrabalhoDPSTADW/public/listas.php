@@ -39,10 +39,10 @@ if (isset($_GET['success']) && $_GET['success'] === 'adicionado') {
     ?>
         <table border="1">
             <tr>
-                <td>Nome</td>
-                <td>Descrição</td>
-                <td>Situação</td>
-                <td colspan="2">Ação</td>
+                <td>NOME</td>
+                <td>DESCRIÇÃO</td>
+                <td>SITUAÇÃO</td>
+                <td colspan="3">AÇÃO</td>
             </tr>
         <?php
         foreach ($lista_lista as $lista) {

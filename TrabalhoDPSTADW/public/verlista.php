@@ -16,37 +16,6 @@ $idlista = $_GET['id'];
 <body>
     <h1>Jogos adicionados na lista</h1>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div>
         <a href='verlista.php?id=$idlista'>Visualizar adicionados</a></td>
     </div>

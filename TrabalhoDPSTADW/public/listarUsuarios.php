@@ -37,7 +37,7 @@ require_once "../controle/funcoes.php";
                 <td>EMAIL</td>
                 <td>SENHA</td>
                 <td>FOTO</td>
-                <td colspan="2">Ação</td>
+                <td colspan="2">AÇÃO</td>
             </tr>
         <?php
         foreach ($lista_usuario as $usuario) {
