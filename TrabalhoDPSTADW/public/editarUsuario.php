@@ -21,20 +21,11 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
     <link rel="stylesheet" href="./estilo/estilo_editarUsuario.css">
 </head>
 <body>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    
-    <div class="edit-container">
-        <div class="edit-header">
-            <h1 class="edit-title">Editar Dados Pessoais</h1>
-            <p class="edit-subtitle">Atualize suas informações e foto de perfil</p>
-        </div>
-        
-        <div class="edit-card">
-            <form action="../controle/atualizarUsuario.php" method="post" enctype="multipart/form-data">
-                <!-- precisamos mandar o id para saber quem atualizar -->
-                <input type="hidden" name="idusuario" value="<?php echo $usuario['idusuario']; ?>">
+
+    <form id="formulario" action="atualizar_dados.php" method="post" enctype="multipart/form-data">
+    <!-- precisamos mandar o id para saber quem atualizar -->
+    <input type="hidden" name="idusuario" value="<?php echo $id_usuario = $_SESSION['idusuario']; ?>">
+
 
                 <!-- Seção da Foto -->
                 <div class="photo-section">
