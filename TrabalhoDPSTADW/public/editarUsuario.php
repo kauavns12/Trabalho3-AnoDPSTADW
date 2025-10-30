@@ -11,7 +11,7 @@ $id_usuario = $_SESSION['idusuario'];
 // busca dados do usuário
 $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
 ?>
-<?php include 'cabeçalho.php'; ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,10 +22,18 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
 </head>
 <body>
 
-    <form id="formulario" action="atualizar_dados.php" method="post" enctype="multipart/form-data">
-    <!-- precisamos mandar o id para saber quem atualizar -->
-    <input type="hidden" name="idusuario" value="<?php echo $id_usuario = $_SESSION['idusuario']; ?>">
+    <?php include 'cabeçalho.php'; ?>
 
+    <div class="main-container">
+        <div class="page-header">
+            <h1>Editar Dados Pessoais</h1>
+            <p>Atualize suas informações de perfil</p>
+        </div>
+
+        <div class="form-container">
+            <form id="formulario" action="atualizar_dados.php" method="post" enctype="multipart/form-data">
+                <!-- precisamos mandar o id para saber quem atualizar -->
+                <input type="hidden" name="idusuario" value="<?php echo $id_usuario; ?>">
 
                 <!-- Seção da Foto -->
                 <div class="photo-section">
@@ -70,7 +78,7 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
                            name="senha" 
                            class="form-input" 
                            placeholder="********">
-                    <small style="color: #94a3b8; font-size: 0.85rem; margin-top: 5px; display: block;">
+                    <small class="password-note">
                         Deixe este campo em branco se não deseja alterar sua senha
                     </small>
                 </div>
