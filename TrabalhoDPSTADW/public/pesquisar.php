@@ -83,12 +83,14 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
 ?>
 
 <?php
-pesquisarUsuario_Nome($conexao,$valor);
 pesquisarConquistaNome($conexao,$valor);
-pesquisarPostConteudo($conexao,$valor);
+
+
+
 ?>
 
 
 
+//pesquisarPostConteudo($conexao,$valor);
 
 </body>
