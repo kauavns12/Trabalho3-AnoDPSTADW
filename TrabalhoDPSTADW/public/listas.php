@@ -62,7 +62,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'adicionado') {
             echo "<td>$descricao</td>";
             echo "<td>$sitnome</td>";
 
-            echo "<td><a href='/jogosdalista.php?idlista=$idlista'>Visualizar lista</a></td>";
+            echo "<td><a href='jogosdalista.php?id=$idlista'>Visualizar lista</a></td>";
             echo "<td><a href='../controle/deletarLista.php?idlista=$idlista'>Excluir lista</a></td>";
             echo "<td><a href='formJogoLista.php?id=$idlista'>Adicione um novo jogo na lista</a></td>";
             echo "</tr>";

@@ -37,7 +37,7 @@ require_once "../controle/funcoes.php";
                 <td>FOTO</td>
                 <td>NOME</td>
                 <td>DESENVOLVEDOR</td>
-                <td>DATA_LANCA</td>
+                <td>DATA DE LANÇAMENTO</td>
                 <td colspan="2">Ação</td>
             </tr>
         <?php
