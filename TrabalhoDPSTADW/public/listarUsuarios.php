@@ -27,7 +27,7 @@ require_once "../controle/funcoes.php";
     $lista_usuario = listarUsuario($conexao);
 
     if (count($lista_usuario) == 0) {
-        echo "Não existem clientes cadastrados";
+        echo "Não existem usuários cadastrados";
     } else {
     ?>
         <table border="1">

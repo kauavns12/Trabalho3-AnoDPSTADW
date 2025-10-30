@@ -37,7 +37,7 @@ function excluirUsuario($conexao, $idusuario)
 
 function pesquisarUsuario_ID($conexao, $idusuario)
 {
-    $sql = "SELECT nome, foto FROM usuario WHERE idusuario = ?";
+    $sql = "SELECT nome, gmail, foto FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
     mysqli_stmt_execute($comando);

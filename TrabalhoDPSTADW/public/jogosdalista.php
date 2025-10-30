@@ -3,37 +3,31 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$id_usuario = $_SESSION['idusuario'];
-
-if (isset($_GET['error']) && $_GET['error'] === 'jaexiste') {
-    echo "<p style='color: red;'>Este jogo já está na sua lista.</p>";
-}
-
-if (isset($_GET['success']) && $_GET['success'] === 'adicionado') {
-    echo "<p style='color: green;'>Jogo adicionado com sucesso!</p>";
-}
+$idlista = $_GET['id'];
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listas</title>
- 
+    <title>Menu - FRIV GAMES & WIKI</title>
+    <link rel="stylesheet" href="./estilo/stilinho.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 
 </head>
 
+
 <body>
-    <div>
-    <a href="formLista.php">Criar nova lista</a>
-    </div> <br> <br>
+    <?php include 'cabeçalho.php'; ?>
 
-    <?php
-    $lista_lista = listarListaUsu($conexao,$id_usuario);
+<?php
 
-    if (count($lista_lista) == 0) {
+$jogoslista = listarJogosDaLista($conexao, $idlista);
+
+if (count($lista_lista) == 0) {
         echo "Não existem listas criadas";
     } else {
     ?>
@@ -68,10 +62,6 @@ if (isset($_GET['success']) && $_GET['success'] === 'adicionado') {
             echo "</tr>";
         }
     }
-        ?>
-        </table>
-         <td><a href='home.php'>Voltar</a></td>
+?>
 
 </body>
-
-</html>

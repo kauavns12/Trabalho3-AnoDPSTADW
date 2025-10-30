@@ -21,9 +21,9 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
     <title>Editar Dados</title>
 </head>
 <body>
-<form action="../controle/atualizarUsuario.php" method="post" enctype="multipart/form-data">
+    <form id="formulario" action="atualizar_dados.php" method="post" enctype="multipart/form-data">
     <!-- precisamos mandar o id para saber quem atualizar -->
-    <input type="hidden" name="idusuario" value="<?php echo $usuario['idusuario']; ?>">
+    <input type="hidden" name="idusuario" value="<?php echo $id_usuario = $_SESSION['idusuario']; ?>">
 
     Nome:<br>
     <input type="text" name="nome" value="<?php echo $usuario['nome']; ?>"><br><br>

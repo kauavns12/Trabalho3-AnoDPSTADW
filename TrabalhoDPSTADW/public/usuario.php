@@ -48,13 +48,15 @@ if (!$usuariovisto) {
     </div>
     <div>
         <div>
+            
             <?php
                 $listas = listarListaUsu($conexao, $idusuvisto);
-            if (count($listas) == 0) {
-                echo "Esse usuário não possui listas criadas";
-            } else {
-                ?>
+                if (count($listas) == 0) {
+                    echo "Esse usuário não possui listas criadas";
+                } else {
+                    ?>
                 <table border="1">
+                    LISTAS:
                     <tr>
                         <td>Lista</td>
                         <td>Descrição</td>
@@ -77,20 +79,22 @@ if (!$usuariovisto) {
         </div>
         
         <div>
+            
             <?php
             $preferencias = listarPreferenciaUsu($conexao, $idusuvisto);
             $generos = [];
-                
+            
             foreach ($preferencias as $preferencia) {
                 $idgenero = $preferencia['genero_idgenero'];
-                        $generos[] = pesquisarGeneroID($conexao, $idgenero);
-                    
-                    }
+                $generos[] = pesquisarGeneroID($conexao, $idgenero);
+                
+            }
             if (count($generos) == 0) {
                 echo "Esse usuário não possui preferencias";
             } else {
                 ?>
                 <table border="1">
+                    GÊNEROS FAVORITOS:
                     <tr>
                         <td>Gênero</td>
                     
@@ -107,6 +111,7 @@ if (!$usuariovisto) {
                 ?>
         </div>
         <div>
+            
             <?php
                 $jogos = [];
                 $favoritos = listarFavoritoUsuario($conexao, $idusuvisto);
@@ -120,6 +125,7 @@ if (!$usuariovisto) {
             } else {
                 ?>
                 <table border="1">
+                JOGOS FAVORITOS:
             <tr>
                 <td>FOTO</td>
                 <td>NOME</td>
