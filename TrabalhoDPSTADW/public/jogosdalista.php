@@ -23,45 +23,50 @@ $idlista = $_GET['id'];
 <body>
     <?php include 'cabeçalho.php'; ?>
 
-<?php
+    <?php
 
-$jogoslista = listarJogosDaLista($conexao, $idlista);
+    $jogoslista = listarJogosDaLista($conexao, $idlista);
 
-if (count($lista_lista) == 0) {
+    if (count($lista_lista) == 0) {
         echo "Não existem listas criadas";
     } else {
     ?>
-        <table border="1">
+        <table class="jogos-table">
             <tr>
-                <td>Nome</td>
-                <td>Descrição</td>
-                <td>Situação</td>
+                <td>FOTO</td>
+                <td>NOME</td>
+                <td>DESENVOLVEDOR</td>
+                <td>DATA_LANCA</td>
                 <td colspan="2">Ação</td>
             </tr>
         <?php
-        foreach ($lista_lista as $lista) {
-            $idlista = $lista['idlista'];
-            $nome = $lista['nome'];
-            $descricao = $lista['descricao'];
-            $situacao = $lista['situacao'];
+        foreach ($jogos as $jogo) {
+            $idjogo = $jogo['idjogo'];
+            $nome = $jogo['nome'];
+            $desenvolvedor = $jogo['desenvolvedor'];
+            $data = $jogo['data_lanca'];
+            $foto = $jogo['img'];
 
-            if ($situacao == 0) {
-                $sitnome = 'Privado';
-            } else {
-                $sitnome = 'Público';
+
+
+            // Verificar se a imagem existe
+            $caminhoImagem = "../controle/fotos/$foto";
+            $imagemPadrao = "../controle/fotos/default_game.png"; // Crie uma imagem padrão
+
+            if (!file_exists($caminhoImagem) || empty($foto)) {
+                $caminhoImagem = $imagemPadrao;
             }
 
             echo "<tr>";
+            echo "<td><div class='imagem-container'><img src='$caminhoImagem' alt='$nome' class='jogo-imagem' onerror=\"this.src='$imagemPadrao'\"></div></td>";
             echo "<td>$nome</td>";
-            echo "<td>$descricao</td>";
-            echo "<td>$sitnome</td>";
-
-            echo "<td><a href='/jogosdalista.php?idlista=$idlista'>Visualizar lista</a></td>";
-            echo "<td><a href='../controle/deletarLista.php?idlista=$idlista'>Excluir lista</a></td>";
-            echo "<td><a href='formJogoLista.php?id=$idlista'>Adicione um novo jogo na lista</a></td>";
+            echo "<td>$desenvolvedor</td>";
+            echo "<td>$data</td>";
+            echo "<td><a href='jogo.php?id=$idjogo'><i class='fas fa-eye'></i> Visualizar</a></td>";
             echo "</tr>";
         }
+        echo "</table>";
     }
-?>
+        ?>
 
 </body>
