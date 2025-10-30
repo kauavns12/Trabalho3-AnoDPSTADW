@@ -21,17 +21,14 @@ if (!$jogo) {
 }
 
 // CORREÇÃO: Verificar e corrigir o caminho da imagem
-if (!empty($jogo['img'])) {
-    // Se a imagem já tem caminho completo, usa como está
-    if (strpos($jogo['img'], 'http') === 0) {
-        $imagem_jogo = $jogo['img'];
-    } else {
-        // Se é um caminho relativo, ajusta para o caminho correto
-        $imagem_jogo = "./" . ltrim($jogo['img'], './');
-    }
+$caminhoImagem = "../controle/fotos/" . $jogo['img'];
+$imagemPadrao = "../controle/fotos/default_game.png";
+
+// Verificar se a imagem existe
+if (!file_exists($caminhoImagem) || empty($jogo['img'])) {
+    $imagem_jogo = $imagemPadrao;
 } else {
-    // Imagem padrão caso não exista
-    $imagem_jogo = "./estilo/imagens/sem-imagem.jpg";
+    $imagem_jogo = $caminhoImagem;
 }
 
 // Processar avaliação
@@ -89,7 +86,7 @@ $user = pesquisarUsuario_ID($conexao, $idusuario);
 
         <div class="game-content">
             <div class="game-media">
-                <img src="<?php echo htmlspecialchars($jogo['img']); ?>" alt="<?php echo htmlspecialchars($jogo['nome']); ?>">
+                <img src="<?php echo htmlspecialchars($imagem_jogo); ?>" alt="<?php echo htmlspecialchars($jogo['nome']); ?>" class="jogo-imagem" onerror="this.src='../controle/fotos/default_game.png'">
             </div>
 
             <div class="game-info">
@@ -157,7 +154,7 @@ $user = pesquisarUsuario_ID($conexao, $idusuario);
 
             <div class="comment-form">
                 <form method="POST" action="">
-                    <textarea name="comentario" id="comentario"required placeholder="Digite seu comentário sobre o jogo..."></textarea>
+                    <textarea name="comentario" id="comentario" required placeholder="Digite seu comentário sobre o jogo..."></textarea>
                     <button type="submit" class="btn">
                         <i class="fas fa-paper-plane"></i> Enviar Comentário
                     </button>
