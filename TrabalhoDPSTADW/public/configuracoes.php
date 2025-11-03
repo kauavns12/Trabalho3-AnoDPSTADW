@@ -51,6 +51,16 @@ $id_usuario = $_SESSION['idusuario'];
                 </a>
             <?php endif; ?>
 
+            <?php if ($_SESSION['tipo'] === 'A'): ?>
+                <a href="listarJogo_adm.php?id" class="settings-btn" target="bodyiframe">
+                    <div class="settings-btn-content">
+                        <span class="settings-btn-icon">👥</span>
+                        <span>Jogos cadastrados</span>
+                    </div>
+                    <span class="settings-btn-arrow">→</span>
+                </a>
+            <?php endif; ?>
+
             <a href="listas.php?id" class="settings-btn" target="bodyiframe">
                 <div class="settings-btn-content">
                     <span class="settings-btn-icon">📚</span>

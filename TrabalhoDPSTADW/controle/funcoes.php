@@ -98,6 +98,14 @@ function listarUsuariosAleatorios($conexao, $limite = 5)
     return $usuarios;
 }
 
+function promover($conexao, $idusuario){
+    $sql = "UPDATE usuario SET tipo = 'A'    WHERE idusuario = ? ";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+    $funcionou = mysqli_stmt_execute($comando);
+    return $funcionou;
+}
+
 // =============================================
 // FUNÇÕES DE JOGO
 // =============================================

@@ -6,7 +6,9 @@
 
     $sql = "SELECT * FROM usuario WHERE gmail = '$gmail'";
 
-    $resultado = mysqli_query($conexao, $sql);
+    $resultado = mysqli_query($conexao, $sql);  
+
+    
 
     if (mysqli_num_rows($resultado) == 0) {
         header("Location: ../public/index.php");
@@ -18,6 +20,7 @@
         $id_usuario = $linha['idusuario'];
         $nome = $linha['nome'];
         $foto = $linha['foto']; // Nova linha para pegar a foto
+        //echo $foto; die;
         if (password_verify($senha, $senha_banco)) {
             session_start();
             $_SESSION['logado'] = 'sim';
@@ -25,6 +28,9 @@
             $_SESSION['idusuario'] = $id_usuario;
             $_SESSION['nome'] = $nome;
             $_SESSION['foto'] = $foto; // Armazenando a foto na sessão
+
+            //var_dump($_SESSION);
+            //die;
             header("Location: ../public/home.php");
         }
         else {

@@ -9,11 +9,7 @@ session_start();
 $id_usuario = $_GET['id'];
 
 // busca dados do usuário
-$sql = "    UPDATE usuario SET tipo = 'A'    WHERE idusuario = ? ";
-$comando = mysqli_prepare($conexao, $sql);
-
-mysqli_stmt_bind_param($comando, 'i', $id_usuario);
-$funcionou = mysqli_stmt_execute($comando);
+$funcionou = promover($conexao,$id_usuario);
 
 if($funcionou == true){
     header("Location: listarUsuario_adm.php");
