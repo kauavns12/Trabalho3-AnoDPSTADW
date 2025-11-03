@@ -2,24 +2,31 @@
 
 require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
+require_once "../controle/funcoes.php";
+
+if ($_SESSION['tipo'] == 'c') {
+    header("Location: home.php");
+}
 
 $idjogo = $_GET['idjogo'];
+
+$generos = [];
 $generos = listarGenero($conexao);
+
+
 $jogos = pesquisarJogoID($conexao, $idjogo);
 
 if (count($jogos) == 0) {
         echo "Não existem jogos cadastrados";
         header('Location: home.php');
     } else {
-    
-        foreach ($jogos as $jogo) {
-            $id = $jogo['idjogo'];
-            $nome = $jogo['nome'];
-            $descricao = $jogo['descricao'];
-            $foto = $jogo['foto'];
-            $desenvolvedor = $jogo['desenvolvedor'];
-            $data = $jogo['data_lanca'];
-        }}
+            $id = $jogos['idjogo'];
+            $nome = $jogos['nome'];
+            $descricao = $jogos['descricao'];
+            $foto = $jogos['img'];
+            $desenvolvedor = $jogos['desenvolvedor'];
+            $data = $jogos['data_lanca'];
+        }
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +45,7 @@ if (count($jogos) == 0) {
 <?php include 'cabeçalho.php'; ?>
 <body> 
     
-    <form action="../controle/editarJogo.php?idjogo=<?php $id ?>" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
+    <form action="../controle/editarJogo.php?idjogo=<?php echo $id ?>" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
             <h1>Cadastro de Jogo</h1>
         </div>
@@ -87,4 +94,90 @@ if (count($jogos) == 0) {
 
     
 </body>
+<script>
+        let selectedGeneros = [];
+        
+        // Função para controlar a seleção de gêneros
+        function toggleGenero(checkbox, generoId) {
+            const generoOption = checkbox.parentElement;
+            const index = selectedGeneros.indexOf(generoId);
+            
+            if (checkbox.checked) {
+                // Verificar se já selecionou o máximo permitido
+                if (selectedGeneros.length >= 2) {
+                    checkbox.checked = false;
+                    alert('Você pode selecionar no máximo 2 gêneros.');
+                    return;
+                }
+                
+                // Adicionar à lista de selecionados
+                if (index === -1) {
+                    selectedGeneros.push(generoId);
+                    generoOption.classList.add('selected');
+                }
+            } else {
+                // Remover da lista de selecionados
+                if (index !== -1) {
+                    selectedGeneros.splice(index, 1);
+                    generoOption.classList.remove('selected');
+                }
+            }
+            
+            // Atualizar a aparência visual
+            updateGenerosAppearance();
+        }
+        
+        // Atualizar a aparência visual dos gêneros selecionados
+        function updateGenerosAppearance() {
+            const allOptions = document.querySelectorAll('.genero-option');
+            
+            allOptions.forEach(option => {
+                const checkbox = option.querySelector('input[type="checkbox"]');
+                const generoId = checkbox.value;
+                
+                // Verificar se este gênero está selecionado
+                const isSelected = selectedGeneros.includes(generoId.toString());
+                
+                if (isSelected) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+        
+        // Adicionar eventos aos checkboxes após o carregamento
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="genero[]"]');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    toggleGenero(this, this.value);
+                });
+                
+                // Inicializar estado dos checkboxes já selecionados (se houver)
+                if (checkbox.checked) {
+                    selectedGeneros.push(checkbox.value);
+                    checkbox.parentElement.classList.add('selected');
+                }
+            });
+        });
+
+        // Validação do formulário
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            if (selectedGeneros.length === 0) {
+                e.preventDefault();
+                alert('Por favor, selecione pelo menos um gênero.');
+            }
+        });
+
+        // Permitir pressionar Enter para adicionar gênero
+        document.getElementById('novo_genero').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                salvarGenero();
+            }
+        });
+    </script>
 </html>

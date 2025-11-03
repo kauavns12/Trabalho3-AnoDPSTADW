@@ -28,16 +28,11 @@ if(!empty($_FILES['foto']['name'])){
 // se usuário digitou nova senha, criptografa e atualiza
 if(!empty($senha)){
     $senha = password_hash($senha, PASSWORD_DEFAULT);
-    $sql = "UPDATE usuario 
-            SET nome='$nome', gmail='$gmail', senha='$senha', foto='$foto' 
-            WHERE idusuario=$id";
+    editarUsuario($conexao, $nome, $gmail, $senha, $id, $foto);
 }else{
-    $sql = "UPDATE usuario 
-            SET nome='$nome', gmail='$gmail', foto='$foto' 
-            WHERE idusuario=$id";
+    editarUsuario($conexao, $nome, $gmail, $senha, $id, $foto);
 }
 
-mysqli_prepare($conexao, $sql);
 
 // --- ATUALIZA A SESSÃO ---
 $_SESSION['nome'] = $nome;
@@ -45,6 +40,7 @@ $_SESSION['gmail'] = $gmail;
 if (!empty($_FILES['foto']['name'])) {
     $_SESSION['foto'] = $foto;
 }
+
 
 // redireciona para home
 header("Location: ../public/configuracoes.php");

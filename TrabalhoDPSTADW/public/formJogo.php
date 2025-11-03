@@ -2,7 +2,7 @@
 
 require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
-
+require_once "../controle/funcoes.php";
 
 // Carregar gêneros do banco diretamente
 $generos = listarGenero($conexao);

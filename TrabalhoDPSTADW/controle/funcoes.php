@@ -15,11 +15,11 @@ function cadastrarUsuario($conexao, $nome, $gmail, $senha, $foto, $tipo)
     return $funcionou;
 }
 
-function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario)
+function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario, $foto)
 {
-    $sql = "UPDATE usuario SET nome=?, gmail=?, senha=? WHERE idusuario=?";
+    $sql = "UPDATE usuario SET nome=?, gmail=?, senha=?, foto=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $gmail, $senha, $idusuario);
+    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $gmail, $senha, $foto ,$idusuario);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;

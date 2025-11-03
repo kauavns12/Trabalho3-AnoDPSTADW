@@ -38,5 +38,5 @@ $ids_generos = array_map('intval', $generos);
 
 editarJogo($conexao, $idjogo, $nome, $descricao, $desenvolvedor, $data_lanca, $novo_nome, $ids_generos);
 
-header("Location: ../public/formJogo.php");
+header("Location: ../public/jogos.php");
 ?>

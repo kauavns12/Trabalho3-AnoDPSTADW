@@ -1,6 +1,7 @@
 <?php
 require_once "../controle/verificarLogado.php";
-
+require_once "../controle/conexao.php";
+require_once "../controle/funcoes.php";
 
 if ($_SESSION['tipo'] == 'c') {
     header("Location: home.php");
@@ -50,7 +51,7 @@ if ($_SESSION['tipo'] == 'c') {
             $idjogo = $jogo['idjogo'];
             $nome = $jogo['nome'];
             $descricao = $jogo['descricao'];
-            $foto = $jogo['foto'];
+            $foto = $jogo['img'];
             $desenvolvedor = $jogo['desenvolvedor'];
             $data = $jogo['data_lanca'];
 
@@ -62,7 +63,7 @@ if ($_SESSION['tipo'] == 'c') {
             echo "<td>$data</td>";
             echo "<td><img src='../controle/fotos/$foto'></td>";
             echo "<td><a href='../controle/deletarJogo.php?idjogo=$idjogo'>Excluir</a></td>";
-            echo "<td><a href='editarJogo.php?id=$idjogo'>Editar</a></td>";
+            echo "<td><a href='editarJogo.php?idjogo=$idjogo'>Editar</a></td>";
             echo "</tr>";
         }
     }

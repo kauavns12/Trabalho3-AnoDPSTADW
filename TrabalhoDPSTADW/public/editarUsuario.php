@@ -77,7 +77,8 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
                     <input type="password" 
                            name="senha" 
                            class="form-input" 
-                           placeholder="********">
+                           placeholder="********"
+                           value="<?php echo htmlspecialchars($usuario['senha']); ?>">
                     <small class="password-note">
                         Deixe este campo em branco se não deseja alterar sua senha
                     </small>
