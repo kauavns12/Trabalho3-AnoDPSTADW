@@ -32,20 +32,11 @@ if (!$usuariovisto) {
 <body>
     <?php include 'cabeçalho.php'; ?>
     
-<<<<<<< Updated upstream
-    <div>
-        <h1><?php echo $nomeusuv; ?></h1>
-    </div>
-    
-    <div>
-        <div>
-            <img src="../controle/fotos/<?php echo $fotousuv; ?>" alt="Foto de <?php echo htmlspecialchars($nomeusuv); ?>">
-=======
     <div class="profile-container">
         <div class="profile-header">
             <h1 class="profile-title"><?php echo $nomeusuv; ?></h1>
             <img src="../controle/fotos/<?php echo $fotousuv; ?>" alt="<?php echo $nomeusuv; ?>" class="profile-avatar">
->>>>>>> Stashed changes
+
         </div>
         
         <div class="profile-sections">
