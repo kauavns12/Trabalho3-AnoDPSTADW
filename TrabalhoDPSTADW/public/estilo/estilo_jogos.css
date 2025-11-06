@@ -34,8 +34,15 @@ body::after {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 /* Overlay escuro para melhor contraste */
@@ -207,10 +214,23 @@ body::before {
 }
 
 @keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(10px, 15px) scale(1.05); }
-    50% { transform: translate(-5px, 20px) scale(0.95); }
-    75% { transform: translate(-10px, -5px) scale(1.02); }
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(10px, 15px) scale(1.05);
+    }
+
+    50% {
+        transform: translate(-5px, 20px) scale(0.95);
+    }
+
+    75% {
+        transform: translate(-10px, -5px) scale(1.02);
+    }
 }
 
 /* Responsividade */
@@ -218,28 +238,28 @@ body::before {
     .jogos-container {
         padding: 0 15px;
     }
-    
+
     .jogos-table {
         display: block;
         overflow-x: auto;
     }
-    
+
     .jogos-table th,
     .jogos-table td {
         padding: 12px 10px;
         font-size: 14px;
     }
-    
+
     .jogo-imagem {
         width: 60px;
         height: 60px;
     }
-    
+
     .imagem-container {
         width: 60px;
         height: 60px;
     }
-    
+
     .jogos-table a {
         padding: 6px 12px;
         font-size: 12px;
@@ -248,29 +268,58 @@ body::before {
 }
 
 @media (max-width: 480px) {
+
     .jogos-table th,
     .jogos-table td {
         padding: 10px 8px;
         font-size: 12px;
     }
-    
+
     .jogo-imagem {
         width: 50px;
         height: 50px;
     }
-    
+
     .imagem-container {
         width: 50px;
         height: 50px;
     }
-    
+
     .jogos-table a {
         padding: 5px 10px;
         font-size: 11px;
         min-width: 70px;
     }
-    
+
     .decoration {
         display: none;
+    }
+
+    .delete-btn {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4) !important;
+    }
+
+    .delete-btn:hover {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+        box-shadow: 0 7px 20px rgba(239, 68, 68, 0.6) !important;
+    }
+
+    /* Ajuste responsivo para colunas adicionais */
+    @media (max-width: 768px) {
+
+        .jogos-table td:nth-child(5),
+        .jogos-table td:nth-child(6),
+        .jogos-table td:nth-child(7) {
+            white-space: nowrap;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .jogos-table a {
+            padding: 4px 8px;
+            font-size: 10px;
+            min-width: 60px;
+        }
     }
 }

@@ -16,7 +16,7 @@ body {
     position: relative;
     padding: 20px;
 }
-aa
+
 /* Efeitos de partículas animadas */
 body::after {
     content: "";
