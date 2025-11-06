@@ -24,8 +24,8 @@ if ($_SESSION['tipo'] == 'c') {
 <?php include 'cabeçalho.php'; ?>
 
 <body>
+    <a href="formJogo.php">Cadastrar Jogo</a>
     <h1>Lista de Jogos Cadastrados</h1>
-
     <?php
     require_once "../controle/conexao.php";
     require_once "../controle/funcoes.php";
