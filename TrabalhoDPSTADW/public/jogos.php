@@ -77,7 +77,7 @@ require_once "../controle/funcoes.php";
         echo "</table>";
 
             ?>
-
+            <a href='home.php' class='back-button'>Voltar para Home</a>
     </div>
 </body>
 

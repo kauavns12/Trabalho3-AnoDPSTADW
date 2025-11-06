@@ -346,3 +346,31 @@ body::before {
     }
 }
 
+/* Botão voltar */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.8);
+    color: #a78bfa;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 1px solid rgba(101, 78, 163, 0.4);
+    margin: 20px 0;
+    text-align: center;
+}
+
+.back-button:hover {
+    background: rgba(101, 78, 163, 0.2);
+    color: #a78bfa;
+    text-decoration: none;
+    border-color: rgba(167, 139, 250, 0.6);
+}
+
+.back-button::before {
+    content: "⬅️";
+    font-size: 0.9rem;
+}

@@ -66,7 +66,7 @@ require_once "../controle/funcoes.php";
         <?php } ?>
 
 
-        <!-- <a href='home.php' class='back-button'>Voltar para Home</a>-->
+        <a href='home.php' class='back-button'>Voltar para Home</a>
     </div>
 </body>
 
