@@ -1,4 +1,4 @@
-/* CSS para Página de Pesquisa - Layout Horizontal */
+/* CSS para Página de Pesquisa - Layout Horizontal CORRIGIDO */
 * {
     margin: 0;
     padding: 0;
@@ -15,9 +15,10 @@ body {
     min-height: 100vh;
     color: #e0e0ff;
     position: relative;
-}
+    overflow-x: hidden; 
+    }
 
-/* Efeitos de partículas animadas */
+
 body::after {
     content: "";
     position: absolute;
@@ -50,13 +51,14 @@ body::before {
     z-index: 0;
 }
 
-/* Container principal */
+/* Container principal - CORRIGIDO */
 .page-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 100px auto 40px;
-    padding: 0 20px;
+    padding: 0 20px; /* Reduzido padding lateral */
     position: relative;
     z-index: 1;
+    width: 100%;
 }
 
 /* Título da página */
@@ -65,12 +67,13 @@ body::before {
     color: #a78bfa;
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     text-shadow: 0 0 15px rgba(167, 139, 250, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
+    padding: 0 20px; /* Garante que não corte nas bordas */
 }
 
 .page-title::before {
@@ -78,16 +81,25 @@ body::before {
     font-size: 2.2rem;
 }
 
-/* Container das pesquisas em layout horizontal */
+/* Container das pesquisas em layout horizontal - CORRIGIDO */
 .search-results-horizontal {
     display: flex;
     gap: 25px;
-    justify-content: space-between;
+    justify-content: flex-start; /* Alinhamento à esquerda */
     align-items: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 10px 5px 20px;
-    margin-bottom: 30px;
+    padding: 20px 20px 30px; /* Padding lateral aumentado */
+    margin-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Pseudo-elemento para garantir espaço no início */
+.search-results-horizontal::before {
+    content: '';
+    min-width: 0; /* Remove qualquer espaço extra */
+    flex-shrink: 0;
 }
 
 .search-results-horizontal::-webkit-scrollbar {
@@ -108,7 +120,7 @@ body::before {
     background: rgba(167, 139, 250, 0.5);
 }
 
-/* Cards de pesquisa lado a lado */
+/* Cards de pesquisa lado a lado - TAMANHO AUMENTADO */
 .search-card {
     background: rgba(26, 11, 46, 0.95);
     border-radius: 16px;
@@ -117,10 +129,16 @@ body::before {
     border: 1px solid rgba(101, 78, 163, 0.4);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    min-width: 320px;
-    max-width: 320px;
+    min-width: 380px; /* Aumentado de 350px */
+    max-width: 380px; /* Aumentado de 350px */
     flex: 0 0 auto;
-    min-height: 500px;
+    min-height: 580px; /* Aumentado de 500px - MAIOR ALTURA */
+    margin: 0; /* Remove qualquer margem que possa causar cortes */
+}
+
+/* Primeiro card específico - garante que não seja cortado */
+.search-card:first-child {
+    margin-left: 0; /* Garante que comece na borda */
 }
 
 .search-card:hover {
@@ -151,9 +169,9 @@ body::before {
     margin: 0;
 }
 
-/* Container do conteúdo da tabela */
+/* Container do conteúdo da tabela - MANTIDO O MESMO TAMANHO */
 .table-container {
-    max-height: 400px;
+    max-height: 400px; /* MANTIDO O MESMO - não aumenta */
     overflow-y: auto;
     margin-top: 15px;
 }
@@ -176,7 +194,7 @@ body::before {
     background: rgba(167, 139, 250, 0.5);
 }
 
-/* Tabelas dentro dos cards - FOTO ANTES DO NOME */
+/* Tabelas dentro dos cards */
 .search-table {
     width: 100%;
     border-collapse: collapse;
@@ -197,18 +215,17 @@ body::before {
     z-index: 1;
 }
 
-/* Reordenando as colunas: FOTO primeiro, depois NOME */
 .search-table th:nth-child(1) {
-    width: 70px; /* Foto */
+    width: 60px;
 }
 
 .search-table th:nth-child(2) {
-    width: auto; /* Nome */
+    width: auto;
     text-align: left;
 }
 
 .search-table th:nth-child(3) {
-    width: 100px; /* Ação */
+    width: 100px;
 }
 
 .search-table td {
@@ -219,7 +236,6 @@ body::before {
     vertical-align: middle;
 }
 
-/* Alinhamento específico para a coluna do nome */
 .search-table td:nth-child(2) {
     text-align: left;
     padding-left: 15px;
@@ -232,10 +248,9 @@ body::before {
 
 .search-table tr:hover {
     background: rgba(15, 23, 42, 0.9);
-    transform: scale(1.01);
 }
 
-/* Imagens nas tabelas - FOTO PRIMEIRO */
+/* Imagens nas tabelas */
 .search-table img {
     width: 50px;
     height: 50px;
@@ -248,7 +263,7 @@ body::before {
 
 .search-table tr:hover img {
     border-color: rgba(167, 139, 250, 0.6);
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Links de ação */
@@ -259,7 +274,7 @@ body::before {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     text-decoration: none;
-    padding: 6px 12px;
+    padding: 8px 12px;
     border-radius: 6px;
     font-weight: 600;
     font-size: 0.8rem;
@@ -329,7 +344,7 @@ body::before {
     font-size: 0.9rem;
 }
 
-/* Elementos decorativos de fundo */
+/* Elementos decorativos de fundo - CORRIGIDOS */
 .decoration {
     position: absolute;
     width: 200px;
@@ -342,7 +357,7 @@ body::before {
 
 .decoration:nth-child(1) {
     top: 10%;
-    left: 5%;
+    left: 2%; /* Ajustado para não cortar */
     width: 120px;
     height: 120px;
     animation-delay: 0s;
@@ -350,7 +365,7 @@ body::before {
 
 .decoration:nth-child(2) {
     bottom: 10%;
-    right: 5%;
+    right: 2%; /* Ajustado para não cortar */
     width: 150px;
     height: 150px;
     background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
@@ -359,7 +374,7 @@ body::before {
 
 .decoration:nth-child(3) {
     top: 40%;
-    right: 15%;
+    right: 12%; /* Ajustado para não cortar */
     width: 80px;
     height: 80px;
     background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
@@ -368,16 +383,16 @@ body::before {
 
 @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(10px, 15px) scale(1.05); }
-    50% { transform: translate(-5px, 20px) scale(0.95); }
-    75% { transform: translate(-10px, -5px) scale(1.02); }
+    25% { transform: translate(8px, 12px) scale(1.05); } /* Reduzido movimento */
+    50% { transform: translate(-4px, 15px) scale(0.95); } /* Reduzido movimento */
+    75% { transform: translate(-8px, -4px) scale(1.02); } /* Reduzido movimento */
 }
 
 /* Animações de entrada */
 @keyframes fadeInHorizontal {
     from {
         opacity: 0;
-        transform: translateX(-30px);
+        transform: translateX(-20px); /* Reduzido movimento */
     }
     to {
         opacity: 1;
@@ -394,11 +409,11 @@ body::before {
 .search-card:nth-child(3) { animation-delay: 0.3s; }
 .search-card:nth-child(4) { animation-delay: 0.4s; }
 
-/* Responsividade */
+/* Responsividade - CORRIGIDA */
 @media (max-width: 1200px) {
     .search-card {
-        min-width: 280px;
-        max-width: 280px;
+        min-width: 350px; /* Aumentado de 320px */
+        max-width: 350px; /* Aumentado de 320px */
     }
 }
 
@@ -411,37 +426,23 @@ body::before {
     .page-title {
         font-size: 2rem;
         margin-bottom: 30px;
+        padding: 0 15px;
     }
     
     .search-results-horizontal {
         gap: 20px;
-        padding: 10px 0 20px;
+        padding: 15px 15px 25px; /* Padding lateral consistente */
     }
     
     .search-card {
-        min-width: 260px;
-        max-width: 260px;
-        min-height: 450px;
+        min-width: 300px; /* Aumentado de 280px */
+        max-width: 300px; /* Aumentado de 280px */
+        min-height: 520px; /* Aumentado de 450px */
         padding: 20px;
     }
     
     .card-title {
         font-size: 1.2rem;
-    }
-    
-    .search-table th,
-    .search-table td {
-        padding: 10px 6px;
-        font-size: 0.85rem;
-    }
-    
-    .search-table img {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .search-table th:nth-child(1) {
-        width: 60px;
     }
 }
 
@@ -454,43 +455,18 @@ body::before {
     .page-title {
         font-size: 1.6rem;
         margin-bottom: 25px;
+        padding: 0 10px;
+    }
+    
+    .search-results-horizontal {
+        padding: 10px 10px 20px; /* Padding lateral consistente */
     }
     
     .search-card {
-        min-width: 240px;
-        max-width: 240px;
+        min-width: 280px; /* Aumentado de 260px */
+        max-width: 280px; /* Aumentado de 260px */
+        min-height: 480px; /* Aumentado de 400px */
         padding: 15px;
-        min-height: 400px;
-    }
-    
-    .card-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-    }
-    
-    .search-table {
-        font-size: 0.8rem;
-    }
-    
-    .search-table th,
-    .search-table td {
-        padding: 8px 4px;
-        font-size: 0.8rem;
-    }
-    
-    .search-table img {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .search-table th:nth-child(1) {
-        width: 50px;
-    }
-    
-    .view-link {
-        padding: 4px 8px;
-        font-size: 0.75rem;
     }
     
     .decoration {

@@ -1,70 +1,90 @@
 <?php
 require_once "../controle/verificarLogado.php";
 
-
 if ($_SESSION['tipo'] == 'c') {
     header("Location: home.php");
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        img {
-            width: 50px;
-            height: 50px;
-        }
-    </style>
+    <title>Lista de Usuários - FRIV GAMES & WIKI</title>
+    <link rel="stylesheet" href="./estilo/cabeçalho.css">
+    <link rel="stylesheet" href="./estilo/estilo_listarUsuDM.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
-<?php include 'cabeçalho.php'; ?>
 
 <body>
-    <h1>Lista de Usuários Cadastrados</h1>
+    <?php include 'cabeçalho.php'; ?>
 
-    <?php
-    require_once "../controle/conexao.php";
-    require_once "../controle/funcoes.php";
+    <div class="page-container">
+        <h1 class="page-title">Lista de Usuários Cadastrados</h1>
+        
+        <div class="main-card">
+            <div class="table-container">
+                <?php
+                require_once "../controle/conexao.php";
+                require_once "../controle/funcoes.php";
 
-    $lista_usuario = listarUsuario($conexao);
+                $lista_usuario = listarUsuario($conexao);
 
-    if (count($lista_usuario) == 0) {
-        echo "Não existem usuários cadastrados";
-    } else {
-    ?>
-        <table border="1">
-            <tr>
-                <td>Id</td>
-                <td>Nome</td>
-                <td>E-mail</td>
-                <td>Foto</td>
-                <td colspan="2">Ações</td>
-            </tr>
-        <?php
-        foreach ($lista_usuario as $usuario) {
-            $idusuario = $usuario['idusuario'];
-            $nome = $usuario['nome'];
-            $gmail = $usuario['gmail'];
-            $foto = $usuario['foto'];
-            $tipo = $usuario['tipo'];
+                if (count($lista_usuario) == 0) {
+                    echo "<div class='no-results'>Não existem usuários cadastrados</div>";
+                } else {
+                ?>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Foto</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Tipo</th>
+                                <th colspan="2">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($lista_usuario as $usuario) {
+                                $idusuario = $usuario['idusuario'];
+                                $nome = $usuario['nome'];
+                                $gmail = $usuario['gmail'];
+                                $foto = $usuario['foto'];
+                                $tipo = $usuario['tipo'];
+                                
+                                $tipo_class = ($tipo == 'a') ? 'adm' : 'user';
+                                $tipo_text = ($tipo == 'a') ? 'ADM' : 'Usuário';
+                            ?>
+                                <tr>
+                                    <td><?php echo $idusuario; ?></td>
+                                    <td><img src='../controle/fotos/<?php echo $foto; ?>' alt='<?php echo $nome; ?>'></td>
+                                    <td><?php echo $nome; ?></td>
+                                    <td><?php echo $gmail; ?></td>
+                                    <td><span class="user-type <?php echo $tipo_class; ?>"><?php echo $tipo_text; ?></span></td>
+                                    <td><a href='../controle/deletarUsuario.php?idusuario=<?php echo $idusuario; ?>' class='action-link ban-link' onclick="return confirm('Tem certeza que deseja banir este usuário?')"><i class='fas fa-ban'></i> Banir</a></td>
+                                    <td><a href='editarUsuario_adm.php?id=<?php echo $idusuario; ?>' class='action-link promote-link'><i class='fas fa-star'></i> Promover ADM</a></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+        
+        <a href='configuracoes.php' class='back-button'>Voltar para Configurações</a>
+    </div>
 
-            echo "<tr>";
-            echo "<td>$idusuario</td>";
-            echo "<td>$nome</td>";
-            echo "<td>$gmail</td>";
-            echo "<td><img src='../controle/fotos/$foto'></td>";
-            echo "<td><a href='../controle/deletarUsuario.php?idusuario=$idusuario'>Banir</a></td>";
-            echo "<td><a href='editarUsuario_adm.php?id=$idusuario'>Promover ADM</a></td>";
-            echo "</tr>";
-        }
-    }
-        ?>
-        </table>
-
-        <td><a href='configuracoes.php'>Voltar</a></td>
+    <!-- Elementos decorativos de fundo -->
+    <div class="decoration"></div>
+    <div class="decoration"></div>
 </body>
 
 </html>
