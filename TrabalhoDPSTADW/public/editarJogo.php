@@ -47,7 +47,7 @@ if (count($jogos) == 0) {
     
     <form action="../controle/editarJogo.php?idjogo=<?php echo $id ?>" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
-            <h1>Cadastro de Jogo</h1>
+            <h1>Editar Jogo</h1>
         </div>
         
         <div class="form-body">

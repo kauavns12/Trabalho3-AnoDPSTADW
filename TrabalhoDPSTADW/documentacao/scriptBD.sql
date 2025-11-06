@@ -421,11 +421,11 @@ INSERT INTO `friv`.`genero` (`nome`) VALUES
 
 -- Inserir jogos
 INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `img`) VALUES
-('Fireboy and Watergirl', 'Duo de aventura em templo com elementos de fogo e água', 'Oslo Albet', '2009-03-15', 'fireboy_watergirl.jpg'),
-('Bloons Tower Defense', 'Jogo de estratégia com macacos e balões', 'Ninja Kiwi', '2007-12-10', 'btd.jpg'),
-('Crush the Castle', 'Jogo de física com catapultas e castelos', 'Armor Games', '2009-05-20', 'ctc.jpg'),
-('Raze', 'Jogo de tio em arena com soldados', 'Sky9 Games', '2011-08-30', 'raze.jpg'),
-('Super Mario Flash', 'Versão web do clássico Mario Bros', 'Anonymous', '2008-11-05', 'mario_flash.jpg');
+('Fireboy and Watergirl', 'Duo de aventura em templo com elementos de fogo e água', 'Oslo Albet', '2009-03-15', '69090216c15eb.jpg'),
+('Bloons Tower Defense', 'Jogo de estratégia com macacos e balões', 'Ninja Kiwi', '2007-12-10', '6.jpg'),
+('Crush the Castle', 'Jogo de física com catapultas e castelos', 'Armor Games', '2009-05-20', 'hqdefault.jpg'),
+('Raze', 'Jogo de tio em arena com soldados', 'Sky9 Games', '2011-08-30', 'raze-3_1x1.jpeg'),
+('Super Mario Flash', 'Versão web do clássico Mario Bros', 'Anonymous', '2008-11-05', 'super-mario-flash.webp');
 
 -- Inserir relação genero_jogo
 INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
@@ -438,12 +438,12 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 
 -- Inserir usuarios (senhas são hashes de "senha123")
 INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
-('João Silva', 'joao.silva@gmail.com', '$2y$10$Fp35ITV/u9vfPRHA.7EhSO/RRyMmF4.c.uVu7WnmD/DP/YbNhSVX', '68d52563a4b5d.png', 'c'),
-('Maria Santos', 'maria.santos@gmail.com', '$2y$10$rQF3rE/QYlbvs37y4k5K8OZ1p3mmwQyhdI7frnZe57YSfFX41JeG.', '68d5360e867da.jpeg', 'c'),
-('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '68d5375cae2fa.jpg', 'c'),
-('Administrador', 'adm@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', '68dab251ddaae.jpeg', 'A'),
+('João Silva', 'joao.silva@gmail.com', '$2y$10$Fp35ITV/u9vfPRHA.7EhSO/RRyMmF4.c.uVu7WnmD/DP/YbNhSVX', '690c79a9a69c6.jpeg', 'c'),
+('Maria Santos', 'maria.santos@gmail.com', '$2y$10$rQF3rE/QYlbvs37y4k5K8OZ1p3mmwQyhdI7frnZe57YSfFX41JeG.', '6908f4b3d6503.jpg', 'c'),
+('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '690c7a469304f.webp', 'c'),
+('Pablo (adm)', 'adm@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', '6908f25f7ac7a.jpeg', 'A'),
 ('Lunna', 'lunna@gmail.com', '$2y$10$vkLZem6D2KPu8aYqrqjUKuiA8/wfafudsV9vRRaZipFQHHGehznZu', '690394dade1b5.png', 'c'),
-('kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', 'flor.jpg', 'c');
+('kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c');
 
 -- Inserir preferencias de usuarios
 INSERT INTO `friv`.`preferencia` (`usuario_idusuario`, `genero_idgenero`) VALUES

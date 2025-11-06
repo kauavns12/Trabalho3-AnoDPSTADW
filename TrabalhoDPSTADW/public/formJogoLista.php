@@ -25,6 +25,7 @@ $idlista = $_GET['id'];
         
         <div class="form-container">
             <form action="../controle/cadastrarjogolista.php?id=<?php echo $idlista; ?>" method="POST">
+                <input type="hidden" name="lista" value="<?php echo $idlista?>">
 
                 <label for="jogo" class="form-label">Qual jogo você quer adicionar?</label>
                 <select name='jogo' id="jogo" class="form-select">
