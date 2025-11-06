@@ -3,7 +3,7 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['idusuario'];
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +35,16 @@ if (count($lista_preferencia_usu) == 0) {
         $idgenero = $lista['genero_idgenero'];
 
         // Buscar gêneros correspondentes
-        $lista_genero = pesquisarGeneroID($conexao, $idgenero);
+        $lista_genero = [];
+        $lista_genero[] = pesquisarGeneroID($conexao, $idgenero);
 
         if (count($lista_genero) == 0) {
             // Se não encontrar gêneros, exibir mensagem dentro da tabela
             echo "<tr><td colspan='2'>Gêneros não identificados</td></tr>";
         } else {
             // Loop para exibir os gêneros encontrados
-            foreach ($lista_genero as $lista1) {
-                $nome = $lista1['nome'];  
+            foreach ($lista_genero as $listao) {
+                $nome = $listao['nome'];  
                 echo "<tr>";
                 echo "<td>$nome</td>";
                 echo "<td><a href='editarPreferencia.php?id=$id_usuario'>Editar preferencia</a></td>";

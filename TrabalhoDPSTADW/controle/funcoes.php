@@ -25,7 +25,7 @@ function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario, $foto)
     return $funcionou;
 }
 
-function editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $idusuario, $foto)
+function editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $foto, $idusuario)
 {
     $sql = "UPDATE usuario SET nome = ?, gmail = ?, senha = ?, foto = ? WHERE idusuario = ?";
 
@@ -38,7 +38,7 @@ function editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $idusuario, $fot
     return $funcionou;
 }
 
-function editarUsuarioSemSenha($conexao, $nome, $gmail, $idusuario, $foto)
+function editarUsuarioSemSenha($conexao, $nome, $gmail, $foto, $idusuario)
 {
     $sql = "UPDATE usuario SET nome = ?, gmail = ?, foto = ? WHERE idusuario = ?";
 
@@ -1434,49 +1434,5 @@ function renderizarSecaoComentarios($comentarios) {
     <?php
 }
 
-// =============================================
-// FUNÇÕES DE INTERFACE
-// =============================================
-
-function exibirMenu($paginaAtiva = '') {
-    $menu = '
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <i class="fas fa-gamepad logo-icon"></i>
-            <span class="logo-text">Friv Games & WIKI</span>
-        </a>
-        
-        <ul class="nav-links">
-            <li><a href="home.php" class="' . ($paginaAtiva == 'home' ? 'active' : '') . '">INÍCIO</a></li>
-            <li><a href="jogos.php" class="' . ($paginaAtiva == 'jogos' ? 'active' : '') . '">JOGOS</a></li>
-            <li><a href="comunidade.php" class="' . ($paginaAtiva == 'comunidade' ? 'active' : '') . '">COMUNIDADE</a></li>
-            <li><a href="foruns.php" class="' . ($paginaAtiva == 'foruns' ? 'active' : '') . '">FÓRUNS</a></li>
-        </ul>
-        
-        <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <a href="pesquisar.php" class="' . ($paginaAtiva == 'pesquisar' ? 'active' : '') . '">PESQUISAR</a>
-        </div>
-        
-        <div class="user-menu">
-            <div class="user-avatar">
-                <img src="../controle/fotos/' . ($_SESSION['foto'] ?? 'default.png') . '" alt="Avatar">
-            </div>
-            <div class="user-name">' . ($_SESSION['nome'] ?? 'Usuário') . '</div>
-            <i class="fas fa-chevron-down dropdown-icon"></i>
-        </div>
-        
-        <div>
-            <div>
-                <a href="../controle/deslogar.php" class="nav-button">Deslogar</a>
-            </div>
-            <div>
-                <a href="./configuracoes.php" class="nav-button">Configurações</a>
-            </div>
-        </div>
-    </nav>';
-    
-    return $menu;
-}
 
 ?>

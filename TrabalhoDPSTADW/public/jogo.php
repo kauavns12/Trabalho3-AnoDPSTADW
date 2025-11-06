@@ -166,7 +166,7 @@ $user = pesquisarUsuario_ID($conexao, $idusuario);
                     <div class="comment">
                         <div class="comment-avatar">
                             <?php if (!empty($comentario['usuario_foto'])): ?>
-                                <img src="<?php echo $comentario['usuario_foto']; ?>" alt="<?php echo $comentario['usuario_nome']; ?>">
+                                <img src="../controle/fotos/<?php echo $comentario['usuario_foto']; ?>" alt="<?php echo $comentario['usuario_nome']; ?>">
                             <?php else: ?>
                                 <?php echo strtoupper(substr($comentario['usuario_nome'], 0, 1)); ?>
                             <?php endif; ?>

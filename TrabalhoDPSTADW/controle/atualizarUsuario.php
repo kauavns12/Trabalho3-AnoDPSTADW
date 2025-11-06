@@ -5,13 +5,13 @@ require_once "../controle/funcoes.php";
 session_start(); // importante para poder mexer na sessão
 
 // pegar dados do form
-$id = $_POST['idusuario'];
+$idusuario = $_POST['idusuario'];
 $nome = $_POST['nome'];
 $gmail = $_POST['gmail'];
 $senha = $_POST['senha']; // pode estar vazio
 
 // buscar foto atual
-$sqlFoto = "SELECT foto FROM usuario WHERE idusuario=$id";
+$sqlFoto = "SELECT foto FROM usuario WHERE idusuario=$idusuario";
 $resFoto = mysqli_query($conexao, $sqlFoto);
 $dadosFoto = mysqli_fetch_assoc($resFoto);
 $foto = $dadosFoto['foto'];
@@ -28,9 +28,9 @@ if(!empty($_FILES['foto']['name'])){
 // se usuário digitou nova senha, criptografa e atualiza
 if (!empty($senha)) {
     $senha = password_hash($senha, PASSWORD_DEFAULT);
-    editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $idusuario, $foto);
+    editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $foto, $idusuario);
 } else {
-    editarUsuarioSemSenha($conexao, $nome, $gmail, $idusuario, $foto);
+    editarUsuarioSemSenha($conexao, $nome, $gmail, $foto, $idusuario);
 }
 
 // --- ATUALIZA A SESSÃO ---
