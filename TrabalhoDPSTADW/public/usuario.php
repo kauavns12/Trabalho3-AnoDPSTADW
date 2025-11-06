@@ -43,7 +43,7 @@ if (!$usuariovisto) {
     
     <div>
         <div>
-            <img src="../controle/fotos/ <?php $foto ?>">
+            <img src="../controle/fotos/<?php echo $fotousuv; ?>" alt="Foto de <?php echo htmlspecialchars($nomeusuv); ?>">
         </div>
     </div>
     <div>

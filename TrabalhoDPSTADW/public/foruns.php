@@ -16,11 +16,12 @@ require_once "../controle/funcoes.php";
     <link rel="stylesheet" href="./estilo/estilo_foruns.css">
 
 </head>
-    <?php include 'cabeçalho.php'; ?>
+<?php include 'cabeçalho.php'; ?>
+
 <body>
-    
+
     <div class="forum-container">
-       
+
         <div class="forum-header">
             <h1 class="page-title">
                 <i class="fas fa-comments"></i>
@@ -28,7 +29,7 @@ require_once "../controle/funcoes.php";
             </h1>
             <p class="forum-subtitle">Compartilhe ideias, faça perguntas e interaja com outros jogadores</p>
         </div>
-      
+
         <div class="forum-actions">
             <a href="./cadastrarcategoria.php" class="nav-button">
                 <i class="fas fa-folder-plus"></i>
@@ -56,7 +57,7 @@ require_once "../controle/funcoes.php";
             <div class="posts-list">
                 <?php
                 $posts = listarPost($conexao);
-                
+
                 if (empty($posts)) {
                     echo '
                     <div class="no-posts">
@@ -74,7 +75,7 @@ require_once "../controle/funcoes.php";
                         $topico_nome = htmlspecialchars($post['topico_forun_idtopico_forun']);
                         $conteudo = htmlspecialchars($post['conteudo']);
                         $conteudo_preview = strlen($conteudo) > 150 ? substr($conteudo, 0, 150) . '...' : $conteudo;
-                        
+
                         echo '
                         <div class="post-item">
                             <div class="post-main">
@@ -122,6 +123,9 @@ require_once "../controle/funcoes.php";
                 </div>
             </div>
         </div>
+
     </div>
+ 
 </body>
+
 </html>

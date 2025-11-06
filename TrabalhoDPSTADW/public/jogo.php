@@ -190,6 +190,7 @@ $user = pesquisarUsuario_ID($conexao, $idusuario);
                 </div>
             <?php endif; ?>
         </div>
+        <a href='jogos.php' class='back-button'>Voltar</a>
     </div>
 </body>
 </html>

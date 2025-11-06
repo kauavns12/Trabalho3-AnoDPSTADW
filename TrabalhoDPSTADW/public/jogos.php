@@ -77,6 +77,7 @@ require_once "../controle/funcoes.php";
         echo "</table>";
 
             ?>
+
     </div>
 </body>
 
