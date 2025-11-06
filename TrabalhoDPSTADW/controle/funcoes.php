@@ -25,6 +25,32 @@ function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario, $foto)
     return $funcionou;
 }
 
+function editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $idusuario, $foto)
+{
+    $sql = "UPDATE usuario SET nome = ?, gmail = ?, senha = ?, foto = ? WHERE idusuario = ?";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $gmail, $senha, $foto, $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+
+function editarUsuarioSemSenha($conexao, $nome, $gmail, $idusuario, $foto)
+{
+    $sql = "UPDATE usuario SET nome = ?, gmail = ?, foto = ? WHERE idusuario = ?";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $gmail, $foto, $idusuario);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+    return $funcionou;
+}
+
 function excluirUsuario($conexao, $idusuario)
 {
     $sql = "DELETE FROM usuario WHERE idusuario=?";
@@ -37,7 +63,7 @@ function excluirUsuario($conexao, $idusuario)
 
 function pesquisarUsuario_ID($conexao, $idusuario)
 {
-    $sql = "SELECT nome, gmail, foto FROM usuario WHERE idusuario = ?";
+    $sql = "SELECT nome, gmail, senha, foto FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
     mysqli_stmt_execute($comando);
@@ -49,10 +75,10 @@ function pesquisarUsuario_ID($conexao, $idusuario)
 
 function pesquisarUsuario_Nome($conexao, $nome)
 {
-    $sql = "SELECT nome, foto FROM usuario WHERE nome LIKE ?";
+    $sql = "SELECT idusuario, nome, foto FROM usuario WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    $nome_param = "%" . $nome . "%";
+    $nome_param = $nome . "%";
     mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
     
@@ -177,7 +203,7 @@ function pesquisarJogoNome($conexao, $nome)
     $sql = "SELECT * FROM jogo WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    $nome_param = "%" . $nome . "%";
+    $nome_param = $nome . "%";
     mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
     
@@ -607,7 +633,7 @@ function pesquisarPostConteudo($conexao, $conteudo)
     $sql = "SELECT * FROM post_forun WHERE conteudo LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    $conteudo_param = "%" . $conteudo . "%";
+    $conteudo_param = $conteudo . "%";
     mysqli_stmt_bind_param($comando, 's', $conteudo_param);
     mysqli_stmt_execute($comando);
     
@@ -1020,7 +1046,7 @@ function pesquisarConquistaNome($conexao, $nome)
     $sql = "SELECT * FROM conquista WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    $nome_param = "%" . $nome . "%";
+    $nome_param = $nome . "%";
     mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
     

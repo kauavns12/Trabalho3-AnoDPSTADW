@@ -26,13 +26,12 @@ if(!empty($_FILES['foto']['name'])){
 }
 
 // se usuário digitou nova senha, criptografa e atualiza
-if(!empty($senha)){
+if (!empty($senha)) {
     $senha = password_hash($senha, PASSWORD_DEFAULT);
-    editarUsuario($conexao, $nome, $gmail, $senha, $id, $foto);
-}else{
-    editarUsuario($conexao, $nome, $gmail, $senha, $id, $foto);
+    editarUsuarioComSenha($conexao, $nome, $gmail, $senha, $idusuario, $foto);
+} else {
+    editarUsuarioSemSenha($conexao, $nome, $gmail, $idusuario, $foto);
 }
-
 
 // --- ATUALIZA A SESSÃO ---
 $_SESSION['nome'] = $nome;

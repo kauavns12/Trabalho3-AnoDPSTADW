@@ -6,10 +6,10 @@ require_once "../controle/funcoes.php";
 session_start();
 
 // aqui pegue o id do usuário logado da sessão
-$id_usuario = $_SESSION['idusuario'];
+$idusuario = $_SESSION['idusuario'];
 
 // busca dados do usuário
-$usuario = pesquisarUsuario_ID($conexao, $id_usuario);
+$usuario = pesquisarUsuario_ID($conexao, $idusuario);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
         <div class="form-container">
             <form id="formulario" action="../controle/atualizarUsuario.php" method="post" enctype="multipart/form-data">
                 <!-- precisamos mandar o id para saber quem atualizar -->
-                <input type="hidden" name="idusuario" value="<?php echo $id_usuario; ?>">
+                <input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>">
 
                 <!-- Seção da Foto -->
                 <div class="photo-section">
@@ -78,7 +78,7 @@ $usuario = pesquisarUsuario_ID($conexao, $id_usuario);
                            name="senha" 
                            class="form-input" 
                            placeholder="********"
-                           value="<?php echo htmlspecialchars($usuario['senha']); ?>">
+                           value="">
                     <small class="password-note">
                         Deixe este campo em branco se não deseja alterar sua senha
                     </small>

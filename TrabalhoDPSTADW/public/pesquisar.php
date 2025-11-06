@@ -14,8 +14,11 @@ require_once "../controle/verificarLogado.php";
 </head>
 
 <body>
+    <div>
     <?php include 'cabeçalho.php'; 
  
+
+
 if (isset($_GET["valor"]) && !empty($_GET["valor"])){
      $valor = $_GET["valor"];
      require_once "../controle/conexao.php";
@@ -46,9 +49,9 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
 }
 ?>
 
+</div>
 
-
-
+<div>
 <?php
 
 if (isset($_GET["valor"]) && !empty($_GET["valor"])){
@@ -72,7 +75,7 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
             $idusu = $usuario['idusuario'];
             $fotou = $usuario['foto'];
             echo "<tr>";
-            echo "<td>" . $jogo["nome"]  . "</td>";
+            echo "<td>" . $usuario['nome']  . "</td>";
             echo "<td><img src='../controle/fotos/$fotou'></td>";
             echo "<td><a href='usuario.php?id=$idusu'><i class='fas fa-eye'></i> Visualizar</a></td>";
             echo "<tr>";
@@ -81,7 +84,8 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
 }
 
 ?>
-
+</div>
+<div>
 <?php
 
 if (isset($_GET["valor"]) && !empty($_GET["valor"])){
@@ -112,8 +116,10 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
     }
 }
 
-
 ?>
+</div>
+
+<div>
 <?php
 if (isset($_GET["valor"]) && !empty($_GET["valor"])){
      $valor = $_GET["valor"];
@@ -141,7 +147,7 @@ if (isset($_GET["valor"]) && !empty($_GET["valor"])){
     }
 }
 ?>
-
+</div>
 
 
 </body>
