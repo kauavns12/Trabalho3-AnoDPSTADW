@@ -20,9 +20,6 @@ $id_usuario = $_SESSION['idusuario'];
 </head>
 
 <body>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
 
     <?php include 'cabeçalho.php'; ?>
 

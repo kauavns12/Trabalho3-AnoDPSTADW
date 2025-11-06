@@ -8,69 +8,89 @@ if ($_SESSION['tipo'] == 'c') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        img {
-            width: 50px;
-            height: 50px;
-        }
-    </style>
+    <title>Lista de Jogos - FRIV GAMES & WIKI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./estilo/cabeçalho.css">
+    <link rel="stylesheet" href="./estilo/estilo_listaJogoDM.css">
 </head>
-<?php include 'cabeçalho.php'; ?>
 
 <body>
-    <a href="formJogo.php">Cadastrar Jogo</a>
-    <h1>Lista de Jogos Cadastrados</h1>
-    <?php
-    require_once "../controle/conexao.php";
-    require_once "../controle/funcoes.php";
+    <?php include 'cabeçalho.php'; ?>
 
-    $lista_jogos = listarJogo($conexao);
+    <div class="page-container">
+        <div class="page-header">
+            <h1 class="page-title">Lista de Jogos Cadastrados</h1>
+            <a href="formJogo.php" class="add-button">
+                <i class="fas fa-plus"></i> Cadastrar Jogo
+            </a>
+        </div>
+        
+        <div class="table-container">
+            <?php
+            $lista_jogos = listarJogo($conexao);
 
-    if (count($lista_jogos) == 0) {
-        echo "Não existem jogos cadastrados";
-    } else {
-    ?>
-        <table border="1">
-            <tr>
-                <td>Id</td>
-                <td>Nome</td>
-                <td>Descricao</td>
-                <td>Desenvolvedor</td>
-                <td>Data de lançamento</td>
-                <td>Foto</td>
-                <td colspan="2">Ações</td>
-            </tr>
-        <?php
-        foreach ($lista_jogos as $jogo) {
-            $idjogo = $jogo['idjogo'];
-            $nome = $jogo['nome'];
-            $descricao = $jogo['descricao'];
-            $foto = $jogo['img'];
-            $desenvolvedor = $jogo['desenvolvedor'];
-            $data = $jogo['data_lanca'];
+            if (count($lista_jogos) == 0) {
+                echo "<div class='no-results'>Não existem jogos cadastrados</div>";
+            } else {
+            ?>
+                <table class="games-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>Descricao</th>
+                            <th>Desenvolvedor</th>
+                            <th>Data de lançamento</th>
+                            <th>Foto</th>
+                            <th colspan="2">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($lista_jogos as $jogo) {
+                        $idjogo = $jogo['idjogo'];
+                        $nome = $jogo['nome'];
+                        $descricao = $jogo['descricao'];
+                        $foto = $jogo['img'];
+                        $desenvolvedor = $jogo['desenvolvedor'];
+                        $data = $jogo['data_lanca'];
+                    ?>
+                        <tr>
+                            <td><?php echo $idjogo; ?></td>
+                            <td><?php echo $nome; ?></td>
+                            <td class="game-description"><?php echo $descricao; ?></td>
+                            <td><?php echo $desenvolvedor; ?></td>
+                            <td><?php echo $data; ?></td>
+                            <td><img src="../controle/fotos/<?php echo $foto; ?>" class="game-image"></td>
+                            <td class="action-cell">
+                                <a href="../controle/deletarJogo.php?idjogo=<?php echo $idjogo; ?>" class="delete-button">
+                                    <i class="fas fa-trash"></i> Excluir
+                                </a>
+                            </td>
+                            <td class="action-cell">
+                                <a href="editarJogo.php?idjogo=<?php echo $idjogo; ?>" class="edit-button">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            <?php
+            }
+            ?>
+        </div>
+        
+        <a href="configuracoes.php" class="back-button">Voltar</a>
+    </div>
 
-            echo "<tr>";
-            echo "<td>$idjogo</td>";
-            echo "<td>$nome</td>";
-            echo "<td>$descricao</td>";
-            echo "<td>$desenvolvedor</td>";
-            echo "<td>$data</td>";
-            echo "<td><img src='../controle/fotos/$foto'></td>";
-            echo "<td><a href='../controle/deletarJogo.php?idjogo=$idjogo'>Excluir</a></td>";
-            echo "<td><a href='editarJogo.php?idjogo=$idjogo'>Editar</a></td>";
-            echo "</tr>";
-        }
-    }
-        ?>
-        </table>
-
-        <td><a href='configuracoes.php'>Voltar</a></td>
 </body>
 
 </html>

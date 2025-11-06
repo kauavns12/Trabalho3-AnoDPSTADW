@@ -81,64 +81,33 @@ body::before {
     font-size: 2.2rem;
 }
 
-/* Container das pesquisas em layout horizontal - CORRIGIDO */
+/* Container das pesquisas em layout horizontal - CORRIGIDO E CENTRALIZADO */
 .search-results-horizontal {
     display: flex;
-    gap: 25px;
-    justify-content: flex-start; /* Alinhamento à esquerda */
+    gap: 30px; /* Aumentado o espaçamento entre os cards */
+    justify-content: center; /* Alterado para centralizar */
     align-items: flex-start;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: wrap; /* Permite que os cards quebrem linha em telas menores */
     padding: 20px 20px 30px; /* Padding lateral aumentado */
     margin-bottom: 40px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Pseudo-elemento para garantir espaço no início */
-.search-results-horizontal::before {
-    content: '';
-    min-width: 0; /* Remove qualquer espaço extra */
-    flex-shrink: 0;
-}
-
-.search-results-horizontal::-webkit-scrollbar {
-    height: 8px;
-}
-
-.search-results-horizontal::-webkit-scrollbar-track {
-    background: rgba(101, 78, 163, 0.1);
-    border-radius: 4px;
-}
-
-.search-results-horizontal::-webkit-scrollbar-thumb {
-    background: rgba(167, 139, 250, 0.3);
-    border-radius: 4px;
-}
-
-.search-results-horizontal::-webkit-scrollbar-thumb:hover {
-    background: rgba(167, 139, 250, 0.5);
-}
-
-/* Cards de pesquisa lado a lado - TAMANHO AUMENTADO */
+/* Cards de pesquisa lado a lado - TAMANHO AUMENTADO E CENTRALIZADOS */
 .search-card {
     background: rgba(26, 11, 46, 0.95);
     border-radius: 16px;
-    padding: 25px;
+    padding: 30px; /* Aumentado o padding interno */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(101, 78, 163, 0.4);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    min-width: 380px; /* Aumentado de 350px */
-    max-width: 380px; /* Aumentado de 350px */
+    min-width: 450px; /* Aumentado significativamente de 380px */
+    max-width: 450px; /* Aumentado significativamente de 380px */
     flex: 0 0 auto;
-    min-height: 580px; /* Aumentado de 500px - MAIOR ALTURA */
+    min-height: 650px; /* Aumentado significativamente de 580px */
     margin: 0; /* Remove qualquer margem que possa causar cortes */
-}
-
-/* Primeiro card específico - garante que não seja cortado */
-.search-card:first-child {
-    margin-left: 0; /* Garante que comece na borda */
 }
 
 .search-card:hover {
@@ -169,9 +138,9 @@ body::before {
     margin: 0;
 }
 
-/* Container do conteúdo da tabela - MANTIDO O MESMO TAMANHO */
+/* Container do conteúdo da tabela - AUMENTADO para acomodar mais conteúdo */
 .table-container {
-    max-height: 400px; /* MANTIDO O MESMO - não aumenta */
+    max-height: 500px; /* Aumentado de 400px para acomodar mais conteúdo */
     overflow-y: auto;
     margin-top: 15px;
 }
@@ -294,7 +263,7 @@ body::before {
     font-size: 0.8rem;
 }
 
-/* Mensagens de nenhum resultado */
+
 .no-results {
     text-align: center;
     color: #94a3b8;
@@ -311,7 +280,7 @@ body::before {
     opacity: 0.7;
 }
 
-/* Botão voltar */
+
 .back-button {
     display: inline-flex;
     align-items: center;
@@ -344,7 +313,7 @@ body::before {
     font-size: 0.9rem;
 }
 
-/* Elementos decorativos de fundo - CORRIGIDOS */
+
 .decoration {
     position: absolute;
     width: 200px;
@@ -357,7 +326,7 @@ body::before {
 
 .decoration:nth-child(1) {
     top: 10%;
-    left: 2%; /* Ajustado para não cortar */
+    left: 2%; 
     width: 120px;
     height: 120px;
     animation-delay: 0s;
@@ -365,7 +334,7 @@ body::before {
 
 .decoration:nth-child(2) {
     bottom: 10%;
-    right: 2%; /* Ajustado para não cortar */
+    right: 2%; 
     width: 150px;
     height: 150px;
     background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
@@ -374,7 +343,7 @@ body::before {
 
 .decoration:nth-child(3) {
     top: 40%;
-    right: 12%; /* Ajustado para não cortar */
+    right: 12%; 
     width: 80px;
     height: 80px;
     background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
@@ -383,16 +352,16 @@ body::before {
 
 @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(8px, 12px) scale(1.05); } /* Reduzido movimento */
-    50% { transform: translate(-4px, 15px) scale(0.95); } /* Reduzido movimento */
-    75% { transform: translate(-8px, -4px) scale(1.02); } /* Reduzido movimento */
+    25% { transform: translate(8px, 12px) scale(1.05); }
+    50% { transform: translate(-4px, 15px) scale(0.95); } 
+    75% { transform: translate(-8px, -4px) scale(1.02); } 
 }
 
-/* Animações de entrada */
+
 @keyframes fadeInHorizontal {
     from {
         opacity: 0;
-        transform: translateX(-20px); /* Reduzido movimento */
+        transform: translateX(-20px); 
     }
     to {
         opacity: 1;
@@ -409,11 +378,18 @@ body::before {
 .search-card:nth-child(3) { animation-delay: 0.3s; }
 .search-card:nth-child(4) { animation-delay: 0.4s; }
 
-/* Responsividade - CORRIGIDA */
+
+@media (max-width: 1400px) {
+    .search-card {
+        min-width: 400px; 
+        max-width: 400px; 
+    }
+}
+
 @media (max-width: 1200px) {
     .search-card {
-        min-width: 350px; /* Aumentado de 320px */
-        max-width: 350px; /* Aumentado de 320px */
+        min-width: 380px; 
+        max-width: 380px; 
     }
 }
 
@@ -431,13 +407,13 @@ body::before {
     
     .search-results-horizontal {
         gap: 20px;
-        padding: 15px 15px 25px; /* Padding lateral consistente */
+        padding: 15px 15px 25px; 
     }
     
     .search-card {
-        min-width: 300px; /* Aumentado de 280px */
-        max-width: 300px; /* Aumentado de 280px */
-        min-height: 520px; /* Aumentado de 450px */
+        min-width: 350px; 
+        max-width: 350px; 
+        min-height: 580px; 
         padding: 20px;
     }
     
@@ -459,13 +435,13 @@ body::before {
     }
     
     .search-results-horizontal {
-        padding: 10px 10px 20px; /* Padding lateral consistente */
+        padding: 10px 10px 20px; 
     }
     
     .search-card {
-        min-width: 280px; /* Aumentado de 260px */
-        max-width: 280px; /* Aumentado de 260px */
-        min-height: 480px; /* Aumentado de 400px */
+        min-width: 320px;
+        max-width: 320px; 
+        min-height: 520px;
         padding: 15px;
     }
     

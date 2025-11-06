@@ -65,11 +65,12 @@ require_once "../controle/funcoes.php";
                 echo "<td><a href='../controle/adicionarFavorito.php?id=$idjogo' class='favorito-btn'><i class='far fa-star'></i> Favoritar</a></td>";
 
                 // BOTÃO DE EXCLUIR E EDITAR- VISÍVEL APENAS PARA ADMINISTRADORES
+
                 if ($_SESSION['tipo'] === 'A') {
                     echo "<td><a href='../controle/deletarJogo.php?idjogo=$idjogo' class='delete-btn' onclick='return confirm(\"Tem certeza que deseja excluir este jogo?\");'><i class='fas fa-trash'></i> Excluir</a></td>";
                 }
                 if ($_SESSION['tipo'] === 'A') {
-                    echo "<td><a href='editarJogo.php?idjogo=$idjogo' class='delete-btn'><i class='fas fa-trash'></i> Editar</a></td>";
+                    echo "<td><a href='editarJogo.php?idjogo=$idjogo' class='edit-btn'><i class='fas fa-trash'></i> Editar</a></td>";
                 }
             }
         }

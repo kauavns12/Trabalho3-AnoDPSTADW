@@ -17,7 +17,7 @@ body {
     position: relative;
 }
 
-/* Efeitos de partículas animadas */
+
 body::after {
     content: "";
     position: absolute;
@@ -130,10 +130,12 @@ body::before {
     justify-content: center;
 }
 
-/* Estilo para o botão de visualizar */
+/* Estilo para os botões de ação */
 .jogos-table a {
-    display: inline-block;
-    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     color: white;
     text-decoration: none;
     padding: 8px 16px;
@@ -141,15 +143,45 @@ body::before {
     font-size: 14px;
     font-weight: 600;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
     text-align: center;
     min-width: 100px;
+    border: none;
+    cursor: pointer;
 }
 
-.jogos-table a:hover {
-    background: linear-gradient(135deg, #6d28d9 0%, #4338ca 100%);
+/* Botão Excluir - Vermelho */
+.delete-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4) !important;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(124, 58, 237, 0.6);
+    box-shadow: 0 7px 20px rgba(239, 68, 68, 0.6) !important;
+}
+
+/* Botão Editar - Azul/Lilás (sem ícone de lixeira) */
+.edit-btn {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(139, 92, 246, 0.6) !important;
+}
+
+/* Remove o ícone de lixeira do botão editar */
+.edit-btn .fa-trash {
+    display: none;
+}
+
+/* Adiciona ícone de edição ao botão editar */
+.edit-btn::before {
+    content: "✏️";
+    font-size: 12px;
 }
 
 /* Estilo específico para o botão de favorito */
@@ -293,16 +325,6 @@ body::before {
 
     .decoration {
         display: none;
-    }
-
-    .delete-btn {
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
-        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4) !important;
-    }
-
-    .delete-btn:hover {
-        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
-        box-shadow: 0 7px 20px rgba(239, 68, 68, 0.6) !important;
     }
 
     /* Ajuste responsivo para colunas adicionais */

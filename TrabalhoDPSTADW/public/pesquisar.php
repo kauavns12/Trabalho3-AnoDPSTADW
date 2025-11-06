@@ -20,7 +20,7 @@ require_once "../controle/verificarLogado.php";
         <h1 class="page-title">Resultados da Pesquisa</h1>
         
         <div class="search-results-horizontal">
-            <!-- Card de Jogos -->
+            
             <div class="search-card">
                 <div class="card-header">
                     <div class="card-icon">🎮</div>
