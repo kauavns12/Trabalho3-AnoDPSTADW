@@ -7,56 +7,59 @@ $id_usuario = $_SESSION['idusuario'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suas Preferâncias</title>
+    <title>Suas Preferências - FRIV GAMES & WIKI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./estilo/cabeçalho.css">
+    <link rel="stylesheet" href="./estilo/estilo_preferenciaUsu.css">
 </head>
-<?php include 'cabeçalho.php'; ?>
+
 <body>
+    <?php include 'cabeçalho.php'; ?>
     
-<?php
-$lista_preferencia_usu = listarPreferenciaUsu($conexao, $id_usuario);
+    <div class="preferencias-container">
+        <h1 class="page-title">Suas Preferências</h1>
+        
+        <div class="content-container">
+            <?php
+            $lista_preferencia_usu = listarPreferenciaUsu($conexao, $id_usuario);
 
-if (count($lista_preferencia_usu) == 0) {
-    echo "Você não possui preferências";
-} else {
-    // Começar a tabela uma única vez
-    echo '<table border="1">
-            <tr>
-                <td>Gênero</td>
-                <td colspan="2">Ação</td>
-            </tr>';
+            if (count($lista_preferencia_usu) == 0) {
+                echo '<div class="no-preferencias">Você não possui preferências</div>';
+            } else {
+                echo '<ul class="preferencias-list">';
+                
+                foreach ($lista_preferencia_usu as $lista) {
+                    $idgenero = $lista['genero_idgenero'];
+                    $lista_genero = [];
+                    $lista_genero[] = pesquisarGeneroID($conexao, $idgenero);
 
-    // Loop para percorrer as preferências do usuário
-    foreach ($lista_preferencia_usu as $lista) {
-        $idgenero = $lista['genero_idgenero'];
-
-        // Buscar gêneros correspondentes
-        $lista_genero = [];
-        $lista_genero[] = pesquisarGeneroID($conexao, $idgenero);
-
-        if (count($lista_genero) == 0) {
-            // Se não encontrar gêneros, exibir mensagem dentro da tabela
-            echo "<tr><td colspan='2'>Gêneros não identificados</td></tr>";
-        } else {
-            // Loop para exibir os gêneros encontrados
-            foreach ($lista_genero as $listao) {
-                $nome = $listao['nome'];  
-                echo "<tr>";
-                echo "<td>$nome</td>";
-                echo "<td><a href='editarPreferencia.php?id=$id_usuario'>Editar preferencia</a></td>";
-                echo "</tr>";
+                    if (count($lista_genero) > 0) {
+                        foreach ($lista_genero as $listao) {
+                            $nome = $listao['nome'];  
+                            echo '<li class="preferencia-item">';
+                            echo '<span class="genero-name">' . $nome . '</span>';
+                            echo '</li>';
+                        }
+                    }
+                }
+                echo '</ul>';
             }
-        }
-    }
+            ?>
+            
+            <div class="edit-btn-container">
+                <a href="editarPreferencia.php?id=<?php echo $id_usuario; ?>" class="edit-btn">Editar Preferências</a>
+            </div>
+        </div>
+    </div>
 
-    // Fechar a tabela após o loop
-    echo '</table>';
-}
-?>
-
+    <!-- Elementos decorativos -->
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
 </body>
 </html>

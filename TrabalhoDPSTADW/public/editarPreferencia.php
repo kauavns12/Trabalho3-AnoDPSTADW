@@ -12,34 +12,50 @@ $generos = listarGenero($conexao); // função que retorna todos os gêneros cad
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Preferências</title>
+    <title>Editar Preferências - FRIV GAMES & WIKI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./estilo/cabeçalho.css">
+    <link rel="stylesheet" href="./estilo/estilo_editarPreferencia.css">
 </head>
-<?php include 'cabeçalho.php'; ?>
 <body>
-    <h2>Editar Preferências</h2>
-    <form action="../controle/salvarPreferenciaEditada.php" method="post">
-        <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
+    <?php include 'cabeçalho.php'; ?>
+    
+    <div class="editar-preferencias-container">
+        <h1 class="page-title">Editar Preferências</h1>
         
-        <label>Selecione seus gêneros favoritos:</label><br>
-        <?php foreach ($generos as $genero): 
-            $id = $genero['idgenero'];
-            $nome = $genero['nome'];
-            // verificar se já está selecionado
-            $checked = false;
-            foreach ($preferencias as $pref) {
-                if ($pref['genero_idgenero'] == $id) {
-                    $checked = true;
-                    break;
-                }
-            }
-        ?>
-            <input type="checkbox" name="generos[]" value="<?php echo $id; ?>" <?php if ($checked) echo "checked"; ?>>
-            <?php echo $nome; ?><br>
-        <?php endforeach; ?>
+        <div class="form-container">
+            <form action="../controle/salvarPreferenciaEditada.php" method="post">
+                <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
+                
+                <label class="form-label">Selecione seus gêneros favoritos:</label>
+                
+                <div class="generos-container">
+                    <?php foreach ($generos as $genero): 
+                        $id = $genero['idgenero'];
+                        $nome = $genero['nome'];
+                        // verificar se já está selecionado
+                        $checked = false;
+                        foreach ($preferencias as $pref) {
+                            if ($pref['genero_idgenero'] == $id) {
+                                $checked = true;
+                                break;
+                            }
+                        }
+                    ?>
+                        <label class="genero-option">
+                            <input type="checkbox" name="generos[]" value="<?php echo $id; ?>" <?php if ($checked) echo "checked"; ?>>
+                            <span class="checkbox-custom"></span>
+                            <span class="genero-name"><?php echo $nome; ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
 
-        <br><input type="submit" value="Salvar Alterações">
-    </form>
+                <button type="submit" class="save-btn">Salvar Alterações</button>
+            </form>
+            
+            <a href="configuracoes.php" class="back-btn">Voltar para Configurações</a>
+        </div>
+    </div>
 
-    <br><a href="configuracoes.php">Voltar</a>
 </body>
 </html>
