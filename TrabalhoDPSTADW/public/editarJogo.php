@@ -37,14 +37,17 @@ if (count($jogos) == 0) {
     <title>Editar Jogo</title>
     <link rel="stylesheet" href="./estilo/estilo_formJogo.css">
     <script src="../controle/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="../controle/jquery.mask.min.js"></script>
     <link rel="stylesheet" href="./estilo/cabeçalho.css">
 
 </head>
-<?php include 'cabeçalho.php'; ?>
+
 <body> 
-    
+
+    <?php include 'cabeçalho.php'; ?>
+
     <form action="../controle/editarJogo.php?idjogo=<?php echo $id ?>" method="post" enctype="multipart/form-data" class="form-container" id="formulario">
         <div class="form-header">
             <h1>Editar Jogo</h1>

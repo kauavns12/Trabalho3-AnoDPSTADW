@@ -1,4 +1,4 @@
-/* Estilos para a página de listagem de jogos */
+/* Estilos para a página de listagem de jogos - TABELA ATUALIZADA */
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +17,6 @@ body {
     position: relative;
 }
 
-
 body::after {
     content: "";
     position: absolute;
@@ -34,18 +33,10 @@ body::after {
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 0.7;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
 }
 
-/* Overlay escuro para melhor contraste */
 body::before {
     content: "";
     position: absolute;
@@ -57,120 +48,224 @@ body::before {
     z-index: 0;
 }
 
-/* Estilos para a página de listagem de jogos */
+/* Container principal */
 .jogos-container {
     max-width: 1200px;
-    margin: 30px auto;
+    margin: 100px auto 40px;
     padding: 0 20px;
     position: relative;
     z-index: 1;
 }
 
+/* Container da tabela */
+.table-container {
+    background: rgba(26, 11, 46, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(101, 78, 163, 0.4);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+/* Tabela de jogos */
 .jogos-table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(26, 11, 46, 0.9);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(101, 78, 163, 0.4);
-    backdrop-filter: blur(10px);
+    table-layout: fixed;
+}
+
+/* Cabeçalho da tabela */
+.jogos-table thead tr {
+    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
 }
 
 .jogos-table th {
-    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
     color: white;
-    padding: 18px 15px;
-    text-align: left;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 2px solid rgba(101, 78, 163, 0.4);
+    padding: 20px 15px;
+    text-align: center;
+    border: none;
 }
 
+/* Definindo larguras específicas para as colunas */
+.jogos-table th:nth-child(1) { /* FOTO */
+    width: 100px;
+}
+
+.jogos-table th:nth-child(2) { /* NOME */
+    width: auto;
+    text-align: left;
+}
+
+.jogos-table th:nth-child(3) { /* DESENVOLVEDOR */
+    width: auto;
+    text-align: left;
+}
+
+.jogos-table th:nth-child(4) { /* DATA */
+    width: 150px;
+}
+
+.jogos-table th:nth-child(5) { /* AÇÕES */
+    width: 350px;
+}
+
+/* Linhas da tabela */
+.jogos-table tbody tr {
+    background: rgba(15, 23, 42, 0.6);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(101, 78, 163, 0.2);
+}
+
+.jogos-table tbody tr:hover {
+    background: rgba(15, 23, 42, 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+}
+
+/* Células da tabela */
 .jogos-table td {
-    padding: 15px;
-    border-bottom: 1px solid rgba(101, 78, 163, 0.3);
+    padding: 20px 15px;
     color: #e0e0ff;
+    text-align: center;
+    border: none;
     vertical-align: middle;
 }
 
-.jogos-table tr:last-child td {
-    border-bottom: none;
+/* Coluna da foto - CENTRALIZADA */
+.jogos-table td:nth-child(1) {
+    text-align: center;
+    padding: 15px;
 }
 
-.jogos-table tr:hover {
-    background: rgba(101, 78, 163, 0.1);
+/* Container da imagem do jogo */
+.jogo-imagem-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 3px solid rgba(167, 139, 250, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    background: rgba(15, 23, 42, 0.8);
 }
 
-/* Estilo para a imagem do jogo */
+.jogos-table tr:hover .jogo-imagem-container {
+    border-color: rgba(167, 139, 250, 0.7);
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* Imagem do jogo */
 .jogo-imagem {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid rgba(167, 139, 250, 0.3);
-    background-color: rgba(15, 23, 42, 0.7);
-    transition: transform 0.3s, box-shadow 0.3s;
+    object-position: center;
     display: block;
+    transition: all 0.3s ease;
 }
 
-.jogo-imagem:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+.jogos-table tr:hover .jogo-imagem {
+    transform: scale(1.1);
 }
 
-/* Container para a imagem */
-.imagem-container {
-    width: 80px;
-    height: 80px;
+/* Colunas de texto - ALINHADAS À ESQUERDA */
+.jogos-table td:nth-child(2),
+.jogos-table td:nth-child(3) {
+    font-weight: 600;
+    color: #a78bfa;
+    text-align: left;
+    font-size: 1.1rem;
+    padding-left: 20px;
+    vertical-align: middle;
+    line-height: 1.4;
+}
+
+/* Coluna de data - CENTRALIZADA */
+.jogos-table td:nth-child(4) {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Container de ações */
+.actions-container {
     display: flex;
-    align-items: center;
+    gap: 10px;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-/* Estilo para os botões de ação */
-.jogos-table a {
+/* Links de ação */
+.action-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
+    gap: 8px;
     color: white;
     text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 8px;
     font-weight: 600;
-    transition: all 0.3s;
-    text-align: center;
-    min-width: 100px;
-    border: none;
-    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.action-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.action-link i {
+    font-size: 1rem;
+}
+
+/* Botão Visualizar - Verde */
+.view-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.view-btn:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+/* Botão Favoritar - Amarelo */
+.favorito-btn {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.favorito-btn:hover {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
 }
 
 /* Botão Excluir - Vermelho */
 .delete-btn {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4) !important;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 }
 
 .delete-btn:hover {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(239, 68, 68, 0.6) !important;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 }
 
-/* Botão Editar - Azul/Lilás (sem ícone de lixeira) */
+/* Botão Editar - Azul/Lilás */
 .edit-btn {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
 }
 
 .edit-btn:hover {
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(139, 92, 246, 0.6) !important;
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
 }
 
 /* Remove o ícone de lixeira do botão editar */
@@ -180,32 +275,31 @@ body::before {
 
 /* Adiciona ícone de edição ao botão editar */
 .edit-btn::before {
-    content: "✏️";
-    font-size: 12px;
-}
-
-/* Estilo específico para o botão de favorito */
-.favorito-btn {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
-}
-
-.favorito-btn:hover {
-    background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important;
-    box-shadow: 0 7px 20px rgba(245, 158, 11, 0.6) !important;
+    content: "" !important;
+    margin-right: 0 !important;
+    font-size: 0 !important;
 }
 
 /* Estilo para mensagem quando não há jogos */
 .no-jogos {
     text-align: center;
     color: #94a3b8;
-    font-size: 18px;
+    font-size: 1.2rem;
+    margin: 60px auto;
     padding: 40px;
-    background: rgba(26, 11, 46, 0.9);
-    border-radius: 12px;
-    margin: 20px 0;
+    background: rgba(26, 11, 46, 0.8);
+    border-radius: 16px;
     border: 1px solid rgba(101, 78, 163, 0.4);
+    max-width: 500px;
     backdrop-filter: blur(10px);
+}
+
+.no-jogos::before {
+    content: "🎮";
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    opacity: 0.7;
 }
 
 /* Elementos decorativos de fundo */
@@ -246,104 +340,26 @@ body::before {
 }
 
 @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(10px, 15px) scale(1.05); }
+    50% { transform: translate(-5px, 20px) scale(0.95); }
+    75% { transform: translate(-10px, -5px) scale(1.02); }
+}
 
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
+/* Animações de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-
-    25% {
-        transform: translate(10px, 15px) scale(1.05);
-    }
-
-    50% {
-        transform: translate(-5px, 20px) scale(0.95);
-    }
-
-    75% {
-        transform: translate(-10px, -5px) scale(1.02);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .jogos-container {
-        padding: 0 15px;
-    }
-
-    .jogos-table {
-        display: block;
-        overflow-x: auto;
-    }
-
-    .jogos-table th,
-    .jogos-table td {
-        padding: 12px 10px;
-        font-size: 14px;
-    }
-
-    .jogo-imagem {
-        width: 60px;
-        height: 60px;
-    }
-
-    .imagem-container {
-        width: 60px;
-        height: 60px;
-    }
-
-    .jogos-table a {
-        padding: 6px 12px;
-        font-size: 12px;
-        min-width: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .jogos-table th,
-    .jogos-table td {
-        padding: 10px 8px;
-        font-size: 12px;
-    }
-
-    .jogo-imagem {
-        width: 50px;
-        height: 50px;
-    }
-
-    .imagem-container {
-        width: 50px;
-        height: 50px;
-    }
-
-    .jogos-table a {
-        padding: 5px 10px;
-        font-size: 11px;
-        min-width: 70px;
-    }
-
-    .decoration {
-        display: none;
-    }
-
-    /* Ajuste responsivo para colunas adicionais */
-    @media (max-width: 768px) {
-
-        .jogos-table td:nth-child(5),
-        .jogos-table td:nth-child(6),
-        .jogos-table td:nth-child(7) {
-            white-space: nowrap;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .jogos-table a {
-            padding: 4px 8px;
-            font-size: 10px;
-            min-width: 60px;
-        }
-    }
+.table-container {
+    animation: fadeInUp 0.6s ease-out;
 }
 
 /* Botão voltar */
@@ -373,4 +389,134 @@ body::before {
 .back-button::before {
     content: "⬅️";
     font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .jogos-container {
+        margin: 80px auto 30px;
+        padding: 0 15px;
+    }
+    
+    .jogos-table {
+        font-size: 0.9rem;
+        table-layout: auto;
+    }
+    
+    .jogos-table th {
+        padding: 15px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .jogos-table td {
+        padding: 15px 10px;
+    }
+    
+    .jogo-imagem-container {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .action-link {
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .actions-container {
+        gap: 8px;
+    }
+    
+    .jogos-table td:nth-child(2),
+    .jogos-table td:nth-child(3) {
+        padding-left: 15px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .jogos-container {
+        margin: 70px auto 20px;
+        padding: 0 10px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    .jogos-table {
+        display: block;
+        white-space: nowrap;
+        table-layout: auto;
+    }
+    
+    .jogos-table th {
+        padding: 12px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .jogos-table td {
+        padding: 12px 8px;
+        font-size: 0.85rem;
+    }
+    
+    .jogo-imagem-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .action-link {
+        min-width: 90px;
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .actions-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .jogos-table td:nth-child(2),
+    .jogos-table td:nth-child(3) {
+        padding-left: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .decoration {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .jogos-container {
+        margin: 60px auto 15px;
+        padding: 0 5px;
+    }
+    
+    .jogos-table th {
+        padding: 10px 6px;
+        font-size: 0.75rem;
+    }
+    
+    .jogos-table td {
+        padding: 10px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .jogo-imagem-container {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .action-link {
+        min-width: 80px;
+        padding: 5px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .jogos-table td:nth-child(2),
+    .jogos-table td:nth-child(3) {
+        padding-left: 8px;
+        font-size: 0.85rem;
+    }
 }
