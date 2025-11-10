@@ -19,7 +19,7 @@ function editarUsuario($conexao, $nome, $gmail, $senha, $idusuario, $foto)
 {
     $sql = "UPDATE usuario SET nome=?, gmail=?, senha=?, foto=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $gmail, $senha, $foto ,$idusuario);
+    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $gmail, $senha, $foto, $idusuario);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
@@ -77,11 +77,11 @@ function pesquisarUsuario_Nome($conexao, $nome)
 {
     $sql = "SELECT idusuario, nome, foto FROM usuario WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    
+
     $nome_param = $nome . "%";
     mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
-    
+
     $resultado = mysqli_stmt_get_result($comando);
     $lista_usuarios = [];
     while ($user = mysqli_fetch_assoc($resultado)) {
@@ -124,7 +124,8 @@ function listarUsuariosAleatorios($conexao, $limite = 5)
     return $usuarios;
 }
 
-function promover($conexao, $idusuario){
+function promover($conexao, $idusuario)
+{
     $sql = "UPDATE usuario SET tipo = 'A'    WHERE idusuario = ? ";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
@@ -198,15 +199,16 @@ function pesquisarJogoID($conexao, $idjogo)
     return $jogo;
 }
 
+
 function pesquisarJogoNome($conexao, $nome)
 {
     $sql = "SELECT * FROM jogo WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    
+
     $nome_param = $nome . "%";
     mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
-    
+
     $resultado = mysqli_stmt_get_result($comando);
     $lista_jogos = [];
     while ($jogo = mysqli_fetch_assoc($resultado)) {
@@ -230,15 +232,6 @@ function listarJogo($conexao)
     return $lista_jogo;
 }
 
-function buscarJogoPorID($conexao, $idjogo)
-{
-    $sql = "SELECT * FROM jogo WHERE idjogo = ?";
-    $stmt = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $idjogo);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    return mysqli_fetch_assoc($result);
-}
 
 function buscarTodosJogos($conexao)
 {
@@ -246,7 +239,7 @@ function buscarTodosJogos($conexao)
     $result = mysqli_query($conexao, $sql);
     $jogos = [];
     if ($result && mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $jogos[] = $row;
         }
     }
@@ -331,7 +324,7 @@ function pesquisarJogoGenero($conexao, $idgenero)
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idgenero);
     mysqli_stmt_execute($comando);
-    
+
     $resultado = mysqli_stmt_get_result($comando);
     $jogos = [];
     while ($jogo = mysqli_fetch_assoc($resultado)) {
@@ -384,7 +377,7 @@ function buscarAvaliacoesJogo($conexao, $idjogo)
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, "i", $idjogo);
     mysqli_stmt_execute($stmt);
-    
+
     $result = mysqli_stmt_get_result($stmt);
     $avaliacoes = [];
     while ($avaliacao = mysqli_fetch_assoc($result)) {
@@ -413,7 +406,7 @@ function buscarMinhaAvaliacao($conexao, $usuario_id, $jogo_id)
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, "ii", $usuario_id, $jogo_id);
     mysqli_stmt_execute($stmt);
-    
+
     $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
         $avaliacao = mysqli_fetch_assoc($result);
@@ -432,7 +425,7 @@ function processarAvaliacao($conexao, $classificacao, $usuario_id, $jogo_id)
     mysqli_stmt_bind_param($stmt, "ii", $usuario_id, $jogo_id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    
+
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         editarAvaliacaoJogo($conexao, $row['idavaliacao_jogo'], $classificacao, $usuario_id, $jogo_id);
@@ -495,7 +488,7 @@ function verificarCategoriasPadrao($conexao)
         mysqli_stmt_bind_param($stmt, "s", $categoria[0]);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        
+
         if (mysqli_num_rows($result) == 0) {
             salvarCategoriaForun($conexao, $categoria[0], $categoria[1]);
         }
@@ -547,6 +540,26 @@ function listarTopico($conexao)
     return $lista_topico;
 }
 
+function pesquisarTopico_ID($conexao, $idtopico_forun)
+{
+    $sql = "SELECT t.idtopico_forun, t.nome AS nome_topico, t.conteudo, c.idcategoria_forun, c.nome AS nome_categoria, j.idjogo, j.nome AS nome_jogo
+            FROM topico_forun t
+            INNER JOIN categoria_forun c ON t.categoria_forun_idcategoria_forun1 = c.idcategoria_forun
+            INNER JOIN jogo j ON t.jogo_idjogo1 = j.idjogo
+            WHERE t.idtopico_forun = ?";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idtopico_forun);
+    mysqli_stmt_execute($comando);
+
+    $resultado = mysqli_stmt_get_result($comando);
+    $topico = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+
+    return $topico;
+}
+
 function buscarOuCriarTopicoJogo($conexao, $jogo_id)
 {
     $sql_topico = "SELECT idtopico_forun FROM topico_forun WHERE jogo_idjogo1 = ? LIMIT 1";
@@ -554,12 +567,12 @@ function buscarOuCriarTopicoJogo($conexao, $jogo_id)
     mysqli_stmt_bind_param($stmt, "i", $jogo_id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-    
+
     if (mysqli_num_rows($result) > 0) {
         $topico = mysqli_fetch_assoc($result);
         return $topico['idtopico_forun'];
     } else {
-        $jogo = buscarJogoPorID($conexao, $jogo_id);
+        $jogo = pesquisarJogoID($conexao, $jogo_id);
         $categoria_padrao = buscarCategoriaPadrao($conexao);
         $nome_topico = "Comentários: " . $jogo['nome'];
         $conteudo_topico = "Tópico para comentários sobre o jogo " . $jogo['nome'];
@@ -632,11 +645,11 @@ function pesquisarPostConteudo($conexao, $conteudo)
 {
     $sql = "SELECT * FROM post_forun WHERE conteudo LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    
+
     $conteudo_param = $conteudo . "%";
     mysqli_stmt_bind_param($comando, 's', $conteudo_param);
     mysqli_stmt_execute($comando);
-    
+
     $resultado = mysqli_stmt_get_result($comando);
     $lista_posts = [];
     while ($post = mysqli_fetch_assoc($resultado)) {
@@ -711,9 +724,18 @@ function ListarComentarioPost($conexao, $idpost)
     $sql = "SELECT * FROM comentario WHERE post_forun_idpost_forun = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idpost);
-    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_comentario = [];
+    if ($resultado) {
+        while ($comentario = mysqli_fetch_assoc($resultado)) {
+            $lista_comentario[] = $comentario;
+        }
+    }
+
     mysqli_stmt_close($comando);
-    return $funcionou;
+    return $lista_comentario;
 }
 
 function buscarComentariosJogo($conexao, $idjogo)
@@ -811,7 +833,8 @@ function listarFavoritoTodosUsuario($conexao)
     }
     return $lista_favoritoTodosUsuario;
 }
-function verificarSeEhFavorito($conexao, $idusuario, $idjogo) {
+function verificarSeEhFavorito($conexao, $idusuario, $idjogo)
+{
     $sql = "SELECT idfavorito FROM favorito WHERE usuario_idusuario = ? AND jogo_idjogo = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idjogo);
@@ -819,16 +842,15 @@ function verificarSeEhFavorito($conexao, $idusuario, $idjogo) {
     $resultado = mysqli_stmt_get_result($comando);
     $favorito = mysqli_fetch_assoc($resultado);
     mysqli_stmt_close($comando);
-    
+
     // if ($favorito) {
-        //     return $favorito['favorito'];
+    //     return $favorito['favorito'];
     // } else {
-        //return false;
+    //return false;
     // }
 
 
     return $favorito ? $favorito['idfavorito'] : false;
-
 }
 
 // =============================================
@@ -893,7 +915,8 @@ function listarListaUsu($conexao, $idusuario)
     mysqli_stmt_close($comando);
     return $lista_lista;
 }
-function adicionarJogoLista($conexao, $idlista, $idusuario, $idjogo) {
+function adicionarJogoLista($conexao, $idlista, $idusuario, $idjogo)
+{
     $sql = "INSERT INTO lista_jogo (lista_idlista, lista_usuario_idusuario, jogo_idjogo) VALUES (?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'iii', $idlista, $idusuario, $idjogo);
@@ -945,7 +968,8 @@ function listarJogoLista($conexao)
     return $lista_lista;
 }
 
-function pesquisarListaID ($conexao, $idlista) {
+function pesquisarListaID($conexao, $idlista)
+{
     $sql = "SELECT * FROM lista WHERE idlista = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $idlista);
@@ -998,7 +1022,8 @@ function listarJogosDaLista($conexao, $idlista)
 }
 
 
-function jogoNaLista($conexao, $idlista, $idjogo) {
+function jogoNaLista($conexao, $idlista, $idjogo)
+{
     $sql = "SELECT 1 FROM lista_jogo WHERE lista_idlista = ? AND jogo_idjogo = ?";
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, 'ii', $idlista, $idjogo);
@@ -1045,11 +1070,11 @@ function pesquisarConquistaNome($conexao, $nome)
 {
     $sql = "SELECT * FROM conquista WHERE nome LIKE ?";
     $comando = mysqli_prepare($conexao, $sql);
-    
+
     $nome_param = $nome . "%";
     mysqli_stmt_bind_param($comando, 's', $nome_param);
     mysqli_stmt_execute($comando);
-    
+
     $resultado = mysqli_stmt_get_result($comando);
     $lista_conquistas = [];
     while ($conquista = mysqli_fetch_assoc($resultado)) {
@@ -1076,7 +1101,7 @@ function listarConquistaUsu($conexao, $idusuario)
     mysqli_stmt_bind_param($comando, 'i', $idusuario);
     mysqli_stmt_execute($comando);
 
-    
+
 
 
 
@@ -1320,14 +1345,15 @@ function deletarRelacionametoUsu($conexao, $idusuario)
 // FUNÇÕES DE RENDERIZAÇÃO
 // =============================================
 
-function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_avaliacao) {
-    ?>
+function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_avaliacao)
+{
+?>
     <div class="rating-section">
         <div class="section-title">
             <i class="fas fa-star"></i>
             <h2>Avaliação do Jogo</h2>
         </div>
-        
+
         <div class="rating-display">
             <div class="average-rating">
                 <?php echo $media_avaliacao; ?> <i class="fas fa-star" style="color: #ffc107;"></i>
@@ -1336,12 +1362,12 @@ function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_av
                 Baseado em <?php echo $total_avaliacoes; ?> avaliações
             </div>
         </div>
-        
+
         <form method="POST" action="">
             <div class="stars-input">
                 <?php for ($i = 5; $i >= 1; $i--): ?>
-                    <input type="radio" id="estrela<?php echo $i; ?>" name="classificacao" value="<?php echo $i; ?>" 
-                           <?php echo ($minha_avaliacao && $minha_avaliacao['classificacao'] == $i) ? 'checked' : ''; ?>>
+                    <input type="radio" id="estrela<?php echo $i; ?>" name="classificacao" value="<?php echo $i; ?>"
+                        <?php echo ($minha_avaliacao && $minha_avaliacao['classificacao'] == $i) ? 'checked' : ''; ?>>
                     <label for="estrela<?php echo $i; ?>"><i class="fas fa-star"></i></label>
                 <?php endfor; ?>
             </div>
@@ -1349,7 +1375,7 @@ function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_av
                 <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Avaliar</button>
             </div>
         </form>
-        
+
         <div class="rating-stats">
             <div class="stat-box">
                 <div class="stat-icon">
@@ -1358,7 +1384,7 @@ function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_av
                 <div class="stat-value"><?php echo $media_avaliacao >= 3 ? 'Y' : 'N'; ?></div>
                 <div class="stat-label">ANALIAÇÃO GERAL</div>
             </div>
-            
+
             <div class="stat-box">
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
@@ -1366,13 +1392,13 @@ function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_av
                 <div class="stat-value"><?php echo $total_avaliacoes; ?></div>
                 <div class="stat-label">TOTAL DE AVALIAÇÕES</div>
             </div>
-            
+
             <div class="stat-box">
                 <div class="stat-icon">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="stat-value">
-                    <?php 
+                    <?php
                     if ($minha_avaliacao) {
                         echo $minha_avaliacao['classificacao'] >= 3 ? 'Y' : 'N';
                     } else {
@@ -1384,24 +1410,25 @@ function renderizarSecaoAvaliacao($media_avaliacao, $total_avaliacoes, $minha_av
             </div>
         </div>
     </div>
-    <?php
+<?php
 }
 
-function renderizarSecaoComentarios($comentarios) {
-    ?>
+function renderizarSecaoComentarios($comentarios)
+{
+?>
     <div class="comments-section">
         <div class="section-title">
             <i class="fas fa-comments"></i>
             <h2>Comentários</h2>
         </div>
-        
+
         <div class="comment-form">
             <form method="POST" action="">
                 <textarea name="comentario" required placeholder="Digite seu comentário aqui..."></textarea>
                 <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar Comentário</button>
             </form>
         </div>
-        
+
         <?php if (count($comentarios) > 0): ?>
             <?php foreach ($comentarios as $comentario): ?>
                 <div class="comment">
@@ -1431,7 +1458,7 @@ function renderizarSecaoComentarios($comentarios) {
             </div>
         <?php endif; ?>
     </div>
-    <?php
+<?php
 }
 
 

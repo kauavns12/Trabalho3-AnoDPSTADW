@@ -1,6 +1,8 @@
 <?php
-require_once "../controle/conexao.php";
-require_once "../controle/funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
+require_once "verificarLogado.php";
+
 
 session_start(); // importante para poder mexer na sessão
 

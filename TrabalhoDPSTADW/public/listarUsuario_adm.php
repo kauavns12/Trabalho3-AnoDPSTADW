@@ -23,7 +23,7 @@ if ($_SESSION['tipo'] == 'c') {
 
     <div class="page-container">
         <h1 class="page-title">Lista de Usuários Cadastrados</h1>
-        
+
         <div class="main-card">
             <div class="table-container">
                 <?php
@@ -55,7 +55,7 @@ if ($_SESSION['tipo'] == 'c') {
                                 $gmail = $usuario['gmail'];
                                 $foto = $usuario['foto'];
                                 $tipo = $usuario['tipo'];
-                                
+
                                 $tipo_class = ($tipo == 'a') ? 'adm' : 'user';
                                 $tipo_text = ($tipo == 'a') ? 'ADM' : 'Usuário';
                             ?>
@@ -78,7 +78,7 @@ if ($_SESSION['tipo'] == 'c') {
                 ?>
             </div>
         </div>
-        
+
         <a href='configuracoes.php' class='back-button'>Voltar para Configurações</a>
     </div>
 

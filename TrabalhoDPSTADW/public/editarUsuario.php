@@ -1,14 +1,13 @@
 <?php
 // editarUsuario.php
+require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 
-session_start();
-
-// aqui pegue o id do usuário logado da sessão
+// Pega o ID do usuário logado da sessão
 $idusuario = $_SESSION['idusuario'];
 
-// busca dados do usuário
+// Busca dados do usuário no banco
 $usuario = pesquisarUsuario_ID($conexao, $idusuario);
 ?>
 
@@ -33,14 +32,14 @@ $usuario = pesquisarUsuario_ID($conexao, $idusuario);
 
         <div class="form-container">
             <form id="formulario" action="../controle/atualizarUsuario.php" method="post" enctype="multipart/form-data">
-                <!-- precisamos mandar o id para saber quem atualizar -->
+                <!-- Mandar o ID do usuário logado -->
                 <input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>">
 
                 <!-- Seção da Foto -->
                 <div class="photo-section">
                     <span class="photo-label">Foto de Perfil</span>
                     <div class="current-photo">
-                        <img src="../controle/fotos/<?php echo $usuario['foto']; ?>" 
+                        <img src="../controle/fotos/<?php echo htmlspecialchars($usuario['foto']); ?>" 
                              alt="Foto atual" 
                              class="user-photo">
                     </div>
@@ -81,7 +80,7 @@ $usuario = pesquisarUsuario_ID($conexao, $idusuario);
                            placeholder="********"
                            value="">
                     <small class="password-note">
-                        Deixe este campo em branco se não deseja alterar sua senha
+                        Deixe este campo em branco se não deseja alterar sua senha.
                     </small>
                 </div>
 

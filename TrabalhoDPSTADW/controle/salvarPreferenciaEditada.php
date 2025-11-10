@@ -1,6 +1,6 @@
 <?php
-require_once "../controle/verificarLogado.php";
-require_once "../controle/conexao.php";
+require_once "verificarLogado.php";
+require_once "conexao.php";
 
 // Pega os dados do formulário
 $id_usuario = $_POST['id_usuario'];
