@@ -1,5 +1,5 @@
 <?php
-require_once "verificarLogado.php";
+
 require_once "conexao.php";
 require_once "funcoes.php";
 

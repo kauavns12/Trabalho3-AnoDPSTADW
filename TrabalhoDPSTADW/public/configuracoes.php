@@ -54,7 +54,7 @@ $id_usuario = $_SESSION['idusuario'];
             <?php if ($_SESSION['tipo'] === 'A'): ?>
                 <a href="listarJogo_adm.php?id" class="settings-btn" target="bodyiframe">
                     <div class="settings-btn-content">
-                        <span class="settings-btn-icon">👥</span>
+                        <span class="settings-btn-icon">🎮</span>
                         <span>Jogos cadastrados</span>
                     </div>
                     <span class="settings-btn-arrow">→</span>
@@ -76,7 +76,7 @@ $id_usuario = $_SESSION['idusuario'];
             <a href="lista_preferencia_usu.php" class="settings-btn" target="bodyiframe">
                 <div class="settings-btn-content">
                     <span class="settings-btn-icon">⭐</span>
-                    <span>Listar Preferências do Usuário</span>
+                    <span>Listar Preferências de Gênero do Usuário</span>
                 </div>
                 <span class="settings-btn-arrow">→</span>
             </a>

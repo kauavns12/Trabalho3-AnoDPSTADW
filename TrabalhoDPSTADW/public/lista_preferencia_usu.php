@@ -22,10 +22,11 @@ $id_usuario = $_SESSION['idusuario'];
     <?php include 'cabeçalho.php'; ?>
     
     <div class="preferencias-container">
-        <h1 class="page-title">Suas Preferências</h1>
+        <h1 class="page-title">Suas Preferências de Gênero</h1>
         
         <div class="content-container">
             <?php
+
             $lista_preferencia_usu = listarPreferenciaUsu($conexao, $id_usuario);
 
             if (count($lista_preferencia_usu) == 0) {
