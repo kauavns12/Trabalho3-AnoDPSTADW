@@ -79,7 +79,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'adicionado') {
             </div>
         <?php } ?>
         
-        <a href='home.php' class='back-button'>Voltar</a>
+        <a href='configuracoes.php' class='back-button'>Voltar</a>
     </div>
 </body>
 </html>

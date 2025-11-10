@@ -82,9 +82,6 @@ if ($_SESSION['tipo'] == 'c') {
         <a href='configuracoes.php' class='back-button'>Voltar para Configurações</a>
     </div>
 
-    <!-- Elementos decorativos de fundo -->
-    <div class="decoration"></div>
-    <div class="decoration"></div>
 </body>
 
 </html>

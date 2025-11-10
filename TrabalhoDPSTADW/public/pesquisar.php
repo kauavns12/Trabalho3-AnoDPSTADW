@@ -141,9 +141,5 @@ require_once "../controle/verificarLogado.php";
         <a href='home.php' class='back-button'>Voltar para Home</a>
     </div>
 
-    <!-- Elementos decorativos -->
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
 </body>
 </html>

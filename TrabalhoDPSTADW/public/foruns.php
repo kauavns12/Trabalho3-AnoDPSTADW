@@ -125,7 +125,7 @@ require_once "../controle/funcoes.php";
         </div>
 
     </div>
-    <div> <a href='home.php' class='back-button'>Voltar para Home</a></div>
+    
 </body>
 
 </html>
