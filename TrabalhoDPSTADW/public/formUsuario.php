@@ -70,7 +70,7 @@ require_once "../controle/funcoes.php";
                     <h2 class="section-title">ACESSAR</h2>
                     
                     <div class="form-group">
-                        <label>INSPIRA FOTO DE USUÁRIO</label>
+                        <label>INSIRA FOTO DE USUÁRIO</label>
                         <div class="photo-upload-container">
                             <div class="photo-preview">
                                 <img id="preview-img" src="" alt="Pré-visualização">
