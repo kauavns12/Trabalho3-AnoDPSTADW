@@ -523,10 +523,10 @@ INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '690c7a469304f.webp', 'c'),
 ('Pablo (adm)', 'adm@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', '6908f25f7ac7a.jpeg', 'A'),
 ('Lunna', 'lunna@gmail.com', '$2y$10$vkLZem6D2KPu8aYqrqjUKuiA8/wfafudsV9vRRaZipFQHHGehznZu', '690394dade1b5.png', 'c'),
-('kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c');
-('Italo', 'italo@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'italo.jpg', 'A');
-('Kauã', 'kaua@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'kaua.jpeg', 'A');
-('Luna', 'luna@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'lunna.jpg', 'A');
+('kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c'),
+('Italo', 'italo@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'italo.jpg', 'A'),
+('Kauã', 'kaua@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'kaua.jpeg', 'A'),
+('Luna', 'luna@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'lunna.jpg', 'A'),
 ('Lucas', 'lucas@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'wither3.jpg', 'A');
 
 
