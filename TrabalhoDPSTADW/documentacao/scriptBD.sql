@@ -408,16 +408,31 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 USE friv;
 -- Inserir generos
 INSERT INTO `friv`.`genero` (`nome`) VALUES
-('Ação'),
-('Aventura'),
-('Estratégia'),
-('Quebra-cabeça'),
-('Tiro'),
-('Esportes'),
-('Corrida'),
-('RPG'),
-('Simulação'),
-('Casual');
+('Ação'), -- 1
+('Aventura'), -- 2
+('Estratégia'), -- 3
+('Quebra-cabeça'), -- 4
+('Tiro'), -- 5
+('Esportes'), -- 6
+('Corrida'), -- 7
+('RPG'), -- 8
+('Simulação'), -- 9
+('Casual'), -- 10
+('Terror'), -- 11
+('Romance'), -- 12
+('Culinária'), -- 13
+('Turno'), -- 14
+('Plataforma'), -- 15
+('Hero Shooter'), -- 16
+('Luta'),-- 17
+('Tower Defense'), -- 18
+('Moda'), -- 19
+('Battle Arena'), -- 20
+('Sandbox'), -- 21
+('Sobrevivência'), -- 22
+('Corrida'), -- 23
+("jump 'n' run"), -- 24
+("MMORPG"); -- 25
 
 -- Inserir jogos
 INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `img`) VALUES
@@ -425,16 +440,58 @@ INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `
 ('Bloons Tower Defense', 'Jogo de estratégia com macacos e balões', 'Ninja Kiwi', '2007-12-10', '6.jpg'),
 ('Crush the Castle', 'Jogo de física com catapultas e castelos', 'Armor Games', '2009-05-20', 'hqdefault.jpg'),
 ('Raze', 'Jogo de tio em arena com soldados', 'Sky9 Games', '2011-08-30', 'raze-3_1x1.jpeg'),
-('Super Mario Flash', 'Versão web do clássico Mario Bros', 'Anonymous', '2008-11-05', 'super-mario-flash.webp');
+('Honkai Star Rail', 'Honkai: Star Rail é um jogo de RPG gacha 3D desenvolvido e publicado pela HoYoverse. Foi lançado para Windows e dispositivos móveis em 26 de abril de 2023; há previsão de lançamento para  PlayStation 4 e 5', 'HoYolab', '2023-04-26', 'honkai-star-rail_s7q5.jpg'),
+('Five Nights at Freddys 4', "Five Nights at Freddy's 4 é um jogo eletrônico independente de sobrevivência de terror em point-and-click", 'Scott Cawthon', '2015-07-23', 'fnaf4.jpg'),
+('Jogo da Barbie', 'Jogo de moda da barbie', 'Mattel', '2017-07-27', 'pablo.webp'),
+('Minecraft', 'Minecraft é um jogo eletrônico sandbox de sobrevivência de 2011 desenvolvido e publicado pela desenvolvedora sueca Mojang Studios.', 'Mojang', '2009-05-17', 'minecraft.avif'),
+('Mobile Legends: Bang Bang', 'Mobile Legends: Bang Bang é um jogo eletrônico para aparelhos móveis no estilo Multiplayer Online Battle Arena desenvolvido e publicado pela Moonton.', 'Moonton', '2016-07-14', 'mobile.jpeg'),
+('Pokemon White', 'Pokémon Black Version e White Version são jogos eletrônicos de RPG lançados em 2010, desenvolvidos pela Game Freak e publicados pela The Pokémon Company e Nintendo lançados para o portátil Nintendo DS. São os primeiros títulos da quinta geração da série Pokémon.', 'GameFreak', '2010-09-18', 'pokblack.webp'),
+('Amoung Us', 'Among Us é um jogo eletrônico online, dos gêneros jogo em grupo e sobrevivência, desenvolvido e publicado pelo estúdio de jogos estadunidense InnerSloth.', 'Innersloth', '2018-06-15', 'among-us_8kks.jpg'),
+('Overwatch 2', 'Overwatch 2 é um jogo eletrônico multijogador de tiro em primeira pessoa publicado e distribuído pela Blizzard Entertainment. A Blizzard Entertainment anunciou Overwatch 2 durante a BlizzCon 2019', 'Blizzard Entertainment', '2022-10-04', 'images.png'),
+('Genshin Impact', 'RPG de ação de mundo aberto gratuito que se passa no mundo de fantasia de Teyvat', 'HoYolab', '2020-09-28', 'genshin.png'),
+('Colheita Feliz', "Colheita Feliz foi um simulador de fazenda em tempo real desenvolvido pela Elex e distribuído pela empresa norte-americana Mentez, fundada no Brasil pela empreendedora serial Tahiana D'Egmont, disponível como um aplicativo no site da extinta rede social Orkut.", 'Elex', '2008-06-15', 'colheita.jpg'),
+('Pokemon FireRed', 'Pokémon FireRed Version e Pokémon LeafGreen Version são dois jogos eletrônicos de RPG de 2004 recriado pelo Pokémon Red e Blue de Game Boy em 1996. Eles foram desenvolvidos pela Game Freak e publicados pela The Pokémon Company e pela Nintendo para o Game Boy Advance', 'GameFreak', '2004-01-24', 'pk.webp'),
+('Rock & Roll Racing', "Rock N' Roll Racing é um jogo eletrônico de corrida e de combate de veículos que possui um estilo único para um jogo de 1993", 'Blizzard Entertainment', '1993-06-04', 'rocknrollRacing.jpg'),
+('Blackthorne', 'Blackthorne é um videogame de plataforma desenvolvido pela Blizzard Entertainment. Blackthorne foi lançado para SNES e MS-DOS em 1994, e com gráficos melhorados e uma maior paleta de cores para Sega 32X em 1995 e para Mac OS em 1996', 'Interplay', '1994-09-07', 'blackthorne.webp'),
+('Metal Warriors', 'Metal Warriors é um jogo eletrônico de ação e plataforma de rolagem lateral desenvolvido pela LucasArts e publicado pela Konami exclusivamente para o Super Nintendo Entertainment System na América do Norte em abril de 1995', 'LucasArts', '1995-04-07', 'maxresdefault.jpg'),
+('Dragon Ball: Advanced Adventure', 'Dragon Ball: Advanced Adventure é um jogo eletrônico lançado para o Game Boy Advance baseado na série de mangá e anime Dragon Ball. O jogo contém 30 personagens jogáveis. Ele contém cinco modos de jogo.', 'Dimps', '2004-11-18', 'dragon-ball-gba.jpg'),
+('Biker Mice from Mars', 'Biker Mice From Mars é um videogame de corrida lançado pela Konami para o Super Nintendo Entertainment System. É um tie-in para a série animada de mesmo título. A versão PAL do jogo apresenta colocação de produtos no jogo para barras de chocolate Snickers', 'Konami', '1994-11-1', 'biker-mice-from-mars--24160.jpg'),
+('Pokemon Sapphire', 'Pokémon Ruby e Pokémon Sapphire são dois jogos que correspondem à terceira geração da série Pokémon. Desenvolvidos pela Game Freak e publicados pela Nintendo para Game Boy Advance, foram lançados no Japão em 21 de Novembro de 2002 e lançado no resto do mundo no ano seguinte, em 2003.', 'GameFreak', '2002-11-21', 'SI_GBA_PokemonSapphire_enGB_image1600w.jpg'),
+('World of Warcraft', 'World of Warcraft é um jogo on-line do gênero MMORPG, desenvolvido e distribuído pela produtora Blizzard Entertainment e lançado em 2004', 'Blizzard Entertainment', '2004-11-23', 'WoW_Box_Art1.jpg'),
+('The Witcher III', 'Você é Geralt de Rívia, mercenário matador de monstros. Você está em um continente devastado pela guerra e infestado de monstros para você explorar à vontade. Sua tarefa é encontrar Ciri, a Criança da Profecia — uma arma viva que pode alterar a forma do mundo. ', 'CD PROJEKT RED', '2015-05-18', 'wither3.avif'),
+("Baldur's Gate III", "Baldur's Gate III é um jogo eletrônico de RPG desenvolvido e publicado pela Larian Studios. É o terceiro jogo principal da série Baldur's Gate, que é baseada no sistema de RPG de mesa Dungeons & Dragons, dentro do cenário de Forgotten Realms", 'Larian Studios', '2023-08-03', 'badosgat3.avif'),
+("No Man's Sky", "No Man's Sky é um jogo de ficção científica de exploração e sobrevivência num universo com geração processual infinita.", 'Hello Games', '2016-08-12', 'nomansky.jpeg');
 
 -- Inserir relação genero_jogo
 INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 (2, 1), -- Aventura
+(18, 2), -- Tower Defense
 (3, 2), -- Estratégia
 (4, 3), -- Quebra-cabeça
 (1, 4), -- Ação
 (5, 4), -- Tiro
-(2, 5); -- Aventura
+(8, 5), -- Honkai/RPG
+(14, 5), -- Honkai/Turno
+(11, 6), -- Fnaf/Terror
+(19, 7), -- Barbie/Moda
+(21, 8), -- Minecraft/Sandbox
+(20, 9), -- MLBB/BA
+(8, 10), -- PKW/RPG
+(22, 11), -- AmoungUs/Sob
+(16, 12), -- OV/Tiro
+(8, 13), -- Genshin/RPG
+(9, 14), -- COLHEITA/simulador
+(8, 15), -- PK FR/RPG
+(23, 16), -- Rock/Corrida
+(24, 17), -- Black/jump 'n' run
+(1, 18), -- Metal/açãõ
+(17, 19), -- DB/Luta
+(23, 20), -- Biker/Corrida
+(8, 21), -- PK SPH/RPG
+(25, 22), --WOWC/RPG
+(8, 23), -- The Witcher/RPG
+(8, 24), -- Baldur's Gate III/RPG
+(22, 25); -- No Man's Sky/RPG
 
 -- Inserir usuarios (senhas são hashes de "senha123")
 INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
