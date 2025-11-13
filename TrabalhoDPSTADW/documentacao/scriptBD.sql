@@ -509,10 +509,10 @@ INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('Pablo (adm)', 'adm@gmail.com', '$2y$10$9AZ8LwR6/YizFQljcev/h.EAYu7cPL0CpNvKGeFNZbk883VCaXxSq', '6908f25f7ac7a.jpeg', 'A'),
 ('Lunna', 'lunna@gmail.com', '$2y$10$vkLZem6D2KPu8aYqrqjUKuiA8/wfafudsV9vRRaZipFQHHGehznZu', '690394dade1b5.png', 'c'),
 ('Kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c'),
-('Italo', 'italo@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'italo.jpg', 'A'),
+('Italo', 'italo@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'italo.png', 'A'),
 ('Kauã', 'kaua@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'kaua.jpeg', 'A'),
 ('Luna', 'luna@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'lunna.jpg', 'A'),
-('Lucas', 'lucas@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'wither3.jpg', 'A');
+('Lucas', 'lucas@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'lucas.jpeg', 'A');
 
 -- ===============================
 -- INSERIR PREFERÊNCIAS
@@ -564,13 +564,12 @@ INSERT INTO `friv`.`lista` (`nome`, `descricao`, `situacao`, `usuario_idusuario1
 -- ===============================
 -- INSERIR JOGOS NAS LISTAS
 -- ===============================
-INSERT INTO `friv`.`lista_jogo` (`lista_idlista`, `jogo_idjogo`) VALUES
-(1, 2),
-(1, 3),
-(2, 1),
-(3, 4),
-(3, 5);
-
+INSERT INTO `friv`.`lista_jogo` (`lista_idlista`, `lista_usuario_idusuario`, `jogo_idjogo`) VALUES
+(1, 1, 2),
+(1, 1, 3),
+(2, 2, 1),
+(3, 3, 4),
+(3, 3, 5);
 -- ===============================
 -- INSERIR HISTÓRICO
 -- ===============================
