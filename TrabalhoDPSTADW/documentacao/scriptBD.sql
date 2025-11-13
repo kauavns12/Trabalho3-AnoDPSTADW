@@ -464,34 +464,34 @@ INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `
 
 -- Inserir relação genero_jogo
 INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
-(2, 1), -- Aventura
-(18, 2), -- Tower Defense
-(3, 2), -- Estratégia
-(4, 3), -- Quebra-cabeça
-(1, 4), -- Ação
-(5, 4), -- Tiro
-(8, 5), -- Honkai/RPG
-(14, 5), -- Honkai/Turno
-(11, 6), -- Fnaf/Terror
-(19, 7), -- Barbie/Moda
-(21, 8), -- Minecraft/Sandbox
-(20, 9), -- MLBB/BA
-(8, 10), -- PKW/RPG
-(22, 11), -- AmoungUs/Sob
-(16, 12), -- OV/Tiro
-(8, 13), -- Genshin/RPG
-(9, 14), -- COLHEITA/simulador
-(8, 15), -- PK FR/RPG
-(23, 16), -- Rock/Corrida
-(24, 17), -- Black/jump 'n' run
-(1, 18), -- Metal/açãõ
-(17, 19), -- DB/Luta
-(23, 20), -- Biker/Corrida
-(8, 21), -- PK SPH/RPG
-(25, 22), --WOWC/RPG
-(8, 23), -- The Witcher/RPG
-(8, 24), -- Baldur's Gate III/RPG
-(22, 25); -- No Man's Sky/RPG
+(2, 1), 
+(18, 2), 
+(3, 2), 
+(4, 3), 
+(1, 4), 
+(5, 4),
+(8, 5), 
+(14, 5), 
+(11, 6), 
+(19, 7),
+(21, 8), 
+(20, 9), 
+(8, 10), 
+(22, 11), 
+(16, 12), 
+(8, 13), 
+(9, 14),
+(8, 15), 
+(23, 16), 
+(24, 17), 
+(1, 18), 
+(17, 19), 
+(23, 20),
+(8, 21), 
+(25, 22), 
+(8, 23), 
+(8, 24), 
+(22, 25); 
 
 -- Inserir usuarios (senhas são hashes de "senha123")
 INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
@@ -501,6 +501,12 @@ INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('Pablo (adm)', 'adm@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', '6908f25f7ac7a.jpeg', 'A'),
 ('Lunna', 'lunna@gmail.com', '$2y$10$vkLZem6D2KPu8aYqrqjUKuiA8/wfafudsV9vRRaZipFQHHGehznZu', '690394dade1b5.png', 'c'),
 ('kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c');
+('Italo', 'italo@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'italo.jpg', 'A');
+('Kauã', 'kaua@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'kaua.jpeg', 'A');
+('Luna', 'luna@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'lunna.jpg', 'A');
+('Lucas', 'lucas@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'wither3.jpg', 'A');
+
+
 
 -- Inserir preferencias de usuarios
 INSERT INTO `friv`.`preferencia` (`usuario_idusuario`, `genero_idgenero`) VALUES
