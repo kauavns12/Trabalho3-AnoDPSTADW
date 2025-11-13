@@ -406,7 +406,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 USE friv;
--- Inserir generos
+
+-- ===============================
+-- INSERIR GÊNEROS
+-- ===============================
 INSERT INTO `friv`.`genero` (`nome`) VALUES
 ('Ação'), 
 ('Aventura'), 
@@ -430,41 +433,43 @@ INSERT INTO `friv`.`genero` (`nome`) VALUES
 ('Battle Arena'), 
 ('Sandbox'), 
 ('Sobrevivência'), 
-('Corrida'), 
-("jump 'n' run"), 
-("MMORPG"); 
+('Jump n Run'),  -- corrigido aspas e duplicação
+('MMORPG');      -- removido gênero duplicado "Corrida"
 
--- Inserir jogos
+-- ===============================
+-- INSERIR JOGOS
+-- ===============================
 INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `img`) VALUES
 ('Fireboy and Watergirl', 'Duo de aventura em templo com elementos de fogo e água', 'Oslo Albet', '2009-03-15', '69090216c15eb.jpg'),
 ('Bloons Tower Defense', 'Jogo de estratégia com macacos e balões', 'Ninja Kiwi', '2007-12-10', '6.jpg'),
 ('Crush the Castle', 'Jogo de física com catapultas e castelos', 'Armor Games', '2009-05-20', 'hqdefault.jpg'),
-('Raze', 'Jogo de tio em arena com soldados', 'Sky9 Games', '2011-08-30', 'raze-3_1x1.jpeg'),
-('Honkai Star Rail', 'Honkai: Star Rail é um jogo de RPG gacha 3D desenvolvido e publicado pela HoYoverse. Foi lançado para Windows e dispositivos móveis em 26 de abril de 2023; há previsão de lançamento para  PlayStation 4 e 5', 'HoYolab', '2023-04-26', 'honkai-star-rail_s7q5.jpg'),
-('Five Nights at Freddys 4', "Five Nights at Freddy's 4 é um jogo eletrônico independente de sobrevivência de terror em point-and-click", 'Scott Cawthon', '2015-07-23', 'fnaf4.jpg'),
+('Raze', 'Jogo de tiro em arena com soldados', 'Sky9 Games', '2011-08-30', 'raze-3_1x1.jpeg'),  -- corrigido "tio" para "tiro"
+('Honkai Star Rail', 'Honkai: Star Rail é um jogo de RPG gacha 3D desenvolvido e publicado pela HoYoverse. Foi lançado para Windows e dispositivos móveis em 26 de abril de 2023; há previsão de lançamento para PlayStation 4 e 5', 'HoYolab', '2023-04-26', 'honkai-star-rail_s7q5.jpg'),
+('Five Nights at Freddys 4', 'Five Nights at Freddys 4 é um jogo eletrônico independente de sobrevivência de terror em point-and-click', 'Scott Cawthon', '2015-07-23', 'fnaf4.jpg'),
 ('Jogo da Barbie', 'Jogo de moda da barbie', 'Mattel', '2017-07-27', 'pablo.webp'),
-('Minecraft', 'Minecraft é um jogo eletrônico sandbox de sobrevivência de 2011 desenvolvido e publicado pela desenvolvedora sueca Mojang Studios.', 'Mojang', '2009-05-17', 'minecraft.avif'),
-('Mobile Legends: Bang Bang', 'Mobile Legends: Bang Bang é um jogo eletrônico para aparelhos móveis no estilo Multiplayer Online Battle Arena desenvolvido e publicado pela Moonton.', 'Moonton', '2016-07-14', 'mobile.jpeg'),
-('Pokemon White', 'Pokémon Black Version e White Version são jogos eletrônicos de RPG lançados em 2010, desenvolvidos pela Game Freak e publicados pela The Pokémon Company e Nintendo lançados para o portátil Nintendo DS. São os primeiros títulos da quinta geração da série Pokémon.', 'GameFreak', '2010-09-18', 'pokblack.webp'),
-('Amoung Us', 'Among Us é um jogo eletrônico online, dos gêneros jogo em grupo e sobrevivência, desenvolvido e publicado pelo estúdio de jogos estadunidense InnerSloth.', 'Innersloth', '2018-06-15', 'among-us_8kks.jpg'),
-('Overwatch 2', 'Overwatch 2 é um jogo eletrônico multijogador de tiro em primeira pessoa publicado e distribuído pela Blizzard Entertainment. A Blizzard Entertainment anunciou Overwatch 2 durante a BlizzCon 2019', 'Blizzard Entertainment', '2022-10-04', 'images.png'),
-('Genshin Impact', 'RPG de ação de mundo aberto gratuito que se passa no mundo de fantasia de Teyvat', 'HoYolab', '2020-09-28', 'genshin.png'),
-('Colheita Feliz', "Colheita Feliz foi um simulador de fazenda em tempo real desenvolvido pela Elex e distribuído pela empresa norte-americana Mentez, fundada no Brasil pela empreendedora serial Tahiana D'Egmont, disponível como um aplicativo no site da extinta rede social Orkut.", 'Elex', '2008-06-15', 'colheita.jpg'),
-('Pokemon FireRed', 'Pokémon FireRed Version e Pokémon LeafGreen Version são dois jogos eletrônicos de RPG de 2004 recriado pelo Pokémon Red e Blue de Game Boy em 1996. Eles foram desenvolvidos pela Game Freak e publicados pela The Pokémon Company e pela Nintendo para o Game Boy Advance', 'GameFreak', '2004-01-24', 'pk.webp'),
-('Rock & Roll Racing', "Rock N' Roll Racing é um jogo eletrônico de corrida e de combate de veículos que possui um estilo único para um jogo de 1993", 'Blizzard Entertainment', '1993-06-04', 'rocknrollRacing.jpg'),
-('Blackthorne', 'Blackthorne é um videogame de plataforma desenvolvido pela Blizzard Entertainment. Blackthorne foi lançado para SNES e MS-DOS em 1994, e com gráficos melhorados e uma maior paleta de cores para Sega 32X em 1995 e para Mac OS em 1996', 'Interplay', '1994-09-07', 'blackthorne.webp'),
-('Metal Warriors', 'Metal Warriors é um jogo eletrônico de ação e plataforma de rolagem lateral desenvolvido pela LucasArts e publicado pela Konami exclusivamente para o Super Nintendo Entertainment System na América do Norte em abril de 1995', 'LucasArts', '1995-04-07', 'maxresdefault.jpg'),
-('Dragon Ball: Advanced Adventure', 'Dragon Ball: Advanced Adventure é um jogo eletrônico lançado para o Game Boy Advance baseado na série de mangá e anime Dragon Ball. O jogo contém 30 personagens jogáveis. Ele contém cinco modos de jogo.', 'Dimps', '2004-11-18', 'dragon-ball-gba.jpg'),
-('Biker Mice from Mars', 'Biker Mice From Mars é um videogame de corrida lançado pela Konami para o Super Nintendo Entertainment System. É um tie-in para a série animada de mesmo título. A versão PAL do jogo apresenta colocação de produtos no jogo para barras de chocolate Snickers', 'Konami', '1994-11-1', 'biker-mice-from-mars--24160.jpg'),
-('Pokemon Sapphire', 'Pokémon Ruby e Pokémon Sapphire são dois jogos que correspondem à terceira geração da série Pokémon. Desenvolvidos pela Game Freak e publicados pela Nintendo para Game Boy Advance, foram lançados no Japão em 21 de Novembro de 2002 e lançado no resto do mundo no ano seguinte, em 2003.', 'GameFreak', '2002-11-21', 'SI_GBA_PokemonSapphire_enGB_image1600w.jpg'),
-('World of Warcraft', 'World of Warcraft é um jogo on-line do gênero MMORPG, desenvolvido e distribuído pela produtora Blizzard Entertainment e lançado em 2004', 'Blizzard Entertainment', '2004-11-23', 'WoW_Box_Art1.jpg'),
-('The Witcher III', 'Você é Geralt de Rívia, mercenário matador de monstros. Você está em um continente devastado pela guerra e infestado de monstros para você explorar à vontade. Sua tarefa é encontrar Ciri, a Criança da Profecia — uma arma viva que pode alterar a forma do mundo. ', 'CD PROJEKT RED', '2015-05-18', 'wither3.avif'),
-("Baldur's Gate III", "Baldur's Gate III é um jogo eletrônico de RPG desenvolvido e publicado pela Larian Studios. É o terceiro jogo principal da série Baldur's Gate, que é baseada no sistema de RPG de mesa Dungeons & Dragons, dentro do cenário de Forgotten Realms", 'Larian Studios', '2023-08-03', 'badosgat3.avif'),
-("No Man's Sky", "No Man's Sky é um jogo de ficção científica de exploração e sobrevivência num universo com geração processual infinita.", 'Hello Games', '2016-08-12', 'nomansky.jpeg');
+('Minecraft', 'Minecraft é um jogo eletrônico sandbox de sobrevivência de 2011 desenvolvido e publicado pela Mojang Studios.', 'Mojang', '2009-05-17', 'minecraft.avif'),
+('Mobile Legends: Bang Bang', 'Jogo eletrônico para aparelhos móveis no estilo Multiplayer Online Battle Arena desenvolvido pela Moonton.', 'Moonton', '2016-07-14', 'mobile.jpeg'),
+('Pokemon White', 'Pokémon Black Version e White Version são jogos eletrônicos de RPG lançados em 2010, desenvolvidos pela Game Freak e publicados pela The Pokémon Company e Nintendo.', 'GameFreak', '2010-09-18', 'pokblack.webp'),
+('Among Us', 'Among Us é um jogo eletrônico online de sobrevivência e dedução social, desenvolvido e publicado pela InnerSloth.', 'Innersloth', '2018-06-15', 'among-us_8kks.jpg'),
+('Overwatch 2', 'Overwatch 2 é um jogo eletrônico multijogador de tiro em primeira pessoa publicado e distribuído pela Blizzard Entertainment.', 'Blizzard Entertainment', '2022-10-04', 'images.png'),
+('Genshin Impact', 'RPG de ação de mundo aberto gratuito que se passa no mundo de fantasia de Teyvat.', 'HoYolab', '2020-09-28', 'genshin.png'),
+('Colheita Feliz', 'Simulador de fazenda em tempo real desenvolvido pela Elex e distribuído pela Mentez, popular no Orkut.', 'Elex', '2008-06-15', 'colheita.jpg'),
+('Pokemon FireRed', 'Pokémon FireRed é um remake do clássico Pokémon Red, desenvolvido pela Game Freak.', 'GameFreak', '2004-01-24', 'pk.webp'),
+('Rock & Roll Racing', 'Rock N Roll Racing é um jogo eletrônico de corrida e combate veicular.', 'Blizzard Entertainment', '1993-06-04', 'rocknrollRacing.jpg'),
+('Blackthorne', 'Videogame de plataforma desenvolvido pela Blizzard Entertainment.', 'Interplay', '1994-09-07', 'blackthorne.webp'),
+('Metal Warriors', 'Jogo eletrônico de ação e plataforma desenvolvido pela LucasArts e publicado pela Konami.', 'LucasArts', '1995-04-07', 'maxresdefault.jpg'),
+('Dragon Ball: Advanced Adventure', 'Jogo eletrônico baseado em Dragon Ball lançado para Game Boy Advance.', 'Dimps', '2004-11-18', 'dragon-ball-gba.jpg'),
+('Biker Mice from Mars', 'Videogame de corrida lançado pela Konami para SNES.', 'Konami', '1994-11-01', 'biker-mice-from-mars--24160.jpg'),  -- corrigido data
+('Pokemon Sapphire', 'Pokémon Ruby e Sapphire representam a terceira geração da série.', 'GameFreak', '2002-11-21', 'SI_GBA_PokemonSapphire_enGB_image1600w.jpg'),
+('World of Warcraft', 'MMORPG desenvolvido e distribuído pela Blizzard Entertainment.', 'Blizzard Entertainment', '2004-11-23', 'WoW_Box_Art1.jpg'),
+('The Witcher III', 'Você é Geralt de Rívia, um bruxo em busca de Ciri, a Criança da Profecia.', 'CD PROJEKT RED', '2015-05-18', 'wither3.avif'),
+('Baldurs Gate III', 'RPG baseado em Dungeons & Dragons desenvolvido pela Larian Studios.', 'Larian Studios', '2023-08-03', 'badosgat3.avif'),
+('No Mans Sky', 'Jogo de exploração e sobrevivência em universo gerado proceduralmente.', 'Hello Games', '2016-08-12', 'nomansky.jpeg');
 
--- Inserir relação genero_jogo
+-- ===============================
+-- INSERIR RELAÇÃO GÊNERO_JOGO
+-- ===============================
 INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
-<<<<<<< Updated upstream
 (2, 1), 
 (18, 2), 
 (3, 2), 
@@ -475,25 +480,12 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 (14, 5), 
 (11, 6), 
 (19, 7),
-=======
-(2, 1), -- Aventura
-(18, 2), -- Tower Defense
-(3, 2), -- Estratégia
-(4, 3), -- Quebra-cabeça
-(1, 4), -- Ação
-(5, 4), -- Tiro
-(8, 5), -- Honkai/RPG
-(14, 5), -
-(11, 6), 
-(19, 7), 
->>>>>>> Stashed changes
 (21, 8), 
 (20, 9), 
 (8, 10), 
 (22, 11), 
 (16, 12), 
 (8, 13), 
-<<<<<<< Updated upstream
 (9, 14),
 (8, 15), 
 (23, 16), 
@@ -501,46 +493,41 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 (1, 18), 
 (17, 19), 
 (23, 20),
-=======
-(9, 14), 
-(8, 15), 
-(23, 16), 
-(24, 17),
-(1, 18), 
-(17, 19), 
-(23, 20), 
->>>>>>> Stashed changes
 (8, 21), 
-(25, 22), 
+(24, 22), 
 (8, 23), 
 (8, 24), 
 (22, 25); 
 
--- Inserir usuarios (senhas são hashes de "senha123")
+-- ===============================
+-- INSERIR USUÁRIOS
+-- ===============================
 INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('João Silva', 'joao.silva@gmail.com', '$2y$10$Fp35ITV/u9vfPRHA.7EhSO/RRyMmF4.c.uVu7WnmD/DP/YbNhSVX', '690c79a9a69c6.jpeg', 'c'),
 ('Maria Santos', 'maria.santos@gmail.com', '$2y$10$rQF3rE/QYlbvs37y4k5K8OZ1p3mmwQyhdI7frnZe57YSfFX41JeG.', '6908f4b3d6503.jpg', 'c'),
 ('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '690c7a469304f.webp', 'c'),
-('Pablo (adm)', 'adm@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', '6908f25f7ac7a.jpeg', 'A'),
+('Pablo (adm)', 'adm@gmail.com', '$2y$10$9AZ8LwR6/YizFQljcev/h.EAYu7cPL0CpNvKGeFNZbk883VCaXxSq', '6908f25f7ac7a.jpeg', 'A'),
 ('Lunna', 'lunna@gmail.com', '$2y$10$vkLZem6D2KPu8aYqrqjUKuiA8/wfafudsV9vRRaZipFQHHGehznZu', '690394dade1b5.png', 'c'),
-('kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c'),
+('Kamilinha', 'kami@gmail.com', '$2y$10$RDiKVRmN2a39gIJoDMjXNOtixdqYMFBkHfhVd/nmbHDZnqVHlvjry', '6908f6fd3ca77.jpg', 'c'),
 ('Italo', 'italo@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'italo.jpg', 'A'),
 ('Kauã', 'kaua@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'kaua.jpeg', 'A'),
 ('Luna', 'luna@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'lunna.jpg', 'A'),
 ('Lucas', 'lucas@gmail.com', '$2y$10$qfKMDzjTInKefhdkDvidaeWewOViNy2dnZG/9gWNdgZfE246MIdHO', 'wither3.jpg', 'A');
 
-
-
--- Inserir preferencias de usuarios
+-- ===============================
+-- INSERIR PREFERÊNCIAS
+-- ===============================
 INSERT INTO `friv`.`preferencia` (`usuario_idusuario`, `genero_idgenero`) VALUES
-(1, 1), -- João gosta de Ação
-(1, 2), -- João gosta de Aventura
-(2, 4), -- Maria gosta de Quebra-cabeça
-(2, 9), -- Maria gosta de Simulação
-(4, 5), -- Pedro gosta de Tiro
-(4, 3); -- Pedro gosta de Estratégia
+(1, 1),
+(1, 2),
+(2, 4),
+(2, 9),
+(3, 5),
+(3, 3);
 
--- Inserir conquistas
+-- ===============================
+-- INSERIR CONQUISTAS
+-- ===============================
 INSERT INTO `friv`.`conquista` (`nome`, `descricao`) VALUES
 ('Primeiros Passos', 'Complete o primeiro nível de qualquer jogo'),
 ('Viciado', 'Jogue por mais de 10 horas no total'),
@@ -548,91 +535,109 @@ INSERT INTO `friv`.`conquista` (`nome`, `descricao`) VALUES
 ('Estrategista', 'Vença 20 jogos de estratégia'),
 ('Social', 'Comente em 10 tópicos diferentes');
 
--- Inserir conquistas de usuarios
 INSERT INTO `friv`.`conquista_usu` (`conquista_idconquista`, `usuario_idusuario`) VALUES
 (1, 1),
 (1, 2),
-(1, 4),
+(1, 3),
 (3, 2),
-(4, 4);
+(4, 3);
 
--- Inserir favoritos
+-- ===============================
+-- INSERIR FAVORITOS
+-- ===============================
 INSERT INTO `friv`.`favorito` (`usuario_idusuario`, `jogo_idjogo`) VALUES
-(1, 4), -- João gosta de Raze
-(1, 5), -- João gosta de Super Mario Flash
-(2, 1), -- Maria gosta de Fireboy and Watergirl
-(2, 3), -- Maria gosta de Crush the Castle
-(4, 2), -- Pedro gosta de Bloons Tower Defense
-(4, 4); -- Pedro gosta de Raze
+(1, 4),
+(1, 5),
+(2, 1),
+(2, 3),
+(3, 2),
+(3, 4);
 
--- Inserir listas
+-- ===============================
+-- INSERIR LISTAS
+-- ===============================
 INSERT INTO `friv`.`lista` (`nome`, `descricao`, `situacao`, `usuario_idusuario1`) VALUES
 ('Para jogar depois', 'Jogos que quero experimentar', 1, 1),
 ('Melhores jogos', 'Meus favoritos de todos os tempos', 1, 2),
-('Desafios difíceis', 'Jogos que preciso terminar', 0, 4);
+('Desafios difíceis', 'Jogos que preciso terminar', 0, 3);
 
--- Inserir jogos nas listas
-INSERT INTO `friv`.`lista_jogo` (`lista_idlista`, `lista_usuario_idusuario`, `jogo_idjogo`) VALUES
-(1, 1, 2), -- João lista Bloons
-(1, 1, 3), -- João lista Crush the Castle
-(2, 2, 1), -- Maria lista Fireboy
-(3, 4, 4), -- Pedro lista Raze
-(3, 4, 5); -- Pedro lista Mario
+-- ===============================
+-- INSERIR JOGOS NAS LISTAS
+-- ===============================
+INSERT INTO `friv`.`lista_jogo` (`lista_idlista`, `jogo_idjogo`) VALUES
+(1, 2),
+(1, 3),
+(2, 1),
+(3, 4),
+(3, 5);
 
--- Inserir histórico de jogos
+-- ===============================
+-- INSERIR HISTÓRICO
+-- ===============================
 INSERT INTO `friv`.`histo_jogo` (`tempo_ini`, `tempo_fim`, `usuario_idusuario`) VALUES
 ('2024-08-01 14:30:00', '2024-08-01 15:45:00', 1),
 ('2024-08-02 10:15:00', '2024-08-02 11:30:00', 2),
-('2024-08-03 16:00:00', '2024-08-03 18:20:00', 4),
+('2024-08-03 16:00:00', '2024-08-03 18:20:00', 3),
 ('2024-08-04 09:00:00', '2024-08-04 10:30:00', 1);
 
--- Inserir relação historico_jogo
 INSERT INTO `friv`.`relhisto_jogo` (`histo_jogo_idhisto_jogo`, `jogo_idjogo`) VALUES
-(1, 4), -- João jogou Raze
-(2, 1), -- Maria jogou Fireboy
-(3, 2), -- Pedro jogou Bloons
-(4, 5); -- João jogou Mario
+(1, 4),
+(2, 1),
+(3, 2),
+(4, 5);
 
--- Inserir avaliações
+-- ===============================
+-- INSERIR AVALIAÇÕES
+-- ===============================
 INSERT INTO `friv`.`avaliacao_jogo` (`classificacao`, `usuario_idusuario`, `jogo_idjogo`) VALUES
-(5, 1, 4), -- João dá 5 para Raze
-(4, 1, 5), -- João dá 4 para Mario
-(5, 2, 1), -- Maria dá 5 para Fireboy
-(3, 2, 3), -- Maria dá 3 para Crush the Castle
-(4, 4, 2), -- Pedro dá 4 para Bloons
-(5, 4, 4); -- Pedro dá 5 para Raze
+(5, 1, 4),
+(4, 1, 5),
+(5, 2, 1),
+(3, 2, 3),
+(4, 3, 2),
+(5, 3, 4);
 
--- Inserir categorias do forum
+-- ===============================
+-- INSERIR CATEGORIAS DE FÓRUM
+-- ===============================
 INSERT INTO `friv`.`categoria_forun` (`nome`, `descricao`) VALUES
 ('Geral', 'Discussões gerais sobre jogos'),
 ('Dúvidas', 'Tire suas dúvidas sobre os jogos'),
 ('Dicas', 'Compartilhe dicas e estratégias'),
 ('Bugs e Problemas', 'Reporte problemas técnicos');
 
--- Inserir tópicos no forum
+-- ===============================
+-- INSERIR TÓPICOS DE FÓRUM
+-- ===============================
 INSERT INTO `friv`.`topico_forun` (`nome`, `conteudo`, `categoria_forun_idcategoria_forun1`, `jogo_idjogo1`) VALUES
 ('Como passar do nível 5?', 'Estou travado no nível 5 do Fireboy, alguém tem alguma dica?', 3, 1),
 ('Melhor estratégia BTD', 'Qual a melhor torre para rounds avançados?', 3, 2),
 ('Problema com gráficos', 'O jogo está ficando muito lento no meu PC', 4, 4),
 ('Novo jogo anunciado!', 'Acabei de ver que sairá uma sequência!', 1, 3);
 
--- Inserir posts no forum
+-- ===============================
+-- INSERIR POSTS
+-- ===============================
 INSERT INTO `friv`.`post_forun` (`conteudo`, `usuario_idusuario`, `topico_forun_idtopico_forun`) VALUES
-('Tenta usar mais o Watergirl nessa parte, ela é melhor para os obstáculos de água', 4, 1),
+('Tenta usar mais o Watergirl nessa parte, ela é melhor para os obstáculos de água', 3, 1),
 ('O macaco super é o melhor, mas custa caro. Vá acumulando dinheiro!', 1, 2),
 ('Tenta diminuir a qualidade gráfica nas configurações', 2, 3),
 ('Que bom! Mal posso esperar para jogar!', 1, 4);
 
--- Inserir comentarios nos posts
+-- ===============================
+-- INSERIR COMENTÁRIOS
+-- ===============================
 INSERT INTO `friv`.`comentario` (`comentario`, `criado`, `post_forun_idpost_forun`, `post_forun_usuario_idusuario`, `post_forun_topico_forun_idtopico_forun`) VALUES
-('Vou tentar isso, obrigado!', '2024-08-05', 1, 4, 1),
-('Funcionou perfeitamente!', '2024-08-06', 1, 4, 1),
+('Vou tentar isso, obrigado!', '2024-08-05', 1, 3, 1),
+('Funcionou perfeitamente!', '2024-08-06', 1, 3, 1),
 ('Valeu pela dica!', '2024-08-05', 2, 1, 2);
 
--- Inserir relacionamentos (seguidores)
+-- ===============================
+-- INSERIR RELACIONAMENTOS
+-- ===============================
 INSERT INTO `friv`.`relacionamento` (`seguindo`, `seguidor`) VALUES
-(2, 1), -- João segue Maria
-(4, 1), -- João segue Pedro
-(1, 2), -- Maria segue João
-(4, 2), -- Maria segue Pedro
-(1, 4); -- Pedro segue João
+(2, 1),
+(3, 1),
+(1, 2),
+(3, 2),
+(1, 3);
