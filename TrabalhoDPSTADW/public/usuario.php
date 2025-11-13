@@ -43,7 +43,7 @@ if (!$usuariovisto) {
             <div class="profile-section">
                 <h2 class="section-title">📋 LISTAS</h2>
                 <?php
-                $listas = listarListaUsu($conexao, $idusuvisto);
+                $listas = listarListaPuUsu($conexao, $idusuvisto);
                 if (count($listas) == 0) {
                     echo '<div class="empty-message">Esse usuário não possui listas criadas</div>';
                 } else {

@@ -3,6 +3,8 @@ require_once "../controle/verificarLogado.php";
 require_once "../controle/conexao.php";
 require_once "../controle/funcoes.php";
 $idpost = $_GET['id'];
+
+$idusuario = $_SESSION['idusuario']
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -109,5 +111,25 @@ $idpost = $_GET['id'];
         <a href="comunidade.php" class="back-button">Voltar para Comunidade</a>
     </div>
          
+
+
+
+    <div>
+
+                <form action="../controle/comentar.php" method="post">
+                <input type="hidden" name="idpost" value='<?php echo $idpost; ?>> '>
+                <?php //<input type="hidden" name="idusuario" value='<?php echo $idusuario; ?>
+                <input type="hidden" name="idtop" value='<?php echo $idtop; ?>> '>
+            
+
+                <label for="comentario">Comente aqui!</label>
+                <input type="text" name="comentario" id="comentario">
+
+                <label for="comentario">Qual a data do seu comentário?</label>
+                <input type="date" name="data" id="data">
+
+                </form>
+
+    </div>
 </body>
 </html>

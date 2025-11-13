@@ -84,6 +84,14 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
+        /*.post:hover → aplica o efeito somente quando o mouse passa em cima do post.
+
+        transform: translateY(-2px); → faz o post subir levemente (2 px para cima).
+
+        box-shadow muda para uma sombra mais forte → dá a sensação de que o card “flutua”.
+
+        transition: transform 0.3s, box-shadow 0.3s; → deixa o movimento suave e animado, em 0,3 s.*/
+
         .post-header {
             display: flex;
             align-items: center;

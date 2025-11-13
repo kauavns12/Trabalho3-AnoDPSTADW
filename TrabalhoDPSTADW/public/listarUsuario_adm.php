@@ -56,8 +56,8 @@ if ($_SESSION['tipo'] == 'c') {
                                 $foto = $usuario['foto'];
                                 $tipo = $usuario['tipo'];
 
-                                $tipo_class = ($tipo == 'a') ? 'adm' : 'user';
-                                $tipo_text = ($tipo == 'a') ? 'ADM' : 'Usuário';
+                               $tipo_class = ($tipo == 'A') ? 'adm' : 'user';
+                               $tipo_text  = ($tipo == 'A') ? 'ADM' : 'Usuário';
                             ?>
                                 <tr>
                                     <td><?php echo $idusuario; ?></td>

@@ -915,6 +915,20 @@ function listarListaUsu($conexao, $idusuario)
     mysqli_stmt_close($comando);
     return $lista_lista;
 }
+function listarListaPuUsu($conexao, $idusuario)
+{
+    $sql = "SELECT * FROM lista WHERE usuario_idusuario1=? AND situacao != 0";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idusuario);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+    $lista_lista = [];
+    while ($lista = mysqli_fetch_assoc($resultado)) {
+        $lista_lista[] = $lista;
+    }
+    mysqli_stmt_close($comando);
+    return $lista_lista;
+}
 function adicionarJogoLista($conexao, $idlista, $idusuario, $idjogo)
 {
     $sql = "INSERT INTO lista_jogo (lista_idlista, lista_usuario_idusuario, jogo_idjogo) VALUES (?, ?, ?)";
