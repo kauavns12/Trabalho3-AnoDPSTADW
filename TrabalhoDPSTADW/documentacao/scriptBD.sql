@@ -408,31 +408,31 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 USE friv;
 -- Inserir generos
 INSERT INTO `friv`.`genero` (`nome`) VALUES
-('Ação'), -- 1
-('Aventura'), -- 2
-('Estratégia'), -- 3
-('Quebra-cabeça'), -- 4
-('Tiro'), -- 5
-('Esportes'), -- 6
-('Corrida'), -- 7
-('RPG'), -- 8
-('Simulação'), -- 9
-('Casual'), -- 10
-('Terror'), -- 11
-('Romance'), -- 12
-('Culinária'), -- 13
-('Turno'), -- 14
-('Plataforma'), -- 15
-('Hero Shooter'), -- 16
-('Luta'),-- 17
-('Tower Defense'), -- 18
-('Moda'), -- 19
-('Battle Arena'), -- 20
-('Sandbox'), -- 21
-('Sobrevivência'), -- 22
-('Corrida'), -- 23
-("jump 'n' run"), -- 24
-("MMORPG"); -- 25
+('Ação'), 
+('Aventura'), 
+('Estratégia'), 
+('Quebra-cabeça'), 
+('Tiro'), 
+('Esportes'), 
+('Corrida'), 
+('RPG'), 
+('Simulação'), 
+('Casual'), 
+('Terror'), 
+('Romance'), 
+('Culinária'),
+('Turno'), 
+('Plataforma'), 
+('Hero Shooter'), 
+('Luta'),
+('Tower Defense'), 
+('Moda'), 
+('Battle Arena'), 
+('Sandbox'), 
+('Sobrevivência'), 
+('Corrida'), 
+("jump 'n' run"), 
+("MMORPG"); 
 
 -- Inserir jogos
 INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `img`) VALUES
@@ -464,6 +464,7 @@ INSERT INTO `friv`.`jogo` (`nome`, `descricao`, `desenvolvedor`, `data_lanca`, `
 
 -- Inserir relação genero_jogo
 INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
+<<<<<<< Updated upstream
 (2, 1), 
 (18, 2), 
 (3, 2), 
@@ -474,12 +475,25 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 (14, 5), 
 (11, 6), 
 (19, 7),
+=======
+(2, 1), -- Aventura
+(18, 2), -- Tower Defense
+(3, 2), -- Estratégia
+(4, 3), -- Quebra-cabeça
+(1, 4), -- Ação
+(5, 4), -- Tiro
+(8, 5), -- Honkai/RPG
+(14, 5), -
+(11, 6), 
+(19, 7), 
+>>>>>>> Stashed changes
 (21, 8), 
 (20, 9), 
 (8, 10), 
 (22, 11), 
 (16, 12), 
 (8, 13), 
+<<<<<<< Updated upstream
 (9, 14),
 (8, 15), 
 (23, 16), 
@@ -487,6 +501,15 @@ INSERT INTO `friv`.`genero_jogo` (`genero_idgenero`, `jogo_idjogo`) VALUES
 (1, 18), 
 (17, 19), 
 (23, 20),
+=======
+(9, 14), 
+(8, 15), 
+(23, 16), 
+(24, 17),
+(1, 18), 
+(17, 19), 
+(23, 20), 
+>>>>>>> Stashed changes
 (8, 21), 
 (25, 22), 
 (8, 23), 
