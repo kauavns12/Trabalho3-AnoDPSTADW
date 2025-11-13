@@ -37,6 +37,7 @@ INSERT INTO `friv`.`usuario` (`nome`, `gmail`, `senha`, `foto`, `tipo`) VALUES
 ('Pedro Costa', 'pedro.costa@gmail.com', '$2y$10$92IXUNpkjO0rOS5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '68d5375cae2fa.jpg', 'c'),
 ('Italo', 'italoanimal17@gmail.com', '$2y$10$TFQN0Ur.Vbeu3g7MCe4HEeZ1OZ6h3widDE6N43eSZLmBrPHEcxM7i', '68dab251ddaae.jpeg', 'A');
 
+
 -- Inserir preferencias de usuarios
 INSERT INTO `friv`.`preferencia` (`usuario_idusuario`, `genero_idgenero`) VALUES
 (1, 1), -- João gosta de Ação
